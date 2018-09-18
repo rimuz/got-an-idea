@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+
+  background-color: #009AF0;
+  font-family: sans-serif;
+}
+
+body.blue-bg {
+  transition: background-color 1s;
+  background-color: #009AF0;
+}
+
+body.gray-bg {
+  transition: background-color 1s;
+  background-color: #DDD;
+}
+
+body.white-bg {
+  transition: background-color 1s;
+  background-color: white;
+}
+
+/*
+TODO: startup animation
+body.light {
+  background-color: #ddd;
+  transition: background-color 3s;
+}
+*/
