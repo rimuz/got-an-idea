@@ -2,13 +2,13 @@ body {
   margin: 0;
   padding: 0;
 
-  background-color: #009AF0;
+  background-color: white;
   font-family: sans-serif;
 }
 
 body.blue-bg {
   transition: background-color 1s;
-  background-color: #009AF0;
+  background-color: #000080;
 }
 
 body.gray-bg {

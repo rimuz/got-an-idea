@@ -17,13 +17,11 @@ const tellMore = () => {
               margin: '20px',
               fontFamily: TextFont
             }}>
-              <h2>Title Title Title</h2>
-              Text Text Text <br />
-              Text Text Text <br />
-              Text Text Text <br />
-              Text Text Text <br />
-              Text Text Text <br />
-              Text Text Text <br />
+              <h2>Un biplano immersivo etichetta cupido per
+                celebrare un grembiule</h2>
+              La digestione giocava al serbatoio nella torre del
+              faro, poi suggerisce che i criceti debbano girare in
+              tram.
             </div>
           </Card>
         </Repeat>

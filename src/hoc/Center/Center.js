@@ -4,6 +4,7 @@ const center = (props) => {
   const vert1 = {
     display: 'table',
     position: 'absolute',
+    
     top: '0',
     left: '0',
     width: '100%',

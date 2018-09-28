@@ -17,18 +17,36 @@ class StartPage extends Component {
 
   render() {
     return (
-      <Center vertical horizontal>
-        <BigTitle />
-        <Subtitle />
+      <div>
+        <div style ={{
+          width: '100%',
+          height: '100%',
+          display: 'block'
+        }}>
+          <Center vertical horizontal>
+            <BigTitle />
+            <Subtitle />
 
-        <Center horizontal>
-          <Button clicked={this.tellMeMoreHandler.bind(this)}>
-            Tell me more
-          </Button>
-          <Button>Login</Button>
-          <Button>Register</Button>
-        </Center>
-      </Center>
+            <Center horizontal>
+              <Button clicked={this.tellMeMoreHandler.bind(this)}>
+                Tell me more
+              </Button>
+
+              <Button>Login</Button>
+              <Button>Register</Button>
+            </Center>
+          </Center>
+        </div>
+
+        <div style={{
+          position: 'absolute',
+          top: '100%',
+          left: '0',
+        }}>
+          Ciao
+        </div>
+      </div>
+
     );
   }
 };

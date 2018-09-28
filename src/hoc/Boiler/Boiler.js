@@ -5,6 +5,7 @@ import { GrayColor, BlueColor, setGray, TitleFont } from '../../Constants'
 import Comp from '../Comp/Comp';
 import Button from './Button/Button';
 import Center from '../Center/Center';
+import SearchBar from './SearchBar/SearchBar';
 import { StyleRoot } from 'radium';
 
 class Boiler extends Component {
@@ -46,12 +47,19 @@ class Boiler extends Component {
 
     const buttons = {
       display: 'inline-block',
-      float: 'right',
       marginTop: '0.75vw',
+      float: 'right',
 
       '@media (max-width: 50em)': {
         marginTop: '2vw',
       }
+    };
+
+    const searchStyle = {
+      marginTop: '1vw',
+      marginRight: '2vw',
+      width: '3vw',
+      height: '3vw'
     };
 
     const content = {
@@ -73,6 +81,8 @@ class Boiler extends Component {
             <Button>Login</Button>
             <Button>Register</Button>
           </div>
+
+          <SearchBar />
         </div>
 
         <div style={content}>

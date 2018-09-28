@@ -16,11 +16,10 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Header />
-
-          <Switch>
+          {/*<Switch>
             <Route path='/' exact render={BackgroundSetter('blue')} />
             <Route path='/' render={BackgroundSetter('white')} />
-          </Switch>
+          </Switch>*/}
 
           <Route path='/' exact component={StartPage} />
           <Route path='/tell-more' exact component={TellMore} />
