@@ -1,6 +1,7 @@
 import React from 'react';
+import Radium from 'radium';
+
 import { TitleFont, GrayColor } from '../../../Constants'
-import { StyleRoot } from 'radium'
 
 const subtitle = () => {
   const style = {
@@ -10,17 +11,15 @@ const subtitle = () => {
     color: GrayColor,
 
     '@media (max-width: 50em)': {
-      fontSize: '3vw'
+      fontSize: '3.5vw'
     }
   };
 
   return (
-    <StyleRoot>
-      <div style={style}>
-          The platform for sharing your billion dollars idea
-      </div>
-    </StyleRoot>
+    <div style={style}>
+        The platform for sharing your billion dollars idea
+    </div>
   );
 };
 
-export default subtitle;
+export default Radium(subtitle);

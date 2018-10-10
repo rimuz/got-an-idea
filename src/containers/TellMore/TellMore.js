@@ -4,7 +4,7 @@ import Boiler from '../../hoc/Boiler/Boiler';
 import Center from '../../hoc/Center/Center';
 import Repeat from '../../hoc/Repeat/Repeat';
 import { TextFont } from '../../Constants';
-import Card from '../Card/Card';
+import Card from '../../hoc/Card/Card';
 
 const tellMore = () => {
   return (

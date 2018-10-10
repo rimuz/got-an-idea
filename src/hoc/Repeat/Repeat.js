@@ -1,5 +1,3 @@
-import React from 'react';
-
 const repeat = (props) => {
   if(!props.n)
     props.n = 0;

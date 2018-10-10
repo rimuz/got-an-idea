@@ -1,6 +1,6 @@
 import React from 'react';
 import { GrayColor, BlueColor, TitleFont } from '../../../Constants'
-import { StyleRoot } from 'radium'
+import Radium from 'radium'
 
 const button = (props) => {
   const style = {
@@ -9,6 +9,7 @@ const button = (props) => {
     borderStyle: 'solid',
     borderColor: GrayColor,
     borderRadius: '1vw',
+    borderWidth: '0.2vw',
 
     fontSize: '1.5vw',
     fontFamily: TitleFont,
@@ -22,7 +23,12 @@ const button = (props) => {
     cursor: 'pointer',
 
     '@media (max-width: 50em)': {
-      fontSize: '2.5vw'
+      fontSize: '3vw',
+      padding: '1.5vw',
+      borderRadius: '2vw',
+
+      marginTop: '3.5vw',
+      marginRight: '2vw',
     },
 
     ':hover': {
@@ -32,12 +38,10 @@ const button = (props) => {
   };
 
   return (
-    <StyleRoot style={{ display: 'inline' }}>
-      <button style={style} onClick={props.clicked}>
-        {props.children}
-      </button>
-    </StyleRoot>
+    <button style={style} onClick={props.clicked}>
+      {props.children}
+    </button>
   );
 };
 
-export default button;
+export default Radium(button);

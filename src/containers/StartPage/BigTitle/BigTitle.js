@@ -1,5 +1,5 @@
 import React from 'react';
-import Radium, { StyleRoot } from 'radium';
+import Radium from 'radium';
 import { TitleFont, GrayColor } from '../../../Constants'
 
 const bigTitle = () => {
@@ -9,17 +9,15 @@ const bigTitle = () => {
     color: GrayColor,
 
     '@media (max-width: 50em)': {
-      fontSize: '14vw'
+      fontSize: '14.5vw'
     }
   };
 
   return (
-    <StyleRoot>
-      <div style={style}>
-        Got an idea?
-      </div>
-    </StyleRoot>
+    <div style={style}>
+      Got an idea?
+    </div>
   );
 };
 
-export default bigTitle;
+export default Radium(bigTitle);

@@ -4,7 +4,7 @@ const center = (props) => {
   const vert1 = {
     display: 'table',
     position: 'absolute',
-    
+
     top: '0',
     left: '0',
     width: '100%',
@@ -36,7 +36,7 @@ const center = (props) => {
     }
 
     return (
-      <div style={vert1}>
+      <div style={{...vert1, ...props.style}}>
         <div style={{...vert2, ...style}}>
           {props.children}
         </div>
@@ -44,7 +44,7 @@ const center = (props) => {
     );
   } else {
     return (
-      <div style={horiz1}>
+      <div style={{...horiz1, ...props.style}}>
         <div style={horiz2}>
           {props.children}
         </div>

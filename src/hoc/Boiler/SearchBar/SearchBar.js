@@ -1,47 +1,60 @@
 import React from 'react';
 
-import { BlueColorB2, BlueColorB3, GrayColor, Search, TextFont } from '../../../Constants';
+import { BlueColorB2, BlueColorB3, GrayColor, TextFont } from '../../../Constants';
 
 import Radium from 'radium';
+import TextField from './TextField/TextField';
+import HiddenBar from './HiddenBar/HiddenBar';
 import Center from '../../Center/Center';
-import searchImage from './search.png';
+import Comp from '../../Comp/Comp';
 import './SearchBar.css';
 
 const searchBar = () => {
   const style = {
     position: 'absolute',
     visibility: 'hidden',
+
     top: '0',
     left: '0',
     width: '100%',
     height: '100%',
   };
 
-  const input = {
+  const a = {
+    display: 'inline-block',
+
+    '@media (max-width: 50em)': {
+      'display': 'none',
+    }
+  };
+
+  const b = {
+    'display': 'none',
+
+    '@media (max-width: 50em)': {
+      'display': 'inline-block',
+    }
+  }
+
+  const inner = {
     height: '2vw',
-    width: '30vw',
-
-    outline: 'none',
-    border: 'none',
-    autocapitalize: 'false',
-    visibility: 'visible',
-
-    borderRadius: '0.5vw',
-    fontSize: '1vw',
-    padding: '0.2vw 0.75vw 0.2vw 0.75vw',
-    fontFamily: TextFont,
-
-    backgroundColor: BlueColorB2,
-    boxShadow: '2px 2px 0px 0px ' + BlueColorB3,
-    color: GrayColor,
+    width: '30vw'
   };
 
   return (
-    <div style={style} class='SearchBar'>
-        <Center vertical horizontal>
-          <input type='text' style={input} placeholder='Search'></input>
-        </Center>
-    </div>
+    <Comp>
+      <Center horizontal vertical>
+        <div style={a}>
+            <div style={inner}>
+              <TextField />
+            </div>
+        </div>
+
+        <div style={{b, ...style}}>
+          <HiddenBar />
+        </div>
+      </Center>
+    </Comp>
   );
 };
 

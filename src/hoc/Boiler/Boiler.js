@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import { withRouter } from 'react-router-dom';
 
-import { GrayColor, BlueColor, setGray, TitleFont } from '../../Constants'
+import { GrayColor, BlueColor, TitleFont } from '../../Constants'
 import Comp from '../Comp/Comp';
 import Button from './Button/Button';
-import Center from '../Center/Center';
 import SearchBar from './SearchBar/SearchBar';
-import { StyleRoot } from 'radium';
 
 class Boiler extends Component {
   titleClickHandler = () => {
     this.props.history.push({
-      pathname: '/'
+      pathname: '/',
     });
   }
 
@@ -55,13 +54,6 @@ class Boiler extends Component {
       }
     };
 
-    const searchStyle = {
-      marginTop: '1vw',
-      marginRight: '2vw',
-      width: '3vw',
-      height: '3vw'
-    };
-
     const content = {
       paddingTop: '5vw',
 
@@ -71,7 +63,7 @@ class Boiler extends Component {
     };
 
     return (
-      <StyleRoot>
+      <Comp>
         <div style={navBar}>
           <div style={title} onClick={this.titleClickHandler}>
             Got an idea?
@@ -88,9 +80,9 @@ class Boiler extends Component {
         <div style={content}>
           {this.props.children}
         </div>
-      </StyleRoot>
+      </Comp>
     );
   }
 };
 
-export default withRouter(Boiler);
+export default withRouter(Radium(Boiler));
