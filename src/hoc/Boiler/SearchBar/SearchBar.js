@@ -13,6 +13,7 @@ const searchBar = () => {
   const style = {
     position: 'absolute',
     visibility: 'hidden',
+    textAlign: 'center',
 
     top: '0',
     left: '0',
@@ -20,41 +21,39 @@ const searchBar = () => {
     height: '100%',
   };
 
-  const a = {
-    display: 'inline-block',
-
-    '@media (max-width: 50em)': {
-      'display': 'none',
-    }
-  };
-
   const b = {
     'display': 'none',
 
-    '@media (max-width: 50em)': {
-      'display': 'inline-block',
+    '@media (max-width: 800px)': {
+      //'display': 'inline-block',
     }
   }
 
   const inner = {
+    display: 'inline-block',
     height: '2vw',
-    width: '30vw'
+    width: '30vw',
+
+    position: 'relative',
+    top: '50%',
+    transform: 'perspective(1px) translateY(-50%)',
+
+    '@media (max-width: 800px)': {
+      display: 'none'
+    }
   };
 
   return (
-    <Comp>
-      <Center horizontal vertical>
-        <div style={a}>
-            <div style={inner}>
-              <TextField />
-            </div>
+    <div style={style}>
+        <div style={inner}>
+          <TextField />
         </div>
 
+        {/*
         <div style={{b, ...style}}>
           <HiddenBar />
-        </div>
-      </Center>
-    </Comp>
+        </div>*/}
+    </div>
   );
 };
 

@@ -10,7 +10,7 @@ const subtitle = () => {
     marginTop: '-2vw',
     color: GrayColor,
 
-    '@media (max-width: 50em)': {
+    '@media (max-width: 800px)': {
       fontSize: '3.5vw'
     }
   };

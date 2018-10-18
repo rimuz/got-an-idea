@@ -5,11 +5,12 @@ import Radium from 'radium';
 import { BlueColor, TextFont } from '../../Constants';
 import BigTitle from './BigTitle/BigTitle';
 import Subtitle from './Subtitle/Subtitle';
-import Button from './Button/Button';
+import Button from '../../components/Button/Button';
 import Comp from '../../hoc/Comp/Comp';
 import Center from '../../hoc/Center/Center';
 import Repeat from '../../hoc/Repeat/Repeat';
 import TellMore from './TellMore/TellMore';
+import Footer from '../../components/Footer/Footer';
 
 class StartPage extends Component {
   constructor(props){
@@ -18,13 +19,23 @@ class StartPage extends Component {
   }
 
   tellMeMoreHandler = () => {
-    this.tellMoreRef.current.scrollIntoView({ block: 'end',  behavior: 'smooth' });
+    this.tellMoreRef.current.scrollIntoView({ block: 'start',  behavior: 'smooth' });
   };
 
   render() {
     const style = {
       backgroundColor: BlueColor
     };
+
+    const buttons = {
+      marginTop: '1em',
+      marginRight: '0.75em',
+      fontSize: '2vw',
+
+      '@media (max-width: 800px)': {
+        fontSize: '3vw',
+      }
+    }
 
     const fadeIn = Radium.keyframes({
       '0%': {
@@ -56,18 +67,20 @@ class StartPage extends Component {
             <Subtitle />
 
             <Center horizontal>
-              <Button clicked={this.tellMeMoreHandler.bind(this)}>
+              <Button clicked={this.tellMeMoreHandler.bind(this)}
+                  style={buttons}>
                 Tell me more
               </Button>
 
-              <Button>Login</Button>
-              <Button>Register</Button>
+              <Button style={buttons}>Login</Button>
+              <Button style={buttons}>Register</Button>
             </Center>
           </div>
         </Center>
 
         <div style={bottom} ref={this.tellMoreRef}>
           <TellMore />
+          <Footer />
         </div>
       </Comp>
     );

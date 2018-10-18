@@ -14,7 +14,7 @@ const card = (props) => {
   }
 
   return (
-    <div style={style}>
+    <div style={{...style, ...props.style}}>
       {props.children}
     </div>
   );

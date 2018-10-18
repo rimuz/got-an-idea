@@ -13,11 +13,14 @@ const tellMore = () => {
         <Repeat n='20'>
           <Card>
             <div style={{
-              width: '75vw',
               margin: '20px',
-              fontFamily: TextFont
+              fontFamily: TextFont,
+              fontSize: '18px',
             }}>
-              <h2>Un biplano immersivo etichetta cupido per
+              <h2 style={{
+                fontSize: '1.25em'
+              }}>
+                Un biplano immersivo etichetta cupido per
                 celebrare un grembiule</h2>
               La digestione giocava al serbatoio nella torre del
               faro, poi suggerisce che i criceti debbano girare in

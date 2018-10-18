@@ -11,32 +11,36 @@ const tellMore = () => {
 
   return (
     <div class='TellMore' style={global}>
-      <div class='First'>
-        <h1>Why <em>Got an idea</em>?</h1>
+      <h1>Why <em>Got an idea</em>?</h1>
 
-        <span class='Text'>
+      <div class='Text'>
+        <p>
           "<strong>Everybody</strong> has ideas. Ideas are highly,
           highly <strong>overvalued</strong>. Execution is all that
-          matters." - Casey Neistat. <br />
+          matters." - Casey Neistat.
+        </p>
 
+        <p>
           Quotes aside, it's quite common to come up with ideas while having
           a shower or walking the dogs. So, we can assume thousands
           of intuitions are <strong>wasted</strong> every day,
           while thousands of people are <strong>desperately</strong> looking
-          for them. <br />
+          for them.
+        </p>
 
+        <p>
           What <em>Got an idea</em> does is offering a tidy ad-hoc website
           where you can find <strong>inspirational</strong> ideas for your
-          ext project along with opinions
-          and <strong>improvements</strong> written by the community. <br />
+          next project along with opinions
+          and <strong>improvements</strong> written by the community.
+        </p>
 
+        <p>
           Note that similar things alredy existed (e.g. subreddits such as
           r/SomebodyMakeThis or r/gameideas) but were inadequate to host all
           the ideas' information and their developments as well as
           eventual <strong>feedbacks</strong> from users.
-        </span>
-
-        <h1>What does <em>Got an idea</em> consist of?</h1>
+        </p>
       </div>
     </div>
   );

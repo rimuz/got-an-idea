@@ -8,7 +8,7 @@ const bigTitle = () => {
     fontSize: '9vw',
     color: GrayColor,
 
-    '@media (max-width: 50em)': {
+    '@media (max-width: 800px)': {
       fontSize: '14.5vw'
     }
   };
