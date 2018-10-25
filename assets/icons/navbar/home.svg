@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="15.65261mm"
+   height="16.969057mm"
+   viewBox="0 0 15.65261 16.969057"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="search.svg">
+   sodipodi:docname="home.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -25,16 +25,20 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.175"
-     inkscape:cx="74.208359"
-     inkscape:cy="119.29454"
+     inkscape:zoom="1.979899"
+     inkscape:cx="-104.90362"
+     inkscape:cy="8.8666505"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
      inkscape:window-width="1920"
-     inkscape:window-height="1001"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
+     inkscape:window-height="1017"
+     inkscape:window-x="1672"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
@@ -51,21 +55,12 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
-    <ellipse
-       id="path3713"
-       cx="85.238083"
-       cy="114.35863"
-       style="fill:none;stroke:#dddddd;stroke-width:12.50339127;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
-       rx="53.748306"
-       ry="56.389671" />
-    <rect
-       style="fill:#dddddd;fill-opacity:1;stroke:none;stroke-width:13.01114845;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect4522"
-       width="14.363095"
-       height="75.595238"
-       x="-0.5146752"
-       y="199.83417"
-       transform="rotate(-34.091408)" />
+     id="layer1"
+     transform="translate(-56.836129,-167.11656)">
+    <path
+       style="fill:none;fill-opacity:1;stroke:#dddddd;stroke-width:2.48783207;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:15.80000019;stroke-dasharray:none;stroke-opacity:1"
+       d="m 58.080045,182.8417 v -9.21535 l 6.582389,-5.26591 6.582389,5.26591 v 9.21535 z"
+       id="path5666"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>

@@ -22,6 +22,12 @@ class StartPage extends Component {
     this.tellMoreRef.current.scrollIntoView({ block: 'start',  behavior: 'smooth' });
   };
 
+  loginHandler = () => {
+    this.props.history.push({
+      pathname: '/feed',
+    });
+  };
+
   render() {
     const style = {
       backgroundColor: BlueColor
@@ -72,7 +78,8 @@ class StartPage extends Component {
                 Tell me more
               </Button>
 
-              <Button style={buttons}>Login</Button>
+              <Button clicked={this.loginHandler.bind(this)}
+                  style={buttons}>Login</Button>
               <Button style={buttons}>Register</Button>
             </Center>
           </div>

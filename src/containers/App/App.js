@@ -3,7 +3,7 @@ import { StyleRoot } from 'radium';
 
 import Header from '../../components/Header/Header';
 import StartPage from '../../containers/StartPage/StartPage';
-import TellMore from '../../containers/TellMore/TellMore';
+import FeedPage from '../../containers/FeedPage/FeedPage';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
@@ -21,7 +21,7 @@ class App extends Component {
             </Switch>*/}
 
             <Route path='/' exact component={StartPage} />
-            <Route path='/tell-more' exact component={TellMore} />
+            <Route path='/feed' exact component={FeedPage} />
           </div>
         </BrowserRouter>
       </StyleRoot>

@@ -6,7 +6,7 @@ import Repeat from '../../hoc/Repeat/Repeat';
 import { TextFont } from '../../Constants';
 import Card from '../../hoc/Card/Card';
 
-const tellMore = () => {
+const feedPage = () => {
   return (
     <Boiler>
       <Center horizontal>
@@ -32,4 +32,5 @@ const tellMore = () => {
     </Boiler>
   );
 };
-export default tellMore;
+
+export default feedPage;
