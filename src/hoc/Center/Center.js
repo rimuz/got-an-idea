@@ -25,7 +25,6 @@ const center = (props) => {
     margin: 'auto'
   };
 
-  console.log(props);
   if(props.vertical){
     var style = {};
 

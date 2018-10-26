@@ -10,10 +10,10 @@ const tellMore = () => {
   };
 
   return (
-    <div class='TellMore' style={global}>
+    <div className='TellMore' style={global}>
       <h1>Why <em>Got an idea</em>?</h1>
 
-      <div class='Text'>
+      <div className='Text'>
         <p>
           "<strong>Everybody</strong> has ideas. Ideas are highly,
           highly <strong>overvalued</strong>. Execution is all that
@@ -37,9 +37,10 @@ const tellMore = () => {
 
         <p>
           Note that similar things alredy existed (e.g. subreddits such as
-          r/SomebodyMakeThis or r/gameideas) but were inadequate to host all
-          the ideas' information and their developments as well as
-          eventual <strong>feedbacks</strong> from users.
+          r/crazyideas, r/SomebodyMakeThis but also r/gameideas)
+          but were inadequate to host all the ideas' information
+          and their developments as well as
+          eventual <strong>feedback</strong> from users.
         </p>
       </div>
     </div>
