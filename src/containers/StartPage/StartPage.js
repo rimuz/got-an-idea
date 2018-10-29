@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import Radium from 'radium';
 
-import { BlueColor, TextFont } from '../../Constants';
-import BigTitle from './BigTitle/BigTitle';
-import Subtitle from './Subtitle/Subtitle';
 import Button from '../../components/Button/Button';
 import Comp from '../../hoc/Comp/Comp';
 import Center from '../../hoc/Center/Center';
-import Repeat from '../../hoc/Repeat/Repeat';
 import TellMore from './TellMore/TellMore';
 import Footer from '../../components/Footer/Footer';
+import styles from './StartPage.module.scss';
 
 class StartPage extends Component {
   constructor(props){
@@ -22,70 +18,36 @@ class StartPage extends Component {
     this.tellMoreRef.current.scrollIntoView({ block: 'start',  behavior: 'smooth' });
   };
 
-  loginHandler = () => {
-    this.props.history.push({
-      pathname: '/feed',
-    });
-  };
-
   render() {
-    const style = {
-      backgroundColor: BlueColor
-    };
-
-    const buttons = {
-      marginTop: '1em',
-      marginRight: '0.75em',
-      fontSize: '2vw',
-
-      '@media (max-width: 800px)': {
-        fontSize: '3vw',
-      }
-    }
-
-    const fadeIn = Radium.keyframes({
-      '0%': {
-        opacity: 0,
-        transform: 'translateY(+1.5vw)',
-      },
-
-      '100%': {
-        opacity: 1,
-      }
-    });
-
-    const inner = {
-      animation: 'x 1.5s ease-in-out',
-      animationName: fadeIn,
-    };
-
-    const bottom = {
-      position: 'absolute',
-      top: '100%',
-      width: '100%'
-    };
-
     return (
       <Comp>
-        <Center vertical horizontal style={style}>
-          <div style={inner}>
-            <BigTitle />
-            <Subtitle />
+        <Center vertical horizontal outer={styles.upper}>
+          <div className={styles.inner}>
+            <div className={styles.title}>
+              Got an idea?
+            </div>
+            <div className={styles.subtitle}>
+                The platform for sharing your billion dollars idea
+            </div>
 
             <Center horizontal>
               <Button clicked={this.tellMeMoreHandler.bind(this)}
-                  style={buttons}>
+                      className={styles.button}>
                 Tell me more
               </Button>
 
-              <Button clicked={this.loginHandler.bind(this)}
-                  style={buttons}>Login</Button>
-              <Button style={buttons}>Register</Button>
+              <Button className={styles.button} to="/browse">
+                Login
+              </Button>
+
+              <Button className={styles.button}>
+                Register
+              </Button>
             </Center>
           </div>
         </Center>
 
-        <div style={bottom} ref={this.tellMoreRef}>
+        <div className={styles.bottom} ref={this.tellMoreRef}>
           <TellMore />
           <Footer />
         </div>
@@ -94,4 +56,4 @@ class StartPage extends Component {
   }
 };
 
-export default withRouter(Radium(StartPage));
+export default withRouter(StartPage);

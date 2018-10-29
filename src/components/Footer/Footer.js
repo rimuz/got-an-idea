@@ -1,27 +1,10 @@
 import React from 'react';
-import { BlueColor, GrayColor, TextFont } from '../../Constants';
+import styles from './Footer.module.scss';
 
 const footer = () => {
-  const style = {
-    backgroundColor: BlueColor,
-    color: GrayColor,
-
-    padding: '5em 0em',
-
-    width: '100%',
-    textAlign: 'center',
-    fontFamily: TextFont,
-    fontSize: '15px',
-  };
-
-  const inner = {
-    margin: 'auto',
-    width: '90%',
-  };
-
   return (
-    <div style={style}>
-      <div style={inner}>
+    <div className={styles.outer}>
+      <div className={styles.inner}>
         <p>
           Created with love by Riccardo Musso. <br />
           If you like it, you'll probably appreciate my work on GitHub (@rimuz).

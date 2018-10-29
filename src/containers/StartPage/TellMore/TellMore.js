@@ -1,19 +1,12 @@
 import React from 'react';
-
-import Comp from '../../../hoc/Comp/Comp';
-import { BlueColor, TextFont } from '../../../Constants';
-import './TellMore.css';
+import styles from './TellMore.module.scss';
 
 const tellMore = () => {
-  const global = {
-    fontFamily: TextFont,
-  };
-
   return (
-    <div className='TellMore' style={global}>
+    <div className={styles.container}>
       <h1>Why <em>Got an idea</em>?</h1>
 
-      <div className='Text'>
+      <div>
         <p>
           "<strong>Everybody</strong> has ideas. Ideas are highly,
           highly <strong>overvalued</strong>. Execution is all that

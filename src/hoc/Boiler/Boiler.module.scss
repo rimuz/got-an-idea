@@ -1,0 +1,13 @@
+@import 'src/global';
+
+.outer {
+  font-size: 16px;
+}
+
+.children {
+  margin-top: 3.5em;
+
+  @media (max-width: 800px) {
+    margin-top: 5.5em;
+  }
+}

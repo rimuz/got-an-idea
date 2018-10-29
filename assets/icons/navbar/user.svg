@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="15.65261mm"
-   height="16.969057mm"
-   viewBox="0 0 15.65261 16.969057"
+   width="19mm"
+   height="15mm"
+   viewBox="0 0 19 15"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="home.svg">
+   sodipodi:docname="user.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="-104.90362"
-     inkscape:cy="8.8666505"
+     inkscape:zoom="11.2"
+     inkscape:cx="36.644257"
+     inkscape:cy="19.665006"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -56,11 +56,24 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-56.836129,-167.11656)">
+     transform="translate(-50.893266,-173.89835)">
+    <circle
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#dddddd;stroke-width:1.03604031;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.60000038;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path847"
+       cx="60.36964"
+       cy="181.42197"
+       r="6.9520597" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#dddddd;stroke-width:2.48783207;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:15.80000019;stroke-dasharray:none;stroke-opacity:1"
-       d="m 58.080045,182.8417 v -9.21535 l 6.582389,-5.26591 6.582389,5.26591 v 9.21535 z"
-       id="path5666"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       style="fill:#dddddd;fill-opacity:1;stroke:none;stroke-width:0.14838195px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 60.498938,182.01987 c -3.306863,-0.0471 -5.627212,2.97895 -5.627212,2.97895 0,0 5.007806,7.79006 11.022574,0 -1.930123,-2.19965 -3.780384,-2.95586 -5.395362,-2.97895 z"
+       id="path858" />
+    <ellipse
+       style="fill:#dddddd;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.57200438;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.60000038;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path861"
+       cx="60.355038"
+       cy="179.88277"
+       rx="2.4460692"
+       ry="2.4842892" />
   </g>
 </svg>

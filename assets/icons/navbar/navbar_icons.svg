@@ -58,16 +58,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="474.69968"
-     inkscape:cy="474.95622"
+     inkscape:zoom="1.979899"
+     inkscape:cx="298.69769"
+     inkscape:cy="487.32784"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1161"
-     inkscape:window-height="719"
-     inkscape:window-x="2017"
-     inkscape:window-y="622"
+     inkscape:window-width="716"
+     inkscape:window-height="403"
+     inkscape:window-x="2567"
+     inkscape:window-y="351"
      inkscape:window-maximized="0"
      inkscape:snap-global="true">
     <inkscape:grid
@@ -82,7 +82,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -161,17 +161,17 @@
        r="0.97072542" />
     <path
        style="fill:none;stroke:#dddddd;stroke-width:2.62526536;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 41.318214,188.00518 c 0.963617,-0.49844 1.987948,-0.87936 3.0431,-1.13166 0.804593,-0.19239 1.652543,-0.30913 2.455106,-0.10845 0.401282,0.10034 0.78558,0.28116 1.100365,0.54949 0.314786,0.26834 0.557561,0.62653 0.662559,1.02662 0.106804,0.40697 0.06848,0.84408 -0.06629,1.24266 -0.134765,0.39859 -0.362385,0.76098 -0.629185,1.08632 -0.533598,0.65069 -1.220779,1.15799 -1.789927,1.77783 -0.747519,0.81409 -1.282501,1.82168 -1.53814,2.89694"
+       d="m 114.83458,142.83703 c 0.96362,-0.49844 1.98795,-0.87936 3.0431,-1.13166 0.80459,-0.19239 1.65254,-0.30913 2.45511,-0.10845 0.40128,0.10034 0.78558,0.28116 1.10036,0.54949 0.31479,0.26834 0.55756,0.62653 0.66256,1.02662 0.1068,0.40697 0.0685,0.84408 -0.0663,1.24266 -0.13476,0.39859 -0.36238,0.76098 -0.62918,1.08632 -0.5336,0.65069 -1.22078,1.15799 -1.78993,1.77783 -0.74752,0.81409 -1.2825,1.82168 -1.53814,2.89694"
        id="path5877"
        inkscape:connector-curvature="0"
        inkscape:path-effect="#path-effect5879"
-       inkscape:original-d="m 41.318214,188.00518 c 0.15516,-2.19234 -1.73218,-0.58219 3.0431,-1.13166 3.64808,-0.40234 4.16011,0.66977 4.21803,1.46766 0.0973,1.94956 -0.925,2.51247 -2.4854,4.10681 -1.33581,1.2794 -1.5486,4.19441 -1.53814,2.89694"
+       inkscape:original-d="m 114.83458,142.83703 c 0.15516,-2.19234 -1.73218,-0.58219 3.0431,-1.13166 3.64808,-0.40234 4.16011,0.66977 4.21803,1.46766 0.0973,1.94956 -0.925,2.51247 -2.4854,4.10681 -1.33581,1.2794 -1.5486,4.19441 -1.53814,2.89694"
        sodipodi:nodetypes="ccccc" />
     <ellipse
        style="fill:#dddddd;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5.49948406;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
        id="path5743-49-2-1"
-       cx="44.711456"
-       cy="200.49368"
+       cx="118.22783"
+       cy="155.32553"
        rx="1.7455882"
        ry="1.246083" />
     <path
@@ -198,5 +198,62 @@
        inkscape:connector-curvature="0"
        inkscape:path-effect="#path-effect6011"
        inkscape:original-d="M 102.83266,155.24388 V 143.60123" />
+    <rect
+       style="fill:#dddddd;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.79046416;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect838"
+       width="12.778096"
+       height="2.1682291"
+       x="38.411831"
+       y="168.53673"
+       ry="1.0841146"
+       rx="1.2778074" />
+    <path
+       style="fill:#dddddd;fill-opacity:1;stroke:#dddddd;stroke-width:4.91506004;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:22.60000038;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       d="m 98.670895,182.78941 7.296055,-10.86514 7.29605,10.86514 z"
+       id="path958"
+       inkscape:connector-curvature="0" />
+    <circle
+       style="fill:#dddddd;fill-opacity:1;fill-rule:nonzero;stroke:#dddddd;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:22.60000038;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="path960"
+       cx="105.82382"
+       cy="162.97546"
+       r="2.7228081" />
+    <rect
+       style="fill:#dddddd;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.79046428;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect838-9"
+       width="12.778096"
+       height="2.1682291"
+       x="38.411831"
+       y="173.54802"
+       ry="1.0841146"
+       rx="1.2778074" />
+    <rect
+       style="fill:#dddddd;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.7904644;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect838-9-2"
+       width="12.778096"
+       height="2.1682291"
+       x="38.411831"
+       y="178.55931"
+       ry="1.0841146"
+       rx="1.2778074" />
+    <rect
+       style="fill:#dddddd;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.79046428;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect838-3"
+       width="12.778096"
+       height="2.1682291"
+       x="64.905098"
+       y="173.30598"
+       ry="1.0841146"
+       rx="1.2778074" />
+    <rect
+       style="fill:#dddddd;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.7904644;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect838-3-8"
+       width="12.778096"
+       height="2.1682291"
+       x="168.00105"
+       y="-72.378265"
+       ry="1.0841146"
+       rx="1.2778074"
+       transform="rotate(90)" />
   </g>
 </svg>

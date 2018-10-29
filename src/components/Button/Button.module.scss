@@ -1,0 +1,31 @@
+@import 'src/global';
+
+@mixin set-color($a, $b) {
+  color: $a;
+  background-color: $b;
+  border-color: $b;
+
+  &:hover {
+    color: $b;
+    background-color: $a;
+  }
+}
+
+.button {
+  padding: 0.5em;
+
+  border-style: solid;
+  border-radius: 0.75em;
+  border-width: 0.1em;
+
+  font-family: $title-font;
+  font-weight: lighter;
+  cursor: pointer;
+
+  transition: color 0.75s, background-color 0.75s;
+  @include set-color($blue-color, $gray-color);
+}
+
+.inverted {
+  @include set-color($gray-color, $blue-color);
+}

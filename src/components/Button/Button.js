@@ -1,44 +1,26 @@
 import React from 'react';
-import { GrayColor, BlueColor, TitleFont } from '../../Constants'
-import Radium from 'radium'
+import { withRouter } from 'react-router';
+import styles from './Button.module.scss';
 
 const button = (props) => {
-  var Background = GrayColor, Color = BlueColor;
+  var classes = [styles.button, props.className];
 
-  if(props.invertedColors){
-    Color = GrayColor;
-    Background = BlueColor;
+  if(props.invertedColors)
+    classes.push(styles.inverted);
+
+  var action = props.clicked;
+
+  if(action === undefined){
+    action = () => {
+      props.history.push(props.to);
+    };
   }
 
-  const style = {
-    padding: '0.5em',
-
-    borderStyle: 'solid',
-    borderColor: Background,
-    borderRadius: '0.75em',
-    borderWidth: '0.1em',
-
-    fontSize: '1em',
-    fontFamily: TitleFont,
-    fontWeight: 'lighter',
-
-    color: Color,
-    backgroundColor: Background,
-    cursor: 'pointer',
-
-    transition: 'color 0.75s, background-color 0.75s',
-
-    ':hover': {
-      backgroundColor: Color,
-      color: Background,
-    },
-  };
-
   return (
-    <button style={{...style, ...props.style}} onClick={props.clicked}>
+    <button className={classes.join(' ')} onClick={action}>
       {props.children}
     </button>
   );
 };
 
-export default Radium(button);
+export default withRouter(button);

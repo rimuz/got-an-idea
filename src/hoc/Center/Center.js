@@ -1,55 +1,27 @@
 import React from 'react';
+import styles from './Center.module.scss';
 
 const center = (props) => {
-  const vert1 = {
-    display: 'table',
-    position: 'absolute',
+    const outerClasses = [ styles.outer ];
 
-    top: '0',
-    left: '0',
-    width: '100%',
-    height: '100%',
-  };
-
-  const vert2 = {
-    display: 'table-cell',
-    verticalAlign: 'middle'
-  };
-
-  const horiz1 = {
-    width: '100%',
-    display: 'flex'
-  };
-
-  const horiz2 = {
-    margin: 'auto'
-  };
-
-  if(props.vertical){
-    var style = {};
-
-    if(props.horizontal){
-      style = {
-        textAlign: 'center'
-      };
+    if(props.horizontal || !props.vertical){
+      outerClasses.push(styles.horizontal);
     }
 
+    if(props.vertical){
+      outerClasses.push(styles.vertical);
+    }
+
+    if(props.outer)
+      outerClasses.push(props.outer);
+
     return (
-      <div style={{...vert1, ...props.style}}>
-        <div style={{...vert2, ...style}}>
+      <div className={outerClasses.join(" ")}>
+        <div className={props.inner}>
           {props.children}
         </div>
       </div>
     );
-  } else {
-    return (
-      <div style={{...horiz1, ...props.style}}>
-        <div style={horiz2}>
-          {props.children}
-        </div>
-      </div>
-    );
-  }
 };
 
 export default center;
