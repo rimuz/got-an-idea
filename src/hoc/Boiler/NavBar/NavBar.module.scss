@@ -38,8 +38,10 @@
 .logoAndTitle {
   display: flex;
   align-items: center;
-  cursor: pointer;
   margin: 0em 0em 0em 1em;
+
+  cursor: pointer;
+  text-decoration: none;
 
   @media (max-width: 800px) {
     margin: 0.5em 0em 0.5em 0em;

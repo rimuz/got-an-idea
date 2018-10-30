@@ -2,47 +2,38 @@
 
 .upper {
   background-color: $blue-color;
-  position: absolute;
 }
 
 .inner {
   animation: fadeIn 1.5s ease-in-out;
-}
-
-.title {
   font-family: $title-font;
-  font-size: 9vw;
-  color: $gray-color;
+  text-align: center;
+  font-size: 1vw;
+  margin: 0 0 2em 0;
 
-  @media (max-width: 800px) {
-    font-size: 14.5vw;
+  @media (max-width: 800px){
+    font-size: 1.75vw;
   }
-}
 
-.subtitle {
-  font-family: $title-font;
-  font-size: 2vw;
-  margin-top: -2vw;
-  color: $gray-color;
-
-  @media (max-width: 800px) {
-    font-size: 3.5vw;
+  h1 {
+    font-size: 8em;
+    color: $gray-color;
+    margin: 0;
   }
-}
 
-.button {
-  margin-top: 1em;
-  margin-right: 0.75em;
-  font-size: 1.5vw;
+  p {
+    font-size: 2em;
+    color: $gray-color;
+    margin: -0.75em 0 0.75em 0;
+  }
 
-  @media (max-width: 800px) {
-    font-size: 3vw;
+  button {
+    margin: 0.4em;
+    font-size: 1.5em;
   }
 }
 
 .bottom {
-  position: absolute;
-  top: 100%;
   width: 100%;
 }
 

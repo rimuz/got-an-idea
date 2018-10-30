@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import img_logo from './logo-gray.svg';
 import img_post from './post.svg';
@@ -20,18 +20,17 @@ class NavBar extends Component {
   render(){
     return (
       <div className={styles.outer}>
-        <span className={styles.logoAndTitle}
-              onClick={this.titleClickHandler.bind(this)}>
+        <Link to='/' className={styles.logoAndTitle}>
           <img src={img_logo} className={styles.logo} alt='Logo'/>
           <span className={styles.title}>Got an idea?</span>
-        </span>
+        </Link>
 
         <span className={styles.icons}>
-          <NavLink to="/browse" activeClassName={styles.selected} >
+          <NavLink to='/browse' activeClassName={styles.selected} >
             <img key='browse' src={img_browse} alt='Browse' />
           </NavLink>
 
-          <NavLink to="/search" activeClassName={styles.selected} >
+          <NavLink to='/search' activeClassName={styles.selected} >
             <img key='search' src={img_search} alt='Search' />
           </NavLink>
 
@@ -39,11 +38,11 @@ class NavBar extends Component {
             <img key='list' src={img_list} alt='Get Inspired' />
           </NavLink>
 
-          <NavLink to="/post" activeClassName={styles.selected} >
+          <NavLink to='/post' activeClassName={styles.selected} >
             <img key='post' src={img_post} alt='Post' />
           </NavLink>
 
-          <NavLink to="/user" activeClassName={styles.selected} >
+          <NavLink to='/user' activeClassName={styles.selected} >
             <img key='user' src={img_user} alt='User' />
           </NavLink>
         </span>

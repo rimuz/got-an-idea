@@ -21,16 +21,15 @@ class StartPage extends Component {
   render() {
     return (
       <Comp>
-        <Center vertical horizontal outer={styles.upper}>
-          <div className={styles.inner}>
-            <div className={styles.title}>
-              Got an idea?
-            </div>
-            <div className={styles.subtitle}>
-                The platform for sharing your billion dollars idea
-            </div>
+        <Center vertical horizontal outer={styles.upper} inner={styles.inner}
+                minHeight='100vh'>
 
-            <Center horizontal>
+            <h1>Got an idea?</h1>
+            <p>
+              The platform for sharing your billion dollars idea
+            </p>
+
+            <span>
               <Button clicked={this.tellMeMoreHandler.bind(this)}
                       className={styles.button}>
                 Tell me more
@@ -43,8 +42,7 @@ class StartPage extends Component {
               <Button className={styles.button}>
                 Register
               </Button>
-            </Center>
-          </div>
+            </span>
         </Center>
 
         <div className={styles.bottom} ref={this.tellMoreRef}>
