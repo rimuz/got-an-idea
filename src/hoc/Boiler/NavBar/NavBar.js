@@ -11,18 +11,38 @@ import img_user from './user.svg';
 import styles from './NavBar.module.scss';
 
 class NavBar extends Component {
+  state = {
+    isCollapsed: false
+  };
+
   titleClickHandler = () => {
     this.props.history.push({
       pathname: '/'
     });
   };
 
+  scrollHandler = (event) => {
+    const scrollTop = event.srcElement.scrollingElement.scrollTop;
+    const isCollapsed = scrollTop > 90;
+
+    if(isCollapsed != this.state.isCollapsed)
+      this.setState({ isCollapsed });
+  };
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.scrollHandler.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(this.scrollHandler.bind(this));
+  }
+
   render(){
     return (
-      <div className={styles.outer}>
+      <div className={styles.outer + ' ' + (this.state.isCollapsed ? styles.collapsed : '')}>
         <Link to='/' className={styles.logoAndTitle}>
           <img src={img_logo} className={styles.logo} alt='Logo'/>
-          <span className={styles.title}>Got an idea?</span>
+          <h1>Got an idea?</h1>
         </Link>
 
         <span className={styles.icons}>
