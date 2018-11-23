@@ -1,0 +1,150 @@
+@import 'src/global';
+
+@mixin text-overflow($name, $lines, $line-height){
+  #{$name} {
+    z-index: -1;
+    position: relative;
+    line-height: $line-height; 
+    max-height: $line-height*$lines;
+    overflow: hidden;
+  }
+
+  #{$name}:after {
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: linear-gradient(
+      transparent $line-height*($lines - 2),
+      white $line-height*($lines)
+    );
+  }
+}
+
+$icons-color: #aaa;
+$clicked-color: #555;
+$hover-bg: #efefef;
+
+.outer {
+  box-shadow: 1px 1px 10px 0 lightgray;
+  border-radius: 0.5em;
+
+  padding: 2em 2em 1em 2em;
+  margin: 2em 0em;
+  // font-size: 16px;
+  font-family: $text-font;
+
+  h1 {
+    margin: 1.25em 0 1em 0;
+    font-size: 1.25em;
+    line-height: 1.25em;
+  }
+
+  @include text-overflow(h1, 4, 1.25em);
+  @include text-overflow('.body', 6, 1.5em);
+  
+  @media (max-width: 800px){
+    @include text-overflow(h1, 4, 1.5em);
+    @include text-overflow('.body', 12, 1.5em);
+    
+    font-size: 0.75em;
+  }
+}
+
+.upper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  
+  svg {
+    box-shadow: 1px 1px 10px 1px lightgray;
+    border-radius: 50%;
+
+    padding: 2px;
+    width: 2.5em;
+    height: 2.5em;
+  }
+
+  .nameDate {
+    color: #2f4f4f;
+    align-self: top;
+    font-size: 0.8em;
+    
+    padding: 0em 1em;
+    margin: 0;
+
+    h1, p {
+      margin: 0;
+    }
+  }
+}
+
+.lower {
+  display: flex;
+  border-top: solid 1px #dedede;
+  margin: 3em 0 0 0;
+  padding: 1em 0 0 0;
+
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.btnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  padding: 0.25em 0.5em;
+  border-radius: 0.5em;
+  
+  & + .btn {
+    margin-left: 0.5em;
+  }
+
+  &:hover {
+    background-color: $hover-bg;
+  }
+
+  svg {
+    width: 1em;
+    height: 2em;
+
+    path {
+      fill: $icons-color;
+      stroke: $icons-color;
+    }
+
+    &.upsideDown {
+      z-index: 0;
+      position: relative;
+      transform: rotate(180deg);
+    }
+
+    &.share {
+      width: 1.75em;
+      height: 1.5em;
+    }
+  }
+
+  span {
+    text-decoration: none;
+    margin-left: 0.5em;
+
+    font-weight: bold;
+    color: $icons-color;
+
+    @media (max-width: 800px){
+      &.optional {
+        display: none;
+      }
+    }
+  }
+}
