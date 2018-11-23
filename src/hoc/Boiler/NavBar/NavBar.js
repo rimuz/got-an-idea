@@ -1,75 +1,102 @@
-import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { NavLink, Link } from "react-router-dom";
 
-import img_logo from './logo-gray.svg';
-import img_post from './post.svg';
-import img_search from './search.svg';
-import img_browse from './browse.svg';
-import img_list from './list.svg';
-import img_user from './user.svg';
+import { ReactComponent as Logo } from './logo-gray.svg';
+import { ReactComponent as Browse } from './browse.svg';
+import { ReactComponent as Search } from './search.svg';
+import { ReactComponent as List } from './list.svg';
+import { ReactComponent as Post } from './post.svg';
+import { ReactComponent as User } from './user.svg';
 
-import styles from './NavBar.module.scss';
+import styles from "./NavBar.module.scss";
+import throttle from "lodash/throttle";
 
 class NavBar extends Component {
   state = {
-    isCollapsed: false
-  };
+    isCollapsed: false,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.scrollHandlerFunction = throttle(this.scrollHandler.bind(this), 500);
+  }
 
   titleClickHandler = () => {
     this.props.history.push({
-      pathname: '/'
-    });
-  };
+      pathname: "/",
+    })
+  }
 
-  scrollHandler = (event) => {
+  scrollHandler = event => {
     const scrollTop = event.srcElement.scrollingElement.scrollTop;
-    const isCollapsed = scrollTop > 90;
 
-    if(isCollapsed != this.state.isCollapsed)
+    /*
+      const isCollapsed = scrollTop > 200;
+
+      if(isCollapsed !== this.state.isCollapsed)
+        this.setState({ isCollapsed });
+    */
+
+    var isCollapsed = null;
+
+    if (scrollTop > this.lastTop) {
+      isCollapsed = true;
+    } else if (scrollTop < this.lastTop) {
+      isCollapsed = false;
+    }
+
+    if (isCollapsed !== null && isCollapsed !== this.state.isCollapsed)
       this.setState({ isCollapsed });
-  };
+    this.lastTop = scrollTop;
+  }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.scrollHandler.bind(this));
+    this.lastTop = window.pageYOffset || document.documentElement.scrollTop;
+    window.addEventListener("scroll", this.scrollHandlerFunction);
   }
 
   componentWillUnmount() {
-    window.removeEventListener(this.scrollHandler.bind(this));
+    window.removeEventListener("scroll", this.scrollHandlerFunction);
   }
 
-  render(){
+  render() {
     return (
-      <div className={styles.outer + ' ' + (this.state.isCollapsed ? styles.collapsed : '')}>
-        <Link to='/' className={styles.logoAndTitle}>
-          <img src={img_logo} className={styles.logo} alt='Logo'/>
+      <div
+        className={
+          styles.outer + " " + (this.state.isCollapsed ? styles.collapsed : "")
+        }
+      >
+        <Link to="/" className={styles.logoAndTitle}>
+          <Logo className={styles.logo} />
           <h1>Got an idea?</h1>
         </Link>
 
         <span className={styles.icons}>
-          <NavLink to='/browse' activeClassName={styles.selected} >
-            <img key='browse' src={img_browse} alt='Browse' />
+          <NavLink to="/browse" activeClassName={styles.selected}>
+            <Browse />
           </NavLink>
 
-          <NavLink to='/search' activeClassName={styles.selected} >
-            <img key='search' src={img_search} alt='Search' />
+          <NavLink to="/search" activeClassName={styles.selected}>
+            <Search />
           </NavLink>
 
-          <NavLink to="/list" activeClassName={styles.selected} >
-            <img key='list' src={img_list} alt='Get Inspired' />
+          <NavLink to="/list" activeClassName={styles.selected}>
+            <List />
           </NavLink>
 
-          <NavLink to='/post' activeClassName={styles.selected} >
-            <img key='post' src={img_post} alt='Post' />
+          <NavLink to="/post" activeClassName={styles.selected}>
+            <Post />
           </NavLink>
 
-          <NavLink to='/user' activeClassName={styles.selected} >
-            <img key='user' src={img_user} alt='User' />
+          <NavLink to="/user" activeClassName={styles.selected}>
+            <User />
           </NavLink>
         </span>
-        <span></span>
+        <span />
       </div>
-    );
+    )
   }
 }
 
-export default NavBar;
+export default NavBar
