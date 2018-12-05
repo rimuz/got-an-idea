@@ -23,9 +23,7 @@ class NavBar extends Component {
   }
 
   titleClickHandler = () => {
-    this.props.history.push({
-      pathname: "/",
-    })
+    this.props.history.push('/');
   }
 
   scrollHandler = event => {

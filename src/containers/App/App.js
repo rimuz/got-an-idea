@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Header from '../../components/Header/Header';
 import StartPage from '../../containers/StartPage/StartPage';
-import BrowsePage from '../../containers/BrowsePage/BrowsePage';
+import Browse from '../../containers/Browse/Browse';
 import PageNotFound from '../../containers/404/PageNotFound';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -17,11 +17,11 @@ class App extends Component {
 
           <Switch>
             <Route path='/' exact component={StartPage} />
-            <Route path='/browse' exact component={BrowsePage} />
-            <Route path='/search' exact component={BrowsePage} />
-            <Route path='/list' exact component={BrowsePage} />
-            <Route path='/post' exact component={BrowsePage} />
-            <Route path='/user' exact component={BrowsePage} />
+            <Route path='/browse' component={Browse} />
+            <Route path='/search' component={Browse} />
+            <Route path='/list' component={Browse} />
+            <Route path='/post' component={Browse} />
+            <Route path='/user' component={Browse} />
 
             {/* 404 Page */}
             <Route path='/' component={PageNotFound} />

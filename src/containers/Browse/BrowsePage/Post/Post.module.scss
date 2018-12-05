@@ -28,7 +28,7 @@ $clicked-color: #555;
 $hover-bg: #efefef;
 
 .outer {
-  box-shadow: 1px 1px 10px 0 lightgray;
+  box-shadow: $card-shadow;
   border-radius: 0.5em;
 
   padding: 2em 2em 1em 2em;
@@ -40,6 +40,10 @@ $hover-bg: #efefef;
     margin: 1.25em 0 1em 0;
     font-size: 1.25em;
     line-height: 1.25em;
+  }
+
+  .body {
+    padding-bottom: 3em;
   }
 
   @include text-overflow(h1, 4, 1.25em);
@@ -56,10 +60,10 @@ $hover-bg: #efefef;
 .upper {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap; 
   
   svg {
-    box-shadow: 1px 1px 10px 1px lightgray;
+    box-shadow: $profile-icon-shadow;
     border-radius: 50%;
 
     padding: 2px;
@@ -68,7 +72,7 @@ $hover-bg: #efefef;
   }
 
   .nameDate {
-    color: #2f4f4f;
+    color: $username-color;
     align-self: top;
     font-size: 0.8em;
     
@@ -84,10 +88,9 @@ $hover-bg: #efefef;
 .lower {
   display: flex;
   border-top: solid 1px #dedede;
-  margin: 3em 0 0 0;
   padding: 1em 0 0 0;
 
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 

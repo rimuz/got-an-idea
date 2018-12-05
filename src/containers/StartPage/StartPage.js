@@ -26,7 +26,7 @@ class StartPage extends Component {
 
             <h1>Got an idea?</h1>
             <p>
-              The platform for sharing your billion dollars idea
+              The platform for sharing your billion dollar idea
             </p>
 
             <span>

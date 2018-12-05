@@ -1,0 +1,76 @@
+@import 'src/global.scss';
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-family: $text-font;
+  width: 100%;
+}
+
+.top {
+  margin: 3em 0;
+  padding: 2.5em;
+  border-radius: 0.5em;
+  
+  @include content-width;
+  box-shadow: $card-shadow;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+
+  .nameKarma {
+    margin-left: 1.25em;
+
+    div {
+      font-weight: bold;
+      
+      // name
+      &:first-of-type {
+        color: $username-color; 
+      }
+
+      // karma
+      &:last-of-type {
+        width: fit-content;
+        font-size: 0.9em;
+
+        background: silver;
+        color: white;
+        text-shadow: 2px 1px 2px gray;
+        padding: 0 0.6em 0 0.5em;
+        margin-top: 0.25em;
+        border-radius: 1em;
+      }
+    }
+  }
+
+  svg {
+    box-shadow: $profile-icon-shadow;
+    border-radius: 50%;
+    padding: 2px;
+  
+    width: 3.5em;
+    height: 3.5em;
+  }
+}
+
+.posted {
+  margin: 2em 0 0 0;
+  color: gray;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.75em;
+  line-height: 125%;
+}
+
+.text {
+  margin: 2em 0;
+  font-size: 1.15em;
+  line-height: 140%;
+}

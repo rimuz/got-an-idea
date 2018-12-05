@@ -3,4 +3,17 @@ $gray-color: #ddd;
 
 $title-font: 'Permanent Marker', cursive;
 $text-font: 'M PLUS Rounded 1c', sans-serif;
+
+$username-color: #2f4f4f;
+$card-shadow: 1px 1px 10px 0 lightgray;
+$profile-icon-shadow: 1px 1px 10px 1px lightgray;
+
+@mixin content-width {
+  width: 90%;
+  max-width: 1000px;
+
+  @media (max-width: 800px){
+    width: 95%;
+  }
+}
 //$text-font: 'Roboto', sans-serif;
