@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './containers/App/App';
+import App from './pages/App/App';
 import registerServiceWorker from './registerServiceWorker';
 
 import smoothscroll from 'smoothscroll-polyfill';
