@@ -9,6 +9,46 @@ $username-color: #2f4f4f;
 $card-shadow: 1px 1px 10px 0 lightgray;
 $profile-icon-shadow: 1px 1px 10px 1px lightgray;
 
+@mixin main-button {
+  font-family: $text-font;
+  font-weight: bold;
+  font-size: 1.2em;
+  transition: background-color 0.75s;
+
+  cursor: pointer;
+  padding: 0.3em 0.6em;
+  border: none;
+  border-radius: 0.25em;
+  margin-left: 0.5em;
+
+  background-color: #aaa;
+  color: white;
+
+  &:hover {
+    background-color: #888;
+  }
+}
+
+@mixin secondary-button {
+  @include main-button;
+
+  color: #aaa;
+  background-color: white;
+
+  &:hover {
+    background-color: #efefef;
+  }
+}
+
+@mixin text-field {
+    padding: 0.5em 1em;
+
+    font-size: 1em;
+    font-family: $text-font;
+
+    border: solid 2px #efefef; 
+}
+
 @mixin content-width {
   width: 90%;
   max-width: 1000px;

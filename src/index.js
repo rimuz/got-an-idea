@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './pages/App/App';
+import smoothscroll from 'smoothscroll-polyfill';
 import registerServiceWorker from './registerServiceWorker';
 
-import smoothscroll from 'smoothscroll-polyfill';
+import App from './pages/App/App';
+import './index.scss';
+
+export const prefix = "https://got-an-idea.com";
 
 smoothscroll.polyfill();
 ReactDOM.render(<App />, document.getElementById('root'));
