@@ -1,0 +1,25 @@
+@import 'src/global';
+
+.outer {
+  display: flex;
+  width: 100%;
+
+  flex-direction: column;
+  align-items: center;
+
+  .notLogged {
+    margin: 1.5em 0 1em 0;
+    font-family: $text-font;
+    font-weight: lighter;
+    font-size: 1.5em;
+    color: #333;
+  }
+}
+
+.login {
+  @include secondary-button;
+}
+
+.signup {
+  @include main-button;
+}

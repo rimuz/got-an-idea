@@ -1,0 +1,23 @@
+@import 'src/global';
+
+footer {
+  background-color: $blue-color;
+  color: $gray-color;
+  padding: 1em 0em;
+  width: 100%;
+
+  text-align: center;
+  font-family: $text-font;
+  font-size: 13px;
+}
+
+.inner {
+  margin: auto;
+  width: 90%;
+
+  a, a:visited {
+    font-weight: bold;
+    text-decoration: none;
+    color: $gray-color;
+  }
+}

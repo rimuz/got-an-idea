@@ -1,0 +1,21 @@
+@import 'src/global';
+
+.text {
+  margin: 2em 0 1.5em 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include content-width;
+}
+
+.lower {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}

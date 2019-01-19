@@ -1,0 +1,66 @@
+@import 'src/global';
+@import '../New/common'; 
+
+.outer {
+  display: flex;
+  width: 100%;
+
+  flex-direction: column;
+  align-items: center;
+  font-family: $text-font;
+}
+
+.picAndInfo {
+  @include content-width;
+  display: flex;
+  justify-content: space-between;
+
+  .right {
+    margin-left: 3em;
+    flex-grow: 1;
+
+    .info {
+      padding: 2em 2em 1em 2em;
+      box-shadow: $card-shadow;
+      border-radius: 0.5em;
+
+      h3 {
+        margin: 0;
+        font-size: 1.2em;
+        font-weight: normal;
+      }
+
+      h2 {
+        margin: 0 0 1em 0;
+      }
+    }
+  }
+
+  svg {
+    * {
+      fill: currentColor;
+    }
+
+    width: 6em;
+    height: 6em;
+    border-radius: 50%;
+    box-shadow: $profile-icon-shadow;
+  }
+}
+
+.buttons {
+  margin: 1em 0.5em;
+
+  button {
+    @include main-button;
+    margin-bottom: 0.5em;
+  }
+
+  .delete {
+    background-color: lightcoral;
+
+    &:hover {
+      background-color: indianred;
+    }
+  }
+}

@@ -1,0 +1,90 @@
+@import 'src/global';
+@import '../common';
+
+.lower {
+  width: 100%;
+  
+  form {
+    box-sizing: border-box;
+    width: 100%;
+  
+    box-shadow: $card-shadow;
+    border-radius: 0.5em;
+    margin-bottom: 2.5em;
+  }
+}
+
+.selects {
+  padding: 1.5em 2em;
+}
+
+.input {
+  &+.input{
+    margin-top: 1em;
+  }
+
+  h2 {
+    margin: 0 0 0.5em 0;
+    font-size: 1.25em;
+    font-weight: lighter;
+  }
+
+  label + label {
+    margin-left: 1em;
+  }
+
+  select {
+    width: 10em;
+    font-size: 1em;
+    font-family: $text-font;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  //font-weight: bold;
+  
+  label + label {
+    margin-left: 1em;  
+  }
+}
+
+.areas {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.5em 2em;
+  
+  input[type=text] {
+    margin-bottom: 1em;
+    @include text-field;
+  }
+
+  :global(.ql-toolbar){
+    border: solid 2px #efefef;
+  }
+
+  :global(.ql-container){
+    font-family: $text-font;
+    font-size: 1em;
+    min-height: 5em;
+
+    border: solid 2px #efefef;
+    border-top: 0px;
+
+    :global(.ql-syntax){
+      color: #111 !important;
+      background-color: #efefef !important;
+    }
+  }
+}
+
+.previous {
+  @include secondary-button;
+}
+
+.publish {
+  @include main-button;
+}

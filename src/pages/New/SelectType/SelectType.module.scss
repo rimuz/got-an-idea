@@ -1,0 +1,39 @@
+@import 'src/global';
+@import '../common.scss';
+
+.text {
+  @include content-width;
+}
+
+.idea, .project {
+  border-radius: 0.5em;
+  cursor: pointer;
+  
+  margin: 0.5em 0;
+  padding: 0.5em 2em 5em 2em;
+  transition: transform 2s;
+  width: 50%;
+  margin: 1em;
+
+  box-shadow: $card-shadow;
+
+  font-size: 1.1em;
+  
+  h2 {
+    font-size: 1.5em;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.idea {
+  background: white url("../assets/idea.svg") no-repeat 100% 110%;
+  background-size: 10em;
+}
+
+.project {
+  background: white url("../assets/project.svg") no-repeat 0% 110%;
+  background-size: 7em;
+}

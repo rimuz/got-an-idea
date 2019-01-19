@@ -1,0 +1,36 @@
+@import 'src/global';
+
+.content {
+  width: 25em;
+  padding: 1em;
+}
+
+.urlParent {
+  width: 100%;
+  display: flex;
+}
+
+.url {
+  flex-grow: 5;
+
+  //padding: 0 0.3em;
+  @include text-field;
+  font-size: 0.85em;
+}
+
+.copy {
+  @include main-button;
+  
+  flex-grow: 1;
+  font-size: 1em;
+}
+
+.share {
+  margin-top: 0.5em;
+  width: 100%;
+  display: flex;
+
+  .facebook {
+    margin-right: 3px;
+  }
+}

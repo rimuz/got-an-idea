@@ -1,0 +1,26 @@
+@import 'src/global';
+@import '../common';
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.previous, .next {
+  margin: 0.5em 0;
+  font-size: 1.5em;
+}
+
+.previous {
+  @include secondary-button;
+}
+  
+.next {
+  @include main-button;
+}
+
+.last {
+  margin-top: 1em;
+}

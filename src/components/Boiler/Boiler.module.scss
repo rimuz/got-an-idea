@@ -1,0 +1,18 @@
+.outer {
+  font-size: 16px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.children {
+  padding-top: 3.5em;
+
+  @media (max-width: 800px) {
+    padding-top: 5.75em;
+  }
+}

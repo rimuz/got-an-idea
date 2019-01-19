@@ -1,0 +1,82 @@
+@import 'src/global';
+
+$icons-color: #aaa;
+$clicked-color: #555;
+$hover-bg: #efefef;
+
+.withComment {
+  display: flex;
+  border-top: solid 1px #dedede;
+  padding: 1em 0 0 0;
+
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.withoutComment {
+  display: flex;
+  border-top: solid 1px #dedede;
+  padding: 1em 0 0 0;
+
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.btnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  transition: background-color 1s;
+  cursor: pointer;
+
+  padding: 0.25em 0.5em;
+  border-radius: 0.5em;
+  
+  & + .btn {
+    margin-left: 0.5em;
+  }
+
+  &:hover {
+    background-color: $hover-bg;
+  }
+
+  svg {
+    width: 1em;
+    height: 2em;
+
+    path {
+      fill: $icons-color;
+      stroke: $icons-color;
+    }
+
+    &.upsideDown {
+      z-index: 0;
+      position: relative;
+      transform: rotate(180deg);
+    }
+
+    &.share {
+      width: 1.75em;
+      height: 1.5em;
+    }
+  }
+
+  span {
+    text-decoration: none;
+    margin-left: 0.5em;
+
+    font-weight: bold;
+    color: $icons-color;
+
+    @media (max-width: 800px){
+      &.optional {
+        display: none;
+      }
+    }
+  }
+}

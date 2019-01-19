@@ -1,0 +1,21 @@
+@import 'src/global';
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $text-font;
+  min-height: 50vh;
+
+  .outer {
+    @include content-width;
+    margin-bottom: 2em;
+  }
+}
+
+.outer {
+  display: flex;
+  align-content: stretch;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}

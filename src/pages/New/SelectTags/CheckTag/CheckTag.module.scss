@@ -1,0 +1,39 @@
+@import 'src/global';
+
+.tag {
+  display: flex;
+  flex-direction: column;
+
+  width: 12em;
+  height: 12em;
+  border-radius: 0.5em;
+  margin: 1em;
+  
+  background-color: white;// #ff7b2e;
+  //box-shadow: 4px -2px 8px 0px gray;
+  box-shadow: $card-shadow;
+  transition: transform 1s, background-color 0.5s ease-out;
+  cursor: pointer;
+
+
+  &.checked {
+    background-color: #00a30e;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  h1 {
+    margin: 0 auto;
+    padding-top: 0.5em;
+    font-size: 1.25em;
+    color: black;
+    //text-shadow: 2px 2px lightgray;
+  }
+
+  div {
+    margin: auto;
+    font-size: 5em;
+  }
+}

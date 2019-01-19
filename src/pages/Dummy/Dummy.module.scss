@@ -1,0 +1,36 @@
+@import 'src/global';
+
+.page {
+  margin-top: 1.5em;
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-family: $text-font;
+
+  @media(max-width: 800px){
+    font-size: 0.6em;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+
+  div {
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 2em;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1.1em;
+  }
+}
+
+.emoji {
+  font-size: 7em;
+}

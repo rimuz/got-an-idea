@@ -1,0 +1,132 @@
+@import 'src/global';
+
+$transition: transform 1s, opacity 1s;
+$outer-media-height: 5.75em;
+
+
+nav {
+  background-color: $blue-color;
+  box-shadow: 0 2px 8px 0px grey;
+  transition: $transition;
+  transform-origin: 0% 0%;
+
+  position: fixed;
+  z-index: 10;  
+  top: 0;
+  width: 100%;
+  height: 3.5em;
+  font-size: 16px;
+
+  @media (max-width: 800px) {
+      height: 5.75em;
+
+      &.collapsed {
+        transform: scaleY(0.5);
+      }
+  }
+}
+
+.logoAndTitle {
+  display: flex;
+  align-items: center;
+
+  position: absolute;
+  transition: $transition;
+  z-index: 20;
+  
+  left: 0;
+  top: 50%;
+  position: absolute;
+  transform: translateY(-50%);
+
+  cursor: pointer;
+  text-decoration: none;
+
+  svg {
+    width: 1.6em;
+    height: 1.6em;
+    margin: 0em 1em;
+    transition: $transition;
+  }
+
+  h1 {
+    color: $gray-color;
+    font-family: $title-font;
+    white-space: nowrap;
+    font-size: 1.5em;
+    margin: 0;
+    transition: $transition;
+  }
+
+
+  @media(max-width: 800px){
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -$outer-media-height/2+0.5em);
+
+    h1 {
+      font-size: 1.5em;
+    }
+
+    svg {
+      margin: 0em 0.5em;
+    }
+
+    .collapsed & {
+      h1 {
+        opacity: 0;
+      }
+
+      transform: translate(-50vw, -50%) scaleY(2);
+    }
+  }
+}
+ 
+.icons {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5em;
+  transition: $transition;
+  z-index: 30;
+  
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  position: absolute;
+
+  @media (max-width: 800px) {
+    top: 2.75em;
+    
+    .collapsed & {
+      transform: translate(-50%, -1.375em) scaleY(2);
+    }
+  }
+  
+  svg {
+    padding: 0.5em 0.8em 0.5em 0.8em;
+    margin: 0.2em 0em 0.2em 0em;
+    border-radius: 10%;
+
+    cursor: pointer;
+    width: 1.3em;
+    height: 1em;
+    z-index: 10;
+    
+    transition: background-color 0.5s;
+
+    &:hover {
+      background: lighten($blue-color, 5%);
+    }
+  }
+
+  .selected {
+    svg {
+      background: lighten($blue-color, 15%);
+      box-shadow: 0em 0em 0.4em 0.1em #000064;
+
+      &:hover {
+        background: lighten($blue-color, 15%);
+      }
+    }
+  }
+}

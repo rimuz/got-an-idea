@@ -1,0 +1,20 @@
+@import 'src/global';
+
+.outer {
+  display: flex;
+}
+
+.content {
+  margin: auto;
+  @include content-width;
+}
+
+.text {
+  margin: 20px;
+  font-family: $text-font;
+  font-size: 18px;
+
+  h1 {
+    font-size: 1.25em;
+  }
+}

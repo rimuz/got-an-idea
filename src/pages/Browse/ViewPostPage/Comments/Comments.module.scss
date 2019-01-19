@@ -1,0 +1,41 @@
+@import 'src/global';
+
+.area {
+  :global(.ql-container){
+    font-family: $text-font;
+    font-size: 1.1em;
+    
+    :global(.ql-editor){
+      padding: 0.3em !important;
+    }
+   
+    :global(.ql-syntax){
+      color: #111 !important;
+      background-color: #efefef !important;
+    }
+  }
+}
+
+.buttons {
+  width: 100%;
+  padding: 1em 0em;
+  border-bottom: solid 1px #dedede;
+
+  font-size: 0.9em;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submit {
+  @include main-button;
+}
+
+.discard {
+  @include secondary-button;
+}
+
+.numComments {
+  margin: 1em 0 0 1em;
+  color: gray;
+  font-size: 1em;
+}
