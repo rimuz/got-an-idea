@@ -17,7 +17,6 @@
     "redux": "^4.0.1",
     "smoothscroll-polyfill": "^0.4.3"
   },
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && react-snapshot",
@@ -25,7 +24,6 @@
     "deploy": "aws s3 sync --acl public-read build/ s3://got-an-idea",
     "eject": "react-scripts eject"
   },
-
   "browserslist": [
     ">0.2%",
     "not dead",
