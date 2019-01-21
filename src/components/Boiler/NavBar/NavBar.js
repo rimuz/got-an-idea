@@ -50,6 +50,11 @@ class NavBar extends Component {
     this.lastTop = scrollTop;
   }
 
+  compareLink = (desired, match, location) => {
+    const { pathname } = location;
+    return pathname.startsWith(desired);
+  };
+
   componentDidMount() {
     this.lastTop = window.pageYOffset || document.documentElement.scrollTop;
     window.addEventListener("scroll", this.scrollHandlerFunction);
@@ -68,24 +73,29 @@ class NavBar extends Component {
         </Link>
 
         <span className={styles.icons}>
-          <NavLink to="/browse" activeClassName={styles.selected}>
+          <NavLink to="/browse" activeClassName={styles.selected}
+              isActive={this.compareLink.bind(null, "/browse")}>
             <Browse />
           </NavLink>
 
           {/*
-          <NavLink to="/search" activeClassName={styles.selected}>
+          <NavLink to="/search" activeClassName={styles.selected}
+              isActive={this.compareLink.bind(null, "/search")}>
             <Search />
           </NavLink>
 
           <NavLink to="/list" activeClassName={styles.selected}>
+              isActive={this.compareLink.bind(null, "/list")}>
             <List />
           </NavLink>
           */}
-          <NavLink to="/post" activeClassName={styles.selected}>
+          <NavLink to="/post" activeClassName={styles.selected}
+              isActive={this.compareLink.bind(null, "/post")}>
             <Post />
           </NavLink>
           
-          <NavLink to="/user" activeClassName={styles.selected}>
+          <NavLink to="/user" activeClassName={styles.selected}
+              isActive={this.compareLink.bind(null, "/user")}>
             <User />
           </NavLink>
         </span>

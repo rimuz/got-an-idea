@@ -8,20 +8,24 @@
     "quill-image-drop-module": "^1.0.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-helmet": "^5.2.0",
     "react-quill": "^1.3.3",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.2",
+    "react-snapshot": "^1.3.0",
     "redux": "^4.0.1",
     "smoothscroll-polyfill": "^0.4.3"
   },
+
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && react-snapshot",
     "test": "react-scripts test --env=jsdom",
-    "deploy": "aws s3 sync build/ s3://got-an-idea",
+    "deploy": "aws s3 sync --acl public-read build/ s3://got-an-idea",
     "eject": "react-scripts eject"
   },
+
   "browserslist": [
     ">0.2%",
     "not dead",

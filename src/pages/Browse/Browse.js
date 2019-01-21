@@ -8,7 +8,7 @@ import ViewPostPage from './ViewPostPage/ViewPostPage';
 const browse = () => (
   <Boiler>
     <Switch>
-      <Route path='/browse' exact component={BrowsePage} />
+      <Route path='/browse(.html)?' exact component={BrowsePage} />
       <Route path='/browse/post/:postId' exact component={ViewPostPage} />
       
       <Route path='/browse' render={

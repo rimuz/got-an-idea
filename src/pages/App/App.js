@@ -30,19 +30,18 @@ class App extends Component {
             <Modals />
             
             <Switch>
-              <Route path='/' exact component={Start} />
-              <Route path='/index.html' exact component={Start} />
+              <Route path='/(index.html)?' exact component={Start} />
 
-              <Route path='/browse' component={Browse} />
-              <Route path='/search' component={Dummy} />
-              <Route path='/list' component={Dummy} />
+              <Route path='/browse(.html)?' component={Browse} />
+              <Route path='/search(.html)?' component={Dummy} />
+              <Route path='/list(.html)?' component={Dummy} />
 
               {/* User */}
-              <Route path='/user/sign-up' exact component={Register} />
-              <Route path='/user' component={User} />
+              <Route path='/user/sign-up(.html)?' exact component={Register} />
+              <Route path='/user(.html)?' component={User} />
 
               {/* Post */}
-              <Route path='/post' exact component={New} />
+              <Route path='/post(.html)?' exact component={New} />
               <Route path='/post/:urlStage' component={New} />
 
               {/* 404 Page */}
