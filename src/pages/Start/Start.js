@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import { Helmet } from 'react-helmet';
 
 import Button from '../../components/Button/Button';
 import Comp from '../../components/Comp/Comp';

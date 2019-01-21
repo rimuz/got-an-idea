@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
