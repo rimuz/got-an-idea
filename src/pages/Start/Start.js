@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { Helmet } from 'react-helmet';
 
 import Button from '../../components/Button/Button';
 import Comp from '../../components/Comp/Comp';
@@ -21,24 +22,22 @@ class Start extends Component {
   render() {
     return (
       <Comp>
-        <Center vertical horizontal outer={styles.upper} inner={styles.inner}
-                minHeight='100vh'>
+        <Center vertical horizontal outer={styles.upper} inner={styles.inner} minHeight='100vh'>
+          <h1>Got an idea?</h1>
+          <p>
+            The platform for sharing your billion dollar idea
+          </p>
 
-            <h1>Got an idea?</h1>
-            <p>
-              The platform for sharing your billion dollar idea
-            </p>
+          <span>
+            <Button clicked={this.tellMeMoreHandler}
+                    className={styles.button}>
+              Tell me more
+            </Button>
 
-            <span>
-              <Button clicked={this.tellMeMoreHandler}
-                      className={styles.button}>
-                Tell me more
-              </Button>
-
-              <Button className={styles.button} to="/browse">
-                Let's start!
-              </Button>
-            </span>
+            <Button className={styles.button} to="/browse">
+              Let's start!
+            </Button>
+          </span>
         </Center>
 
         <div className={styles.bottom} ref={this.tellMoreRef}>

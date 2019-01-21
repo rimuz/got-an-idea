@@ -26,6 +26,19 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <Comp>
+            <Helmet>
+              <title>
+                Got an idea? - The online place for sharing my billion dollar idea.
+              </title>
+
+                  <meta name="description" content={`
+                Tell the internet all of your crazy ideas! Whether they are
+                a book, a website or a business idea, tons of people
+                out there are desperately looking for them.
+                Login and get inspired on got-an-idea.com!
+              `} />
+            </Helmet>
+
             <ScrollToTop />
             <Modals />
             
