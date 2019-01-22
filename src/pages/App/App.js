@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../../redux/reducers';
+import thunk from 'redux-thunk';
 
 import Start from '../Start/Start';
 import Browse from '../Browse/Browse';
@@ -19,7 +20,10 @@ import Modals from '../../components/Modals/Modals';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.scss';
 
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+);
 
 class App extends Component {
   render() {
