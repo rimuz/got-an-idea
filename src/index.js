@@ -9,7 +9,7 @@ import './index.scss';
 
 export const prefix = "https://got-an-idea.com";
 export const axiosInstance = axios.create({
-  baseURL: 'https://cut6d4fzn2.execute-api.us-east-1.amazonaws.com/dev/',
+  baseURL: 'https:/api.got-an-idea.com/',
 });
 
 smoothscroll.polyfill();

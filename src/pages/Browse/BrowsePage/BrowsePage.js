@@ -32,7 +32,13 @@ class BrowsePage extends Component {
   }
 
   onComponentDidMount(){
-    axiosInstance.get('/browse');
+    axiosInstance.get('/browse')
+      .then(response => {
+        console.log({response});
+      })
+      .catch(error => {
+        console.log({error});
+      });
   }
 }
 
