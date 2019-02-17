@@ -18,7 +18,7 @@
   width: 100%;
   box-shadow: $card-shadow;
   border-radius: 0.5em;
-  margin-bottom: 1.5em;
+  margin: 1.5em 0;
 }
 
 .lower {
@@ -29,6 +29,10 @@
   padding: 1em 2em;
   cursor: pointer;
   transition: background-color 1s;
+
+  @media (max-width: 800px){
+    font-size: 0.75em;
+  }
 
   &:first-of-type {
     border-radius: 0.5em 0.5em 0 0;
@@ -72,5 +76,6 @@
 
   p {
     font-size: 1.2em;
+    margin: 0.75em 0;
   }
 }

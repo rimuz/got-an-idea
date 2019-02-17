@@ -11,18 +11,6 @@ import SelectTags from './SelectTags/SelectTags';
 import SelectStage from './SelectStage/SelectStage';
 import WritePost from './WritePost/WritePost';
 
-export const makePage = (outer, inner) => (
-  <Boiler>
-    <div className={styles.page}>
-      {outer}
-
-      <div className={styles.outer}>
-        {inner}
-      </div>
-    </div>
-  </Boiler>
-);
-
 class New extends Component {
   checkStage = () => {
     const { stage, setStage } = this.props;

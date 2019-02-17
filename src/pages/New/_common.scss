@@ -1,15 +1,48 @@
 @import 'src/global';
 
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $text-font;
+  min-height: 50vh;
+
+  .outer {
+    @include content-width;
+    margin-bottom: 2em;
+  }
+}
+
+.outer {
+  display: flex;
+  align-content: stretch;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
 .text {
-  margin: 2em 0 1.5em 0;
+  margin: 1.5em 0;
   font-size: 1.5em;
   color: #333;
+
+  @media(max-width: 800px){
+    font-size: 1.3em;
+    margin: 0.75em 0 0.75em 1em;
+  }
 }
 
 .upper {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
+
+
+  :nth-child(2) {
+    align-self: flex-end;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 
   @include content-width;
 }

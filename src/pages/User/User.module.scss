@@ -14,9 +14,14 @@
   @include content-width;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 
+  @media (max-width: 800px){
+    font-size: 0.75em;
+  }
+  
   .right {
-    margin-left: 3em;
+    margin: 0 2em;
     flex-grow: 1;
 
     .info {
@@ -41,6 +46,7 @@
       fill: currentColor;
     }
 
+    margin: 0em auto 2em auto;
     width: 6em;
     height: 6em;
     border-radius: 50%;

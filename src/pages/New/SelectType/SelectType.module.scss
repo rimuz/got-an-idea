@@ -1,6 +1,18 @@
 @import 'src/global';
 @import '../common.scss';
 
+.page {
+  @media(max-width: 800px){
+    //font-size: 0.5em;
+  }
+}
+
+.outer {
+  @media(max-width: 800px){
+    flex-direction: column;
+  }
+}
+
 .text {
   @include content-width;
 }
@@ -14,17 +26,27 @@
   transition: transform 2s;
   width: 50%;
   margin: 1em;
-
+  
   box-shadow: $card-shadow;
-
   font-size: 1.1em;
   
   h2 {
     font-size: 1.5em;
   }
 
-  &:hover {
-    transform: scale(1.1);
+  @media(max-width: 800px){
+    width: auto;
+    font-size: 0.85em;
+  
+    h2 {
+      font-size: 1.25em;
+    }
+  }
+
+  @media not all and (max-width: 800px){
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 }
 

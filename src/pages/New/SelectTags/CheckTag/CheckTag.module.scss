@@ -15,13 +15,18 @@
   transition: transform 1s, background-color 0.5s ease-out;
   cursor: pointer;
 
+  @media (max-width: 800px){
+    font-size: 0.5em;
+  }
 
   &.checked {
     background-color: #00a30e;
   }
 
-  &:hover {
-    transform: scale(1.1);
+  @media not all and (max-width: 800px){
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
   h1 {
@@ -29,7 +34,10 @@
     padding-top: 0.5em;
     font-size: 1.25em;
     color: black;
-    //text-shadow: 2px 2px lightgray;
+
+    @media (max-width: 800px){
+      font-size: 1.4em;
+    }
   }
 
   div {

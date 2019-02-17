@@ -7,8 +7,8 @@ import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import debounce from 'lodash/debounce';
 
-import { makePage } from '../New';
 import styles from './WritePost.module.scss';
+import Boiler from '../../../components/Boiler/Boiler';
 import { 
   newPageReset, newPageSetPostType, newPageSetPostStage,
   newPageAddTag, newPageRemoveTag, newPageSetTitle,
@@ -86,86 +86,92 @@ class WritePost extends Component {
     const { postType, postStage, postTags, title, body } = this.props;
     const stages = postType === 'project' ? projectStages : ideaStages;
 
-    return makePage(
-      <div className={styles.upper}>
-        <div className={styles.text}>
-          New post
-        </div>
-
-        <div>
-          <button onClick={this.previousHandler} className={styles.previous}>Previous</button>
-          <button onClick={this.publishHandler} className={styles.publish}>Publish</button>
-        </div>
-      </div>,
-
-      <div className={styles.lower}>
-        <form>
-          <div className={styles.selects}>
-            <div className={styles.input}>
-              <h2>
-                Select type of post:
-              </h2>
-
-              <label>
-                <input type="radio" value="idea"
-                  checked={postType === 'idea'} onChange={this.postTypeHandler} />
-                Idea
-              </label>
-
-              <label>
-                <input type="radio" value="project"
-                  checked={postType !== 'idea'} onChange={this.postTypeHandler} />
-                Project
-              </label>
+    return (
+      <Boiler>
+        <div className={styles.page}>
+          <div className={styles.upper}>
+            <div className={styles.text}>
+              New post
             </div>
 
-            <div className={styles.input}>
-              <h2>
-                {`Select stage of the ${postType}:`}
-              </h2>
-            
-              <select name="stage" value={postStage} onChange={this.postStageHandler}>
-                {
-                  stages.map(stage => (
-                    <option value={stage.shortName} key={stage.shortName}>{stage.shortName}</option>
-                  ))
-                }
-              </select>
+            <div>
+              <button onClick={this.previousHandler} className={styles.previous}>Previous</button>
+              <button onClick={this.publishHandler} className={styles.publish}>Publish</button>
             </div>
+          </div>
 
-            <div className={styles.input}>
-              <h2>
-                Select appropriate tags:
-              </h2>
-              
-              <div className={styles.tags}>
-                {
-                  tags.map(tag => (
-                    <label key={tag.name}>
-                      <input type="checkbox" name={tag.name} onChange={this.tagHandler}
-                        checked={postTags.indexOf(tag.name) !== -1} />
-                      {`#${tag.name}`}
+          <div className={styles.outer}>
+            <div className={styles.lower}>
+              <form>
+                <div className={styles.selects}>
+                  <div className={styles.input}>
+                    <h2>
+                      Select type of post:
+                    </h2>
+
+                    <label>
+                      <input type="radio" value="idea"
+                        checked={postType === 'idea'} onChange={this.postTypeHandler} />
+                      Idea
                     </label>
-                  ))
-                }
+
+                    <label>
+                      <input type="radio" value="project"
+                        checked={postType !== 'idea'} onChange={this.postTypeHandler} />
+                      Project
+                    </label>
+                  </div>
+
+                  <div className={styles.input}>
+                    <h2>
+                      {`Select stage of the ${postType}:`}
+                    </h2>
+                  
+                    <select name="stage" value={postStage} onChange={this.postStageHandler}>
+                      {
+                        stages.map(stage => (
+                          <option value={stage.shortName} key={stage.shortName}>{stage.shortName}</option>
+                          ))
+                        }
+                    </select>
+                  </div>
+
+                  <div className={styles.input}>
+                    <h2>
+                      Select appropriate tags:
+                    </h2>
+                    
+                    <div className={styles.tags}>
+                      {
+                        tags.map(tag => (
+                          <label key={tag.name}>
+                            <input type="checkbox" name={tag.name} onChange={this.tagHandler}
+                              checked={postTags.indexOf(tag.name) !== -1} />
+                            {`#${tag.name}`}
+                          </label>
+                        ))
+                      }
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.areas}>
+                  <input type="text" name="title" placeholder="Enter title here"
+                      value={title} onChange={this.titleHandler} />
+
+                  <ReactQuill value={body.text} onChange={this.bodyHandlerDebounced} theme="snow"
+                      modules={modules} placeholder="Enter body here" />              
+                </div>
+              </form>
+
+              <div className={styles.buttons}>
+                <button onClick={this.previousHandler} className={styles.previous}>Previous</button>
+                <button onClick={this.publishHandler} className={styles.publish}>Publish</button>
               </div>
             </div>
           </div>
-
-          <div className={styles.areas}>
-            <input type="text" name="title" placeholder="Enter title here"
-                value={title} onChange={this.titleHandler} />
-
-            <ReactQuill value={body.text} onChange={this.bodyHandlerDebounced} theme="snow"
-                modules={modules} placeholder="Enter body here" />              
-          </div>
-        </form>
-
-        <div className={styles.buttons}>
-          <button onClick={this.previousHandler} className={styles.previous}>Previous</button>
-          <button onClick={this.publishHandler} className={styles.publish}>Publish</button>
         </div>
-      </div>
+      </Boiler>
     );
   }
 };

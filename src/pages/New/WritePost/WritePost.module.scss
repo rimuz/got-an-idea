@@ -1,6 +1,12 @@
 @import 'src/global';
 @import '../common';
 
+form {
+  @media(max-width: 800px){
+    font-size: 0.75em;
+  }
+}
+
 .lower {
   width: 100%;
   
@@ -10,7 +16,7 @@
   
     box-shadow: $card-shadow;
     border-radius: 0.5em;
-    margin-bottom: 2.5em;
+    margin: 1.25em 0;
   }
 }
 

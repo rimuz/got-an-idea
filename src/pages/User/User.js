@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { ReactComponent as UserImage } from '../Browse/assets/user.svg';
-import PleaseLogIn from '../../components/PleaseLogIn/PleaseLogIn';
 import Boiler from '../../components/Boiler/Boiler';
 import styles from './User.module.scss';
 

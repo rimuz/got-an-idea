@@ -15,7 +15,7 @@ class BrowsePage extends Component {
       <div className={styles.outer}>
         <div className={styles.content}>
           {
-            this.state.posts.map(post => (
+            /*this.state.posts.map(post => (
               <Post
                 id={post.id}
                 title={post.title}
@@ -24,8 +24,36 @@ class BrowsePage extends Component {
                 downvotes={post.downvotes}
                 comments={post.comments}
               />
-            ))
+            ))*/
           }
+          
+          <Repeat n='30'>
+            <Post
+              id='fuffa123'
+              title={`This is the title of the idea.
+                This is the title of the idea.
+                This is the title of the idea.
+                This is the title of the idea.
+                This is the title of the idea.
+              `}
+
+              body={`The body of the idea is here along
+                with the description and its details. If this
+                part is too long it should be trimmed. Text Text
+                Text Text Text Text Text Text Text Text Text Text
+                Text Text Text Text Text Text Text Text Text Text
+                Text Text Text Text Text Text Text Text Text Text
+                Text Text Text Text Text Text Text Text Text Text
+                Text Text Text Text Text Text Text Text Text Text
+                Text Text Text Text Text Text Text Text Text Text
+                Text Text Text Text Text Text Text Text Text Text
+                Text Text Text Text Text Text Text Text Text Text`}
+              upvotes={10}
+              downvotes={20}
+              comments={33}
+              building={420}
+            />
+          </Repeat>
         </div>
       </div>
     );
