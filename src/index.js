@@ -9,7 +9,7 @@ import './index.scss';
 
 export const prefix = "https://got-an-idea.com";
 export const axiosInstance = axios.create({
-  baseURL: 'https:/api.got-an-idea.com/',
+  baseURL: 'https://api.got-an-idea.com/',
 });
 
 smoothscroll.polyfill();

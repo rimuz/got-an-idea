@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { newPageSetStage } from '../../redux/actions';
 import styles from './New.module.scss';
 
+import PleaseLogIn from '../../components/PleaseLogIn/PleaseLogIn';
 import Boiler from '../../components/Boiler/Boiler';
 import SelectType from './SelectType/SelectType';
 import SelectTags from './SelectTags/SelectTags';
@@ -30,19 +31,26 @@ class New extends Component {
       return <Redirect to={`/post/${maxStage}`} />
     }
 
-
     switch(urlStage){
       case 0:
-        return <SelectType />
+        return  <PleaseLogIn>
+                  <SelectType />
+                </PleaseLogIn>;
 
       case 1:
-        return <SelectTags />
+        return  <PleaseLogIn>
+                  <SelectTags />
+                </PleaseLogIn>;
       
       case 2:
-        return <SelectStage />
+        return  <PleaseLogIn>
+                  <SelectStage />
+                </PleaseLogIn>;
       
       case 3:
-        return <WritePost />
+        return  <PleaseLogIn>
+                  <WritePost />
+                </PleaseLogIn>;
       
       default:
         return null;  

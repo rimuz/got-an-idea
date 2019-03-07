@@ -8,6 +8,7 @@ import Login from './Login/Login';
 import ColorChoose from './ColorChoose/ColorChoose';
 import ChangePassword from './ChangePassword/ChangePassword';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
+import Generic from './Generic/Generic';
 
 const modalList = {
   SHARE: Share,
@@ -15,6 +16,7 @@ const modalList = {
   COLOR_CHOOSE: ColorChoose,
   CHANGE_PASSWORD: ChangePassword,
   FORGOT_PASSWORD: ForgotPassword,
+  GENERIC: Generic,
 };
 
 class Modals extends Component {

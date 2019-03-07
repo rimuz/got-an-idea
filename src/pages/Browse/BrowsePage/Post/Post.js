@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './Post.module.scss';
 import { withRouter } from 'react-router-dom';
 
-import { ReactComponent as User } from '../../assets/user.svg';
+import { ReactComponent as UserImage } from '../../assets/user.svg';
 import VoteShareBar from '../../VoteShareBar/VoteShareBar';
 
 class Post extends Component {
@@ -11,27 +11,31 @@ class Post extends Component {
   };
 
   render() {
-    const { id, title, body } = this.props;
+    const {
+      id, title, strippedBody, name, upvotes, downvotes,
+      comments, color
+    } = this.props;
+    console.log("COLOR: " + color);
 
     return (
       <div className={styles.outer}>
         <div onClick={this.clickHandler.bind(this)} style={{ cursor: 'pointer' }}>
           <div className={styles.upper}>
-            <User />
+            <UserImage style={{ color }} />
 
             <div className={styles.nameDate}>
-              <h1>Nome Dell'Utente buffo</h1>
+              <h1>{name}</h1>
               <p>10h</p>
             </div>
           </div>
 
           <h1>{title}</h1>
           <div className={styles.body}>
-            {body}
+            {strippedBody}
           </div>
         </div>
 
-        <VoteShareBar upvotes="100" downvotes="330" comments="100" postId={id} />
+        <VoteShareBar upvotes={upvotes} downvotes={downvotes} comments={comments} postId={id} />
       </div>
     );
   }

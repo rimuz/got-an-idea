@@ -1,8 +1,8 @@
 @import 'src/global';
 
 .outer {
-  padding: 1em 2em;
-  width: 25em;
+  padding: 0.5em 0.5em;
+  width: 30em;
 
   display: flex;
   flex-direction: column;
@@ -13,19 +13,17 @@
   }
 }
 
-.errorMsg {
-  margin: 0.2em;
-  font-size: 1em;
-  color: darkred;
-  font-style: italic;
+.upper {
+  display: flex;
+  margin: 1em 1em;
 }
 
-.email, .password {
-  margin: 0.3em 0;
-  @include text-field;
+.emoji {
+  font-size: 3.5em;
+  margin-right: 0.5em;
 }
 
-.textAndCheckBox {
+.text {
   margin-top: 0.3em;
   font-size: 1em;
 
@@ -33,19 +31,15 @@
   justify-content: space-between;
 }
 
-.recover {
-  font-size: 1em;
-}
-
 .buttons {
   align-self: flex-end;
   margin-top: 1em;
 }
 
-.cancel {
+.left {
   @include secondary-button;
 }
 
-.login {
+.right {
   @include main-button;
 }

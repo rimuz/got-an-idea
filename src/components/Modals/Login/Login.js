@@ -3,8 +3,15 @@ import { connect } from 'react-redux';
 
 import styles from './Login.module.scss';
 import { openModal, closeModal, login } from '../../../redux/actions';
+import { axiosInstance } from '../../..';
 
 class Login extends Component {
+  state = {
+    email: "",
+    emailError: undefined,
+    password: "",
+  }
+
   signUpHandler = () => {
     const { closeModal} = this.props;
     closeModal();
@@ -22,17 +29,51 @@ class Login extends Component {
 
   loginHandler = () => {
     const { closeModal, login, args } = this.props;
-    login();
+    
+    axiosInstance.post('/user/login', {
+      
+    })
+    
     args.then();
     closeModal();
   };
 
+  changeHandler = event => {
+    const { value, name } = event.target;
+    
+    if(name === 'email'){
+      var emailError = undefined;
+      
+      if(value !== "" && !value.match(/^[\w\.]+@([\w\-]+\.)+[\w\-]{2,4}$/))
+        emailError = "Invalid Email."
+
+      this.setState({
+        ...this.state,
+        email: value,
+        emailError  
+      });
+      
+    } else { // password
+      this.setState({
+        ...this.state,
+        password: value,
+      });
+    }   
+  }
 
   render(){
     return (
       <div className={styles.outer}>
-        <input type="text" placeholder="Email" className={styles.email} />
-        <input type="password" placeholder="Password" className={styles.password} />
+        <input name="email" type="text" placeholder="Email"
+          className={styles.email} onChange={this.changeHandler}/>
+
+        {this.state.emailError ?
+          <p className={styles.errorMsg}> {this.state.emailError} </p>
+          : null}
+
+        <input name="password" type="password" placeholder="Password"
+          className={styles.password} onChange={this.changeHandler} />
+        
         <div className={styles.textAndCheckBox}>
           <div>
             No account? <a href="/user/sign-up" onClick={this.closeHandler}>Sign up</a>
@@ -66,4 +107,4 @@ const mapDispatchToProps = dispatch => ({
   login: () => dispatch(login()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

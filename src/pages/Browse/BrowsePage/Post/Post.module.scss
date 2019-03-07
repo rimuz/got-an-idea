@@ -59,6 +59,10 @@
   flex-wrap: wrap; 
   
   svg {
+    * {
+      fill: currentColor;
+    }
+
     box-shadow: $profile-icon-shadow;
     border-radius: 50%;
 

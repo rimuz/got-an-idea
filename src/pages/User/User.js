@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { ReactComponent as UserImage } from '../Browse/assets/user.svg';
+import PleaseLogIn from '../../components/PleaseLogIn/PleaseLogIn';
 import Boiler from '../../components/Boiler/Boiler';
 import styles from './User.module.scss';
-
 import { openModal } from '../../redux/actions';
 
 class User extends Component {
@@ -24,7 +24,7 @@ class User extends Component {
     const color = `hsl(${hue}, ${light}%, ${sat}%)`;
 
     return (
-      //<PleaseLogIn>
+      <PleaseLogIn>
         <Boiler>
           <div className={styles.outer}>
             <div className={styles.upper}>
@@ -55,7 +55,7 @@ class User extends Component {
             </div>
           </div> 
         </Boiler>
-      //</PleaseLogIn>
+      </PleaseLogIn>
     );
   }
 };

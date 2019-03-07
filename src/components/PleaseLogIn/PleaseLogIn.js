@@ -24,18 +24,20 @@ class PleaseLogIn extends Component {
       return (
         <Boiler>
           <div className={styles.outer}>
-            <p className={styles.notLogged}>
-              This section is available only for registered accounts.
+            <div className={styles.content}>
+              <p className={styles.notLogged}>
+                This section is available only for registered accounts.
               </p>
 
-            <div>
-              <button className={styles.login} onClick={this.loginHandler}>
-                Log In
-              </button>
+              <div>
+                <button className={styles.login} onClick={this.loginHandler}>
+                  Log In
+                </button>
 
-              <button className={styles.signup} onClick={this.signupHandler}>
-                Sign Up
-              </button>
+                <button className={styles.signup} onClick={this.signupHandler}>
+                  Sign Up
+                </button>
+              </div>
             </div>
           </div>
         </Boiler>
@@ -50,7 +52,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  openLogin: () => dispatch(openModal('LOGIN', 'Log in', { then: () => {} }))
+  openLogin: () => dispatch(openModal('LOGIN', 'Log in', { then: () => {} })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(PleaseLogIn));

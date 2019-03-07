@@ -3,9 +3,19 @@
 .outer {
   display: flex;
   width: 100%;
+}
+
+.content {
+  margin: auto;
+  display: flex;
+  width: 90%;
 
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 800px){
+    align-items: flex-end;
+  }
 
   .notLogged {
     margin: 1.5em 0 1em 0;
@@ -13,6 +23,10 @@
     font-weight: lighter;
     font-size: 1.5em;
     color: #333;
+
+    @media (max-width: 800px){
+      font-size: 1.25em;
+    }
   }
 }
 

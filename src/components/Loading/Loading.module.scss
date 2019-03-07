@@ -1,0 +1,46 @@
+@import 'src/global';
+
+@keyframes loading {
+    0% {
+        color: hsl(0, 40%, 40%);
+        transform: none;
+    }
+
+    25% {
+        color: hsl(90, 40%, 40%);
+        transform: scale(0.9);
+    }
+
+    50% {
+        color: hsl(180, 40%, 40%);
+        transform: none;
+    }
+
+    75% {
+        color: hsl(270, 40%, 40%);
+        transform: scale(0.9);
+    }
+
+    100% {
+        color: hsl(0, 40%, 40%);
+        transform: none;
+    }
+}
+
+.outer {
+    display: flex;
+    height: 5em;
+
+    span {
+        animation: loading 12s ease-in-out 0s
+                    alternate infinite none running;
+        font-size: 2em;
+        font-weight: bold;
+        font-family: $text-font;
+        margin: auto;
+
+        @media(max-width: 800px){
+            font-size: 1.75em;
+        }
+    }
+}
