@@ -15,7 +15,6 @@ class Post extends Component {
       id, title, strippedBody, name, upvotes, downvotes,
       comments, color
     } = this.props;
-    console.log("COLOR: " + color);
 
     return (
       <div className={styles.outer}>

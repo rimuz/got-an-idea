@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import Boiler from '../../../components/Boiler/Boiler';
+import Loading from '../../../components/Loading/Loading';
 import styles from './Register.module.scss';
 import { openModal } from '../../../redux/actions/modals';
-import { axiosInstance } from '../../..';
 
 const defaultValue = {
   value: "",
-  valid: false,
   error: undefined,
 }
 
 const defaultState = {
-  username: defaultValue,
-  email: defaultValue,
-  confirmEmail: defaultValue,
-  password: defaultValue,
-  confirmPassword: defaultValue
+  fields: {
+    username: defaultValue,
+    email: defaultValue,
+    confirmEmail: defaultValue,
+    password: defaultValue,
+    confirmPassword: defaultValue,
+  },
+  
+  loading: false,
 };
 
 class Register extends Component {
@@ -26,10 +30,11 @@ class Register extends Component {
   state = JSON.parse(JSON.stringify(defaultState))
 
   resetState = () => {
-    this.state = JSON.parse(JSON.stringify(defaultState));
+    this.setState(JSON.parse(JSON.stringify(defaultState)))
   }
 
   changeHandler = event => {
+    const { fields } = this.state;
     const { name } = event.target;
     var { value } = event.target;
     var error = undefined;
@@ -49,7 +54,7 @@ class Register extends Component {
           break;
         
         case 'confirmEmail':
-          if(value !== this.state.email.value)
+          if(value !== fields.email.value)
             error = "Emails don't match.";
           break;
         
@@ -67,7 +72,7 @@ class Register extends Component {
           break;
         
         case 'confirmPassword':
-          if(value !== this.state.password.value)
+          if(value !== fields.password.value)
             error = "Passwords don't match.";
           break;
 
@@ -79,50 +84,73 @@ class Register extends Component {
     this.setState({
       ...this.state,
     
-      [name]: {
-        ...this.state[name],
-        value, error
+      fields: {
+        ...fields,
+        
+        [name]: {
+          value, error
+        }
+      }
+    }, () => {
+      if (name === 'password') {
+        this.changeHandler({
+          target: {
+            name: 'confirmPassword',
+            value: fields.confirmPassword.value,
+          }
+        });
       }
     });
   }
 
   nextHandler = () => {
-    const { openInputErrorModal, openSuccessModal,
-      openConnectionErrorModal } = this.props;
+    const { openInputError, openSuccess, openConnectionError } = this.props;
+    const { fields } = this.state; 
 
-    const keys = Object.keys(this.state);
+    const keys = Object.keys(fields);
 
-    if(keys.some(key => this.state[key].value === "")){
-      openInputErrorModal("Please fill all the text fields!");
+    if (keys.some(key => fields[key].value === "")){
+      openInputError("Please fill all the text fields!");
       return;
     }
 
-    const error = keys.find(key => this.state[key].error !== undefined);
+    const error = keys.find(key => fields[key].error !== undefined);
     if(error){
-      openInputErrorModal(this.state[error].error);
+      openInputError(fields[error].error);
       return;
     }
-
+    
     // no errors, send POST request to the server
-    axiosInstance.post('/user/register', {
-      name: this.state.username.value,
-      email: this.state.email.value,
-      password: this.state.password.value, 
+    axios.post('/user/register', {
+      name: fields.username.value,
+      email: fields.email.value,
+      password: fields.password.value, 
     })
-      .then(response => {
-        this.resetState();
-        openSuccessModal();
-      })
-      .catch(error => {
-        if(error.response)
-          openInputErrorModal(error.response.data.message);
-        else
-          openConnectionErrorModal();
+    .then(response => {
+      this.resetState();
+      openSuccess();
+    })
+    .catch(error => {
+      if(error.response)
+        openInputError(error.response.data.message);
+      else
+        openConnectionError();
+    
+      this.setState({
+        ...this.state,
+        loading: false,
       });
+    });
+
+    this.setState({
+      ...this.state,
+      loading: true,
+    });
   }
 
   render() {
     const { isLoggedIn } = this.props;
+    const { fields } = this.state;
     
     if(isLoggedIn)
       return <Redirect to="/user" />
@@ -142,27 +170,27 @@ class Register extends Component {
             </p>
             
             <input name="username" type="text" placeholder="Username" autocomplete="off"
-              value={this.state.username.value} onChange={this.changeHandler} />
+              value={fields.username.value} onChange={this.changeHandler} />
             
-            { this.state.username.error ?
-              <p className={styles.errorMsg}> {this.state.username.error} </p>
+            { fields.username.error ?
+              <p className={styles.errorMsg}> {fields.username.error} </p>
             : null}
             
             <p>
               Please type a valid email.
             </p>
             <input name="email" type="text" placeholder="Email"
-              value={this.state.email.value} onChange={this.changeHandler} />
+              value={fields.email.value} onChange={this.changeHandler} />
             
-            {this.state.email.error ?
-              <p className={styles.errorMsg}> {this.state.email.error} </p>
+            {fields.email.error ?
+              <p className={styles.errorMsg}> {fields.email.error} </p>
             : null}
 
             <input name="confirmEmail" type="text" placeholder="Confirm Email" autocomplete="off"
-              value={this.state.confirmEmail.value} onChange={this.changeHandler} />
+              value={fields.confirmEmail.value} onChange={this.changeHandler} />
             
-            {this.state.confirmEmail.error ?
-              <p className={styles.errorMsg}> {this.state.confirmEmail.error} </p>
+            {fields.confirmEmail.error ?
+              <p className={styles.errorMsg}> {fields.confirmEmail.error} </p>
             : null}
 
 
@@ -171,22 +199,26 @@ class Register extends Component {
               both letters (at least one uppercase and one lowercase) and numbers.
             </p>
             <input name="password" type="password" placeholder="Password" autocomplete="off"
-              value={this.state.password.value} onChange={this.changeHandler} />
+              value={fields.password.value} onChange={this.changeHandler} />
             
-            {this.state.password.error ?
-              <p className={styles.errorMsg}> {this.state.password.error} </p>
+            {fields.password.error ?
+              <p className={styles.errorMsg}> {fields.password.error} </p>
             : null}
 
             <input name="confirmPassword" type="password" placeholder="Confirm Password"
-              autocomplete="off" value={this.state.confirmPassword.value}
+              autocomplete="off" value={fields.confirmPassword.value}
               onChange={this.changeHandler} />
 
-            {this.state.confirmPassword.error ?
-              <p className={styles.errorMsg}> {this.state.confirmPassword.error} </p>
+            {fields.confirmPassword.error ?
+              <p className={styles.errorMsg}> {fields.confirmPassword.error} </p>
             : null}
 
-            <button className={styles.next} onClick={this.nextHandler}>Next</button>
-          </div>
+            { this.state.loading ? <Loading /> :
+              <button className={styles.next} onClick={this.nextHandler}>
+                Next
+              </button> }
+
+            </div>
         </div>
       </Boiler>
     );
@@ -199,17 +231,17 @@ const stateToProps = state => ({
 });
 
 const dispatchToProps = dispatch => ({
-  openInputErrorModal: msg => dispatch(openModal('GENERIC', 'Error', {
+  openInputError: msg => dispatch(openModal('GENERIC', 'Error', {
     msg, style: 'error',
     right: { msg: 'Got it!' }
   })),
 
-  openSuccessModal: () => dispatch(openModal('GENERIC', 'Success', {
+  openSuccess: () => dispatch(openModal('GENERIC', 'Success', {
     msg: 'Account registered. Please check your email and click the link we sent.',
     style: 'success', right: { msg: 'Awesome!' }
   })),
 
-  openConnectionErrorModal: () => dispatch(openModal('GENERIC', 'Terrible error', {
+  openConnectionError: () => dispatch(openModal('GENERIC', 'Terrible error', {
     msg: 'Transaction failed. Please check your internet connection and wait a few minutes.',
     style: 'error', right: { msg: 'Yes, Sir' }
   }))

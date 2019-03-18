@@ -4,9 +4,7 @@ const initialState = {
   userData: {
     name: 'Username',
     email: 'example@got-an-idea.com',
-    desc: 'Here it is the description.',
     color: { hue: '100', light: '23', sat: '50' },
-    pic: undefined,
     posts: 344,
   },
 };
@@ -15,10 +13,15 @@ const auth = (state = initialState, action) => {
   switch(action.type){
     case 'LOG_IN':
       return {
-        ...initialState,
+        userData: (action.userData ?
+          action.userData : state.userData),
+        token: action.token,
         isLoggedIn: true,
       };
-    
+      
+    case 'LOG_OUT':
+      return initialState;
+      
     case 'SET_USER_DATA':
       return {
         ...state,

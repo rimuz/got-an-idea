@@ -1,15 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import Sugar from 'sugar';
 
 import styles from './Login.module.scss';
+import Loading from '../../../components/Loading/Loading';
 import { openModal, closeModal, login } from '../../../redux/actions';
-import { axiosInstance } from '../../..';
+import { withCookies } from 'react-cookie';
 
 class Login extends Component {
   state = {
     email: "",
     emailError: undefined,
     password: "",
+    loading: false,
+  }
+
+  constructor(props){
+    super(props);
+    this.checkboxRef = React.createRef();
+  }
+  
+  keyPressHandler = e => {
+    if(e.key == 'Enter'){
+      this.loginHandler();
+    }
   }
 
   signUpHandler = () => {
@@ -28,14 +43,49 @@ class Login extends Component {
   };
 
   loginHandler = () => {
-    const { closeModal, login, args } = this.props;
+    const { closeModal, login, args, cookies } = this.props;
+    const { email, password, emailError } = this.state;
+    const storeToken = this.checkboxRef.current.value;
     
-    axiosInstance.post('/user/login', {
+    if(email === "" || password === "" || emailError)
+      return;
+
+    axios.post('/user/login', {
+      email, password
+    })
+    .then(response => {
+      const { jwt, userData } = response.data;
+      console.log({userData});
+
+      login(jwt, userData);
+      if(storeToken){
+        console.log("Scrivendo!!!");
+        cookies.set('jwt', jwt, {
+          expires: Sugar.Date.create('in three months')
+        })
+      }
       
+      closeModal();
+      args.then();
+    })
+    .catch(error => {
+      console.log({error});
+
+      const { response } = error;
+      const msg = response ? ("Error: " + response.data.message) : "Connection error";
+      
+      this.setState({
+        ...this.state,
+        error: msg,
+        loading: false,
+      });
+    });
+
+    this.setState({
+      ...this.state,
+      loading: true,
     })
     
-    args.then();
-    closeModal();
   };
 
   changeHandler = event => {
@@ -64,6 +114,10 @@ class Login extends Component {
   render(){
     return (
       <div className={styles.outer}>
+        {this.state.error ?
+          <p className={styles.errorMsg}> {this.state.error} </p>
+          : null}
+
         <input name="email" type="text" placeholder="Email"
           className={styles.email} onChange={this.changeHandler}/>
 
@@ -72,7 +126,8 @@ class Login extends Component {
           : null}
 
         <input name="password" type="password" placeholder="Password"
-          className={styles.password} onChange={this.changeHandler} />
+          className={styles.password} onChange={this.changeHandler} 
+          onKeyPress={this.keyPressHandler} />
         
         <div className={styles.textAndCheckBox}>
           <div>
@@ -80,18 +135,20 @@ class Login extends Component {
           </div>
           
           <label>
-            <input type="checkbox" defaultChecked />
+            <input type="checkbox" defaultChecked ref={this.checkboxRef} />
             Remember me
           </label>
         </div>
         <div className={styles.recover}>
           <a href="#" onClick={this.forgotHandler}>Forgot password</a>
         </div>
+        
+        { this.state.loading ? <Loading /> :
+          <div className={styles.buttons}>
+            <button className={styles.cancel} onClick={this.cancelHandler}>Cancel</button>
+            <button className={styles.login} onClick={this.loginHandler}>Log in</button>
+          </div> }
 
-        <div className={styles.buttons}>
-          <button className={styles.cancel} onClick={this.cancelHandler}>Cancel</button>
-          <button className={styles.login} onClick={this.loginHandler}>Log in</button>
-        </div>
       </div>
     );
   }
@@ -104,7 +161,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   openForgotPassword: () => dispatch(openModal('FORGOT_PASSWORD', 'Forgot Password')),
   closeModal: () => dispatch(closeModal()),
-  login: () => dispatch(login()),
+  login: (token, userData) => dispatch(login(token, userData)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(withCookies(Login));

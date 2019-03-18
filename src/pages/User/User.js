@@ -19,7 +19,7 @@ class User extends Component {
   }
 
   render() {
-    const { userData, isLoggedIn } = this.props;
+    const { userData } = this.props;
     const { hue, light, sat } = userData.color;
     const color = `hsl(${hue}, ${light}%, ${sat}%)`;
 

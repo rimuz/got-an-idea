@@ -4,14 +4,11 @@ import axios from 'axios';
 import smoothscroll from 'smoothscroll-polyfill';
 
 import registerServiceWorker from './registerServiceWorker';
-import App from './pages/App/App';
-import './index.scss';
+import Root from './components/Root/Root';
 
 export const prefix = "https://got-an-idea.com";
-export const axiosInstance = axios.create({
-  baseURL: 'https://api.got-an-idea.com/',
-});
+axios.defaults.baseURL = "https://api.got-an-idea.com";
 
 smoothscroll.polyfill();
-render(<App />, document.getElementById('root'));
+render(<Root />, document.getElementById('root'));
 registerServiceWorker();

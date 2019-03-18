@@ -121,11 +121,11 @@ nav {
 
   .selected {
     svg {
-      background: lighten($blue-color, 15%);
-      box-shadow: 0em 0em 0.4em 0.1em #000064;
+      background: lighten($blue-color, 10%);
+      box-shadow: 0em 0em 0.4em 0.1em darken($blue-color, 5%); // #000064;
 
       &:hover {
-        background: lighten($blue-color, 15%);
+        background: lighten($blue-color, 10%);
       }
     }
   }

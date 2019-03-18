@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './BrowsePage.module.scss';
+import axios from 'axios';
 
 import Post from './Post/Post';
 import Loading from '../../../components/Loading/Loading.js';
-import { axiosInstance } from '../../..';
 import { openModal } from '../../../redux/actions';
 
 const MIN_POSTS_PER_LOAD = 10;
+var isMounted = false;
 
 class BrowsePage extends Component {
   state = {
@@ -19,6 +20,15 @@ class BrowsePage extends Component {
     justLoaded: 0,
   };
 
+  componentDidMount(){
+    isMounted = true;
+    this.fetchPosts();
+  }
+  
+  componentWillUnmount(){
+    isMounted = false;
+  }
+
   render(){
     return (
       <div className={styles.outer}>
@@ -28,15 +38,9 @@ class BrowsePage extends Component {
               return (
                 <Post
                   color={`hsl(${post.hue}, ${post.light}%, ${post.saturation}%)`}
-                  key={post.postid}
-                  name={post.name}
-                  time={post.time}
-                  id={post.postid}
-                  title={post.title}
-                  strippedBody={post.strippedbody}
-                  upvotes={post.upvotes}
-                  downvotes={post.downvotes}
-                  comments={post.comments}
+                  key={post.postid}       name={post.name}            time={post.time}
+                  id={post.postid}        title={post.title}     strippedBody={post.strippedbody}
+                  upvotes={post.upvotes}  downvotes={post.downvotes}  comments={post.comments}
                   building={420}
                 />
               )
@@ -91,37 +95,34 @@ class BrowsePage extends Component {
       stillLoading: true,
     })
 
-    axiosInstance.post('/browse', {
+    axios.post('/browse', {
       sortMethod: 'newest',
       idx: `${this.state.idx}`
     })
       .then(response => {
-        console.log({response});
-        this.updateState(response.data);
+        if(isMounted)
+          this.updateState(response.data);
       })
       .catch(error => {
         console.error(error);
-
-        this.setState({
-          ...this.state,
-          stillLoading: false,
-          hasReachedEnd: true,
-        })
+        
+        if(isMounted)
+          this.setState({
+            ...this.state,
+            stillLoading: false,
+            hasReachedEnd: true,
+          })
 
         openConnectionErrorModal();
       });
   }
-
-  componentDidMount(){
-    this.fetchPosts();
-  }
 }
 
-const dispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   openConnectionErrorModal: () => dispatch(openModal('GENERIC', 'Terrible error', {
     msg: 'Cannot connect to the server. Please check your internet connection, wait a few minutes and then refresh the page.',
     style: 'error', right: { msg: 'Alright!' }
   }))
 });
 
-export default connect(null, dispatchToProps)(BrowsePage);
+export default connect(null, mapDispatchToProps)(BrowsePage);
