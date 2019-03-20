@@ -41,7 +41,7 @@ class BrowsePage extends Component {
                   key={post.postid}       name={post.name}            time={post.time}
                   id={post.postid}        title={post.title}     strippedBody={post.strippedbody}
                   upvotes={post.upvotes}  downvotes={post.downvotes}  comments={post.comments}
-                  building={420}
+                  vote={post.vote}        building={420}
                 />
               )
             })

@@ -13,7 +13,7 @@ class Post extends Component {
   render() {
     const {
       id, title, strippedBody, name, upvotes, downvotes,
-      comments, color
+      comments, color, vote
     } = this.props;
 
     return (
@@ -34,7 +34,8 @@ class Post extends Component {
           </div>
         </div>
 
-        <VoteShareBar upvotes={upvotes} downvotes={downvotes} comments={comments} postId={id} />
+        <VoteShareBar upvotes={upvotes} downvotes={downvotes} comments={comments}
+                      postId={id} vote={vote} />
       </div>
     );
   }

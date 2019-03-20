@@ -1,20 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
-import { loginDispatch, checkLogin } from '../../../utils';
 import { ReactComponent as Upvote } from '../assets/upvote.svg';
 import { ReactComponent as Comment } from '../assets/comment.svg';
 import { ReactComponent as Share } from '../assets/share.svg';
 import { openModal } from '../../../redux/actions';
 import styles from './VoteShareBar.module.scss';
 
-
 class VoteShareBar extends Component {
+  state = {
+    vote: undefined,
+  };
+  
   voteHandler = isUpvote => {
-    checkLogin(this.props, () => {
-      console.log('then');
-    });
+    const { postId, isLoggedIn, openLogin } = this.props;
+
+    if(!isLoggedIn){
+      openLogin();
+      return;
+    }
+
+    axios.post('/user/vote', {
+      target: 'p',
+      uuid: postId,
+      value: isUpvote ? '+1' : '-1',
+    })
+      .then(response => {
+        this.setState({
+          vote: isUpvote | 0 // bool -> int
+        });
+      })
+      .catch(error => {
+        this.setState({
+          vote: undefined
+        });
+      })
   };
 
   commentHandler = () => {
@@ -29,52 +51,37 @@ class VoteShareBar extends Component {
 
   render(){
     const { comments, upvotes, downvotes } = this.props;
-    const elements = [];
-    
-    elements.push(
-      <div className={styles.btnContainer} key="container-0">
-        <div className={styles.btn} onClick={this.voteHandler.bind(null, true)}>
-          <Upvote />
-          <span>{upvotes}</span>
-        </div>
-
-        <div className={styles.btn} onClick={this.voteHandler.bind(null, true)}>
-          <Upvote className={styles.upsideDown} />
-          <span>{downvotes}</span>
-        </div>
-      </div>
-    );
-    
-    if(comments !== undefined){
-      elements.push(
-        <div className={styles.btnContainer} key="container-1">
-          <div className={styles.btn} onClick={this.commentHandler}>
-            <Comment />
-            <span>{comments}</span>
-          </div>
-        </div>
-      );
-    }
-
-    elements.push(
-      <div className={styles.btnContainer} key="container-2">
-        <div className={styles.btn} onClick={this.shareHandler}>
-          <Share className={styles.share} />
-          <span className={styles.optional}>Share</span>
-        </div>
-      </div>
-    );
-    
-    if(comments !== undefined)
-      return (
-        <div className={styles.withComment}>
-          {elements}
-        </div>
-      );
     
     return (
-      <div className={styles.withoutComment}>
-        {elements}
+      <div className={comments ? styles.withComment : styles.withoutComment}>
+
+        <div className={styles.btnContainer}>
+          <div className={styles.btn} onClick={this.voteHandler.bind(null, true)}>
+            <Upvote className={this.state.vote === 0 ? styles.selected : ""}/>
+            <span>{upvotes}</span>
+          </div>
+
+          <div className={styles.btn} onClick={this.voteHandler.bind(null, false)}>
+            <Upvote className={styles.upsideDown + (this.state.vote === 1 ? styles.selected : "")} />
+            <span>{downvotes}</span>
+          </div>
+        </div>
+
+        { comments ?
+          <div className={styles.btnContainer}>
+            <div className={styles.btn} onClick={this.commentHandler}>
+              <Comment />
+              <span>{comments}</span>
+            </div>
+          </div>
+        : null }
+
+        <div className={styles.btnContainer}>
+          <div className={styles.btn} onClick={this.shareHandler}>
+            <Share className={styles.share} />
+            <span className={styles.optional}>Share</span>
+          </div>
+        </div>
       </div>
     );
   }
@@ -85,8 +92,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  ...loginDispatch(dispatch),
   openShare: postId => dispatch(openModal('SHARE', 'Share', {postId})),
+  openLogin: () => dispatch(openModal('LOGIN', 'Log in'))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VoteShareBar));

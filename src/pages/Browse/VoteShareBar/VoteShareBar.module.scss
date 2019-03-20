@@ -64,6 +64,11 @@ $hover-bg: #efefef;
       width: 1.75em;
       height: 1.5em;
     }
+
+    &.selected {
+      fill: $clicked-color;
+      stroke: $clicked-color;
+    }
   }
 
   span {
