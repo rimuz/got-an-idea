@@ -33,13 +33,13 @@
   font-family: $text-font;
 
   h1 {
-    margin: 1.25em 0 1em 0;
+    margin: 0.75em 0 0.5em 0;
     font-size: 1.25em;
     line-height: 1.25em;
   }
 
   .body {
-    padding-bottom: 3em;
+    padding-bottom: 2em;
   }
 
   @include text-overflow(h1, 4, 1.25em);

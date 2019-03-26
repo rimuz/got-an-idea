@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { closeModal, setUserData } from '../../../redux/actions';
+import { closeModal, setUserData, updateColor } from '../../../redux/actions';
 import styles from './ColorChoose.module.scss';
 
 class ColorChoose extends Component {
@@ -26,16 +26,13 @@ class ColorChoose extends Component {
   }
 
   applyHandler = () => {
-    const { setUserData, closeModal } = this.props;
+    const { updateColor } = this.props;
     
-    setUserData({
-      color: {
-        hue: this.state.hue,
-        light: this.state.light,
-        sat: this.state.sat,
-      },
-    });
-    closeModal();
+    updateColor({
+      hue: this.state.hue,
+      light: this.state.light,
+      sat: this.state.sat,
+    })
   }
 
   componentDidMount(){
@@ -55,10 +52,10 @@ class ColorChoose extends Component {
           <input name="hue" type="range" min="0" max="359" value={hue} onChange={this.changeHandler}/>
           
           <h2>Light</h2>
-          <input name="light" type="range" min="0" max="100" value={light} onChange={this.changeHandler}/>
+          <input name="light" type="range" min="20" max="80" value={light} onChange={this.changeHandler}/>
 
           <h2>Saturation</h2>
-          <input name="sat" type="range" min="0" max="100" value={sat} onChange={this.changeHandler}/>
+          <input name="sat" type="range" min="20" max="80" value={sat} onChange={this.changeHandler}/>
         </div>
       
         <div className={styles.buttons}>
@@ -73,7 +70,7 @@ class ColorChoose extends Component {
 const mapStateToProps = state => state.auth;
 const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(closeModal()),
-  setUserData: data => dispatch(setUserData(data)),
+  updateColor: color => dispatch(updateColor(color))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ColorChoose);

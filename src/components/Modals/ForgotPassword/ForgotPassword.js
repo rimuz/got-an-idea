@@ -22,10 +22,8 @@ class ForgotPassword extends Component {
         <input type="text" placeholder="Email" className={styles.email} />
 
         <div className={styles.buttons}>
-          <div className={styles.buttons}>
-            <button className={styles.cancel} onClick={this.cancelHandler}>Cancel</button>
-            <button className={styles.send} onClick={this.sendHandler}>Send Link</button>
-          </div>
+          <button className={styles.cancel} onClick={this.cancelHandler}>Cancel</button>
+          <button className={styles.send} onClick={this.sendHandler}>Send Link</button>
         </div>
       </div>
     );

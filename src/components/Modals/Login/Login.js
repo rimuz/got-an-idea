@@ -108,7 +108,7 @@ class Login extends Component {
         ...this.state,
         password: value,
       });
-    }   
+    }
   }
 
   render(){

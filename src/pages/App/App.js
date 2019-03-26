@@ -19,19 +19,22 @@ import { Route, Switch } from 'react-router-dom';
 import './App.scss';
 
 import { connect } from 'react-redux';
-import { checkAndFetch } from '../../redux/actions';
+import { checkAndFetch, triedLoggingIn } from '../../redux/actions';
 
 class App extends Component {
   constructor(props) {
     super(props);
     
-    const { cookies, check } = props;
+    const { cookies, check, tried } = props;
     const jwt = cookies.get('jwt');
 
     if(jwt)
-      check(jwt, () => {
+      check(jwt, () => tried(), () => {
         cookies.remove('jwt');
+        tried();
       });
+    else
+      tried();
   }
 
   render() {
@@ -78,7 +81,8 @@ class App extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  check: (token, failed) => dispatch(checkAndFetch(token, failed)),
+  check: (token, success, failed) => dispatch(checkAndFetch(token, success, failed)),
+  tried: () => dispatch(triedLoggingIn()),
 });
 
 export default withRouter(connect(null, mapDispatchToProps)(withCookies(App)));

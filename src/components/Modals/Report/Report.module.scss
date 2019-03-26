@@ -1,0 +1,30 @@
+@import 'src/global';
+
+.outer {
+    padding: 0 1em;
+    font-family: $text-font;
+    width: 25em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    textarea {
+        margin: 1em 0;
+        font-size: 1em;
+        width: 90%;
+    }
+}
+
+.buttons {
+    margin: 0.5em 0;
+    align-self: flex-end;
+}
+
+.cancel {
+    @include secondary-button;
+}
+
+.submit {
+    @include main-button;
+}

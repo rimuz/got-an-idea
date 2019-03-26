@@ -1,5 +1,8 @@
 @import 'src/global';
 
+$icons-color: #aaa;
+$hover-bg: #efefef;
+
 .page {
   display: flex;
   flex-direction: column;
@@ -23,6 +26,32 @@
   border-radius: 0.5em;
   
   box-shadow: $card-shadow;
+}
+
+.userBar {
+  display: flex;
+  justify-content: space-between 
+}
+
+.leftButtons {
+  svg {
+    transition: background-color 1s;
+    width: 1.3em;
+    height: 1.3em;
+    padding: 0.5em;
+    border-radius: 0.75em;
+
+    cursor: pointer;
+
+    * {
+      fill: $icons-color;
+      stroke: $icons-color;
+    }
+
+    &:hover {
+      background-color: $hover-bg;
+    }
+  }
 }
 
 .user {

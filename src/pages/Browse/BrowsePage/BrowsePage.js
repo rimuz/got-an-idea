@@ -7,7 +7,7 @@ import Post from './Post/Post';
 import Loading from '../../../components/Loading/Loading.js';
 import { openModal } from '../../../redux/actions';
 
-const MIN_POSTS_PER_LOAD = 10;
+const MIN_POSTS_PER_LOAD = 10, UPVOTE = 0, DOWNVOTE = 1;
 var isMounted = false;
 
 class BrowsePage extends Component {
@@ -24,7 +24,7 @@ class BrowsePage extends Component {
     isMounted = true;
     this.fetchPosts();
   }
-  
+
   componentWillUnmount(){
     isMounted = false;
   }
@@ -38,10 +38,11 @@ class BrowsePage extends Component {
               return (
                 <Post
                   color={`hsl(${post.hue}, ${post.light}%, ${post.saturation}%)`}
-                  key={post.postid}       name={post.name}            time={post.time}
-                  id={post.postid}        title={post.title}     strippedBody={post.strippedbody}
-                  upvotes={post.upvotes}  downvotes={post.downvotes}  comments={post.comments}
-                  vote={post.vote}        building={420}
+                  key={post.postid} name={post.name} time={post.time}
+                  id={post.postid} title={post.title} strippedBody={post.strippedbody}
+                  comments={post.comments} vote={post.vote} tags={post.tags}
+                  upvotes={post.vote === UPVOTE ? (post.upvotes - 1) : post.upvotes}
+                  downvotes={post.vote === DOWNVOTE ? (post.downvotes - 1) : post.downvotes}
                 />
               )
             })
@@ -69,8 +70,12 @@ class BrowsePage extends Component {
 
     for(const post of posts){
       // ignore duplicated posts
-      if (!arr.find(p => p.postid === post.postid))
+      if (!arr.find(p => p.postid === post.postid)){
         arr.push(post); 
+      }
+
+      console.log("Received post:");
+      console.log({post});
     }
     
     const justLoaded = this.state.justLoaded + arr.length - oldLength;
@@ -89,11 +94,16 @@ class BrowsePage extends Component {
   };
 
   fetchPosts = () => {
-    const { openConnectionErrorModal } = this.props;
+    const { openConnectionErrorModal, triedLoggingIn } = this.props;
 
     this.setState({
       stillLoading: true,
     })
+
+    if(!triedLoggingIn){
+      setTimeout(this.fetchPosts, 100);
+      return;
+    }
 
     axios.post('/browse', {
       sortMethod: 'newest',
@@ -118,6 +128,8 @@ class BrowsePage extends Component {
   }
 }
 
+const mapStateToProps = state => state.auth;
+
 const mapDispatchToProps = dispatch => ({
   openConnectionErrorModal: () => dispatch(openModal('GENERIC', 'Terrible error', {
     msg: 'Cannot connect to the server. Please check your internet connection, wait a few minutes and then refresh the page.',
@@ -125,4 +137,4 @@ const mapDispatchToProps = dispatch => ({
   }))
 });
 
-export default connect(null, mapDispatchToProps)(BrowsePage);
+export default connect(mapStateToProps, mapDispatchToProps)(BrowsePage);

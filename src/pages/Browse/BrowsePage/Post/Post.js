@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import styles from './Post.module.scss';
 import { withRouter } from 'react-router-dom';
+import Sugar from 'sugar';
 
 import { ReactComponent as UserImage } from '../../assets/user.svg';
 import VoteShareBar from '../../VoteShareBar/VoteShareBar';
+import Tags from '../../Tags/Tags';
 
 class Post extends Component {
   clickHandler = () => {
@@ -13,8 +15,11 @@ class Post extends Component {
   render() {
     const {
       id, title, strippedBody, name, upvotes, downvotes,
-      comments, color, vote
+      comments, color, vote, tags, time
     } = this.props;
+
+    const date = Sugar.Date.create(time, { fromUTC: true });
+    const dateString = Sugar.Date.relative(date);
 
     return (
       <div className={styles.outer}>
@@ -24,10 +29,12 @@ class Post extends Component {
 
             <div className={styles.nameDate}>
               <h1>{name}</h1>
-              <p>10h</p>
+              <p>{dateString}</p>
             </div>
           </div>
 
+          <Tags tags={tags} />
+          
           <h1>{title}</h1>
           <div className={styles.body}>
             {strippedBody}

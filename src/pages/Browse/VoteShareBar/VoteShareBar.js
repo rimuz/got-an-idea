@@ -9,30 +9,50 @@ import { ReactComponent as Share } from '../assets/share.svg';
 import { openModal } from '../../../redux/actions';
 import styles from './VoteShareBar.module.scss';
 
+const UPVOTE = 0, DOWNVOTE = 1;
+
 class VoteShareBar extends Component {
-  state = {
-    vote: undefined,
-  };
+  constructor(props){
+    super(props);
+
+    this.state = {
+      vote: props.vote,
+    }
+  }
   
   voteHandler = isUpvote => {
+    const { vote } = this.state;
     const { postId, isLoggedIn, openLogin } = this.props;
 
     if(!isLoggedIn){
       openLogin();
       return;
     }
-
+    
+    console.log("uuid: '" + postId + "'");
+    var newVote = !isUpvote | 0; // bool -> int
+    var queryVote = newVote === 0 ? '+1' : '-1';
+    
+    if(vote !== undefined && isUpvote === (vote === 0)){
+      newVote = undefined;
+      queryVote = '0';
+    }
+    
+    this.setState({
+      vote: newVote,
+    });
+    
     axios.post('/user/vote', {
       target: 'p',
       uuid: postId,
-      value: isUpvote ? '+1' : '-1',
+      value: queryVote,
     })
       .then(response => {
-        this.setState({
-          vote: isUpvote | 0 // bool -> int
-        });
+        console.log("Success!!");
+        console.log({response});
       })
       .catch(error => {
+        console.log({error});
         this.setState({
           vote: undefined
         });
@@ -50,20 +70,27 @@ class VoteShareBar extends Component {
   };
 
   render(){
-    const { comments, upvotes, downvotes } = this.props;
+    var { comments, upvotes, downvotes } = this.props;
+    const upvoted = this.state.vote === UPVOTE,
+          downvoted = this.state.vote === DOWNVOTE;
+    
+    if (upvoted)
+      upvotes += 1;
+    else if (downvoted)
+      downvotes += 1;
     
     return (
       <div className={comments ? styles.withComment : styles.withoutComment}>
 
         <div className={styles.btnContainer}>
           <div className={styles.btn} onClick={this.voteHandler.bind(null, true)}>
-            <Upvote className={this.state.vote === 0 ? styles.selected : ""}/>
-            <span>{upvotes}</span>
+            <Upvote className={upvoted ? styles.selected : ""}/>
+            <span className={upvoted ? styles.selected : ""}>{upvotes}</span>
           </div>
 
           <div className={styles.btn} onClick={this.voteHandler.bind(null, false)}>
-            <Upvote className={styles.upsideDown + (this.state.vote === 1 ? styles.selected : "")} />
-            <span>{downvotes}</span>
+            <Upvote className={styles.upsideDown + " " + (downvoted ? styles.selected : "")} />
+            <span className={downvoted ? styles.selected : ""}>{downvotes}</span>
           </div>
         </div>
 

@@ -1,8 +1,21 @@
 @import 'src/global';
 
 $icons-color: #aaa;
-$clicked-color: #555;
+$clicked-color: #666;
 $hover-bg: #efefef;
+$vote-anim-height: 0.25em;
+
+@keyframes upvoteAnimation {
+  0% { transform: none; }
+  50% { transform: translateY(-$vote-anim-height); }
+  100% { transform: none; }
+}
+
+@keyframes downvoteAnimation {
+  0% { transform: rotate(180deg); }
+  50% { transform: translateY($vote-anim-height) rotate(180deg); }
+  100% { transform: rotate(180deg); }
+}
 
 .withComment {
   display: flex;
@@ -66,8 +79,16 @@ $hover-bg: #efefef;
     }
 
     &.selected {
-      fill: $clicked-color;
-      stroke: $clicked-color;
+      animation: upvoteAnimation 0.75s linear;
+
+      &.upsideDown {
+        animation: downvoteAnimation 0.75s linear;
+      }
+
+      path {
+        fill: $clicked-color;
+        stroke: $clicked-color;
+      }
     }
   }
 
@@ -77,6 +98,10 @@ $hover-bg: #efefef;
 
     font-weight: bold;
     color: $icons-color;
+
+    &.selected {
+      color: $clicked-color;
+    }
 
     @media (max-width: 800px){
       &.optional {

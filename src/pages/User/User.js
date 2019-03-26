@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withCookies } from 'react-cookie';
 
 import { ReactComponent as UserImage } from '../Browse/assets/user.svg';
 import PleaseLogIn from '../../components/PleaseLogIn/PleaseLogIn';
 import Boiler from '../../components/Boiler/Boiler';
 import styles from './User.module.scss';
-import { openModal } from '../../redux/actions';
+import { openModal, logout } from '../../redux/actions';
 
 class User extends Component {
-  colorHandler = () => {
-    const { openColorChoose } = this.props;
-    openColorChoose();
-  }
-
-  passwordHandler = () => {
-    const { openChangePassword } = this.props;
-    openChangePassword();
+  logoutHandler = () => {
+    const { cookies, logout } = this.props;
+    logout();
+    cookies.remove('jwt');
   }
 
   render() {
     const { userData } = this.props;
     const { hue, light, sat } = userData.color;
     const color = `hsl(${hue}, ${light}%, ${sat}%)`;
+
+    const {
+      openColorChoose, openChangePassword
+    } = this.props;
 
     return (
       <PleaseLogIn>
@@ -46,9 +47,9 @@ class User extends Component {
                 </div>
               
                 <div className={styles.buttons}>
-                  <button onClick={this.colorHandler}>Change Color</button>
-                  <button onClick={this.passwordHandler}>Change Password</button>
-                  <button className={styles.logout}>Log out</button>
+                  <button onClick={openColorChoose}>Change Color</button>
+                  <button onClick={openChangePassword}>Change Password</button>
+                  <button onClick={this.logoutHandler}>Log out</button>
                   <button className={styles.delete}>Delete Account</button>
                 </div>
               </div>
@@ -67,6 +68,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   openColorChoose: () => dispatch(openModal('COLOR_CHOOSE', 'Choose Color')),
   openChangePassword: () => dispatch(openModal('CHANGE_PASSWORD', 'Change Password')),
+  logout: () => dispatch(logout()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(User);
+export default connect(mapStateToProps, mapDispatchToProps)(withCookies(User));

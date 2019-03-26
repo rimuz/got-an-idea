@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import styles from './ViewPostPage.module.scss';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { ReactComponent as User } from '../assets/user.svg';
 import { ReactComponent as Building } from '../assets/building.svg';
 import { ReactComponent as BasedOn } from '../assets/based-on.svg';
+import { ReactComponent as Report } from '../assets/report.svg';
 
 import VoteShareBar from '../VoteShareBar/VoteShareBar';
 import Comments from './Comments/Comments';
+import { openModal } from '../../../redux/actions';
 
 class ViewPostPage extends Component {
   render(){
+    const { openReport } = this.props;
     const { postId } = this.props.match.params;
 
     return (
       <div className={styles.page}>
         <div className={styles.innerPage}>
           <div className={styles.top}>
-            <div className={styles.user}>
-              <User />
-              <div className={styles.nameKarma}>
-                <div>Nome utente postatore</div>
-                <div>1.3k</div>
+            <div className={styles.userBar}>
+              <div className={styles.user}>
+                <User />
+                <div className={styles.nameKarma}>
+                  <div>Nome utente postatore</div>
+                  <div>1.3k</div>
+                </div>
+              </div>
+
+              <div className={styles.leftButtons}>
+                <Report onClick={openReport.bind(null, { target: 'p', uuid: postId })}/>
               </div>
             </div>
 
@@ -75,4 +85,8 @@ class ViewPostPage extends Component {
   }
 }
 
-export default withRouter(ViewPostPage);
+const dispatchToProps = dispatch => ({
+  openReport: args => dispatch(openModal('REPORT', 'Report post', args)),
+});
+
+export default withRouter(connect(null, dispatchToProps)(ViewPostPage));

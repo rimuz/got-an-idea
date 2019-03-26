@@ -1,4 +1,5 @@
 const initialState = {
+  triedLoggingIn: false, // e.g. for making 'getPosts' request after auto-login on start up
   isLoggedIn: false,
 
   userData: {
@@ -11,8 +12,16 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
   switch(action.type){
+    case 'TRIED_LOGGING_IN':
+      return {
+        ...state,
+        triedLoggingIn: true,
+      }
+
     case 'LOG_IN':
       return {
+        ...state,
+
         userData: (action.userData ?
           action.userData : state.userData),
         token: action.token,
@@ -20,7 +29,10 @@ const auth = (state = initialState, action) => {
       };
       
     case 'LOG_OUT':
-      return initialState;
+      return {
+        ...initialState,
+        triedLoggingIn: true,
+      };
       
     case 'SET_USER_DATA':
       return {
