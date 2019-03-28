@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
-import { closeModal, setUserData, updateColor } from '../../../redux/actions';
+import { closeModal, openModal, setUserData } from '../../../redux/actions';
+import Loading from '../../Loading/Loading';
 import styles from './ColorChoose.module.scss';
 
 class ColorChoose extends Component {
@@ -9,6 +11,7 @@ class ColorChoose extends Component {
     hue: '0',
     light: '50',
     sat: '50',
+    loading: false,
   }
 
   changeHandler = (event) => {
@@ -26,13 +29,24 @@ class ColorChoose extends Component {
   }
 
   applyHandler = () => {
-    const { updateColor } = this.props;
+    const { hue, light, sat } = this.state;
+    const { openSuccess, openError, setColor } = this.props;
     
-    updateColor({
-      hue: this.state.hue,
-      light: this.state.light,
-      sat: this.state.sat,
+    const color = { hue, light, sat };
+    console.log("Request -> ");
+    console.log({color});
+
+    axios.post('/user/change-color', color)
+    .then(response => {
+      setColor(color);
+      openSuccess();
     })
+    .catch(response => openError());
+    
+    this.setState({
+      ...this.state,
+      loading: true,
+    });
   }
 
   componentDidMount(){
@@ -41,7 +55,7 @@ class ColorChoose extends Component {
   }
   
   render(){
-    const { hue, light, sat } = this.state;
+    const { hue, light, sat, loading } = this.state;
 
     return (
       <div className={styles.outer}>
@@ -58,10 +72,11 @@ class ColorChoose extends Component {
           <input name="sat" type="range" min="20" max="80" value={sat} onChange={this.changeHandler}/>
         </div>
       
-        <div className={styles.buttons}>
-          <button className={styles.cancel} onClick={this.cancelHandler}>Cancel</button>
-          <button className={styles.apply} onClick={this.applyHandler}>Apply</button>
-        </div>
+        { loading ? <Loading /> :
+          <div className={styles.buttons}>
+            <button className={styles.cancel} onClick={this.cancelHandler}>Cancel</button>
+            <button className={styles.apply} onClick={this.applyHandler}>Apply</button>
+          </div> }
       </div>
     );
   }
@@ -69,8 +84,18 @@ class ColorChoose extends Component {
 
 const mapStateToProps = state => state.auth;
 const mapDispatchToProps = dispatch => ({
+  openSuccess: () => dispatch(openModal('GENERIC', 'Success', {
+    msg: 'Color changed successfully.',
+    style: 'success', right: { msg: 'Awesome!' }
+  })),
+  
+  openError: () => dispatch(openModal('GENERIC', 'Terrible error', {
+    msg: 'Operation failed. Please check your internet connection and wait a few minutes.',
+    style: 'error', right: { msg: 'Okay' }
+  })),
+
   closeModal: () => dispatch(closeModal()),
-  updateColor: color => dispatch(updateColor(color))
+  setColor: color => dispatch(setUserData({ color }))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ColorChoose);

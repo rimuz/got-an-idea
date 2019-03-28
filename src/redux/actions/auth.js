@@ -32,21 +32,6 @@ export const checkAndFetch = (jwt, success, failed) => dispatch => {
     });
 };
 
-export const updateColor = color => dispatch => {
-  axios.post('/user/change-color', { ...color })
-    .then(response => {
-      dispatch(setUserData({ color }));
-      dispatch(openModal('GENERIC', 'Success', {
-        msg: 'Color changed successfully.',
-        style: 'success', right: { msg: 'Awesome!' }
-      }));
-    })
-    .catch(response => dispatch(openModal('GENERIC', 'Terrible error', {
-      msg: 'Operation failed. Please check your internet connection and wait a few minutes.',
-      style: 'error', right: { msg: 'Okay' }
-    })));
-};
-
 export const setUserData = userData => ({
   type: 'SET_USER_DATA',
   userData,

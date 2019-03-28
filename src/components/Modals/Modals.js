@@ -10,6 +10,7 @@ import ChangePassword from './ChangePassword/ChangePassword';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
 import Generic from './Generic/Generic';
 import Report from './Report/Report';
+import DeleteAccount from './DeleteAccount/DeleteAccount';
 
 const modalList = {
   SHARE: Share,
@@ -17,6 +18,7 @@ const modalList = {
   COLOR_CHOOSE: ColorChoose,
   CHANGE_PASSWORD: ChangePassword,
   FORGOT_PASSWORD: ForgotPassword,
+  DELETE_ACCOUNT: DeleteAccount,
   GENERIC: Generic,
   REPORT: Report,
 };

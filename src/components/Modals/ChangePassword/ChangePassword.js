@@ -1,18 +1,71 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import { openModal, closeModal } from '../../../redux/actions';
+import Loading from '../../Loading/Loading';
 import styles from './ChangePassword.module.scss';
 
+const defaultValue = {
+  value: "",
+  error: undefined,
+};
+
+const defaultState = {
+  fields: {
+    oldPassword: defaultValue,
+    newPassword: defaultValue,
+    confirmNewPassword: defaultValue,
+  },
+
+  loading: false,
+};
+
 class ChangePassword extends Component {
+  state = JSON.parse(JSON.stringify(defaultState));
+
   cancelHandler = () => {
     const { closeModal } = this.props;
     closeModal();
   };
 
   applyHandler = () => {
-    const { closeModal } = this.props;
-    closeModal();
+    const { openInputError, openSuccess, openConnectionError } = this.props;
+    const { fields } = this.state;
+
+    const keys = Object.keys(fields);
+
+    if (keys.some(key => fields[key].value === "")) {
+      openInputError("Please fill all the text fields!");
+      return;
+    }
+
+    const error = keys.find(key => fields[key].error !== undefined);
+    if (error) {
+      openInputError(fields[error].error);
+      return;
+    }
+
+    // no errors, send POST request to the server
+    axios.post('/user/change-password', {
+      oldPassword: fields.oldPassword.value,
+      newPassword: fields.newPassword.value,
+    })
+      .then(response => {
+        this.resetState();
+        openSuccess();
+      })
+      .catch(error => {
+        if (error.response)
+          openInputError(error.response.data.message);
+        else
+          openConnectionError();
+      });
+
+    this.setState({
+      ...this.state,
+      loading: true,
+    });
   }
 
   forgotHandler = () => {
@@ -20,21 +73,97 @@ class ChangePassword extends Component {
     openForgotPassword();
   };
 
+  changeHandler = event => {
+    const { fields } = this.state;
+    const { name } = event.target;
+    var { value } = event.target;
+    var error = undefined;
+
+    if (value !== "") {
+      switch (name) {
+        case 'newPassword':
+          if (value.length < 10)
+            error = "Password too short.";
+          else if (value.length > 200)
+            error = "Password too long.";
+          else if (!value.match(/[A-Z]/))
+            error = "Password must contain at least one uppercase letter.";
+          else if (!value.match(/[a-z]/))
+            error = "Password must contain at least one lowercase letter.";
+          else if (!value.match(/[0-9]/))
+            error = "Password must contain at least one number.";
+          break;
+
+        case 'confirmNewPassword':
+          if (value !== fields.newPassword.value)
+            error = "Passwords don't match.";
+          break;
+
+        default: // this is ridiculous!
+          break;
+      }
+    }
+
+    this.setState({
+      ...this.state,
+
+      fields: {
+        ...fields,
+
+        [name]: {
+          value, error
+        }
+      }
+    }, () => {
+      if (name === 'newPassword') {
+        this.changeHandler({
+          target: {
+            name: 'confirmNewPassword',
+            value: fields.confirmNewPassword.value,
+          }
+        });
+      }
+    });
+  };
+
   render(){
+    const { fields, loading } = this.state;
+
     return (
       <div className={styles.outer}>
-        <input type="password" placeholder="Old Password" className={styles.password} />
-        <input type="password" placeholder="New Password" className={styles.password} />
-        <input type="password" placeholder="Confirm Password" className={styles.password} />
+        <input name="oldPassword" type="password" placeholder="Old Password"
+          value={fields.oldPassword.value} className={styles.password}
+          onChange={this.changeHandler} />
+
+        {fields.oldPassword.error ?
+          <p className={styles.errorMsg}> {fields.oldPassword.error} </p>
+          : null}
+        
+        <input name="newPassword" type="password" placeholder="New Password"
+          value={fields.newPassword.value} className={styles.password}
+          onChange={this.changeHandler} />
+        
+        {fields.newPassword.error ?
+          <p className={styles.errorMsg}> {fields.newPassword.error} </p>
+          : null}
+
+        <input name="confirmNewPassword" type="password" placeholder="Confirm Password"
+          value={fields.confirmNewPassword.value} className={styles.password}
+          onChange={this.changeHandler} />
+
+        {fields.confirmNewPassword.error ?
+          <p className={styles.errorMsg}> {fields.confirmNewPassword.error} </p>
+          : null}
 
         <div className={styles.recover}>
           <a href="#" onClick={this.forgotHandler}>Forgot password</a>
         </div>
 
-        <div className={styles.buttons}>
-          <button className={styles.cancel} onClick={this.cancelHandler}>Cancel</button>
-          <button className={styles.apply} onClick={this.applyHandler}>Apply</button>
-        </div>
+        { loading ? <Loading /> :
+          <div className={styles.buttons}>
+            <button className={styles.cancel} onClick={this.cancelHandler}>Cancel</button>
+            <button className={styles.apply} onClick={this.applyHandler}>Apply</button>
+          </div> }
       </div>
     );
   }
@@ -43,5 +172,20 @@ class ChangePassword extends Component {
 const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(closeModal()),
   openForgotPassword: () => dispatch(openModal('FORGOT_PASSWORD', 'Forgot Password')),
+  
+  openInputError: msg => dispatch(openModal('GENERIC', 'Error', {
+    msg, style: 'error',
+    right: { msg: 'Got it!' }
+  })),
+
+  openSuccess: () => dispatch(openModal('GENERIC', 'Success', {
+    msg: 'Password changed.',
+    style: 'success', right: { msg: 'Awesome!' }
+  })),
+
+  openConnectionError: () => dispatch(openModal('GENERIC', 'Terrible error', {
+    msg: 'Transaction failed. Please check your internet connection and wait a few minutes.',
+    style: 'error', right: { msg: 'Yes, Sir' }
+  }))
 });
 export default connect(null, mapDispatchToProps)(ChangePassword);

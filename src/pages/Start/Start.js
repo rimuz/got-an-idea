@@ -8,6 +8,9 @@ import TellMore from './TellMore/TellMore';
 import Footer from '../../components/Boiler/Footer/Footer';
 import styles from './Start.module.scss';
 
+import { ReactComponent as JustFilament } from './assets/just-filament.svg';
+import { ReactComponent as LogoGray } from './assets/logo-gray.svg';
+
 class Start extends Component {
   constructor(props){
     super(props);
@@ -21,23 +24,27 @@ class Start extends Component {
   render() {
     return (
       <Comp>
-        <Center vertical horizontal outer={styles.upper} inner={styles.inner} minHeight='100vh'>
-          <h1>Got an idea?</h1>
-          <p>
-            The platform for sharing your billion dollar idea
-          </p>
+        <div className={styles.upper}>
+          <div className={styles.title}>
+            <LogoGray className={styles.logoFilament} />
+            <div className={styles.titleInner}> Got an idea? </div>
+          </div>
 
-          <span>
+          <div className={styles.subtitle}>
+            The platform for sharing your billion dollar idea
+          </div>
+
+          <div className={styles.buttons}>
             <Button clicked={this.tellMeMoreHandler}
                     className={styles.button}>
-              Tell me more
+               Learn more
             </Button>
 
             <Button className={styles.button} to="/browse">
-              Let's start!
+              Enter
             </Button>
-          </span>
-        </Center>
+          </div>
+        </div>
 
         <div className={styles.bottom} ref={this.tellMoreRef}>
           <TellMore />

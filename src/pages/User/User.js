@@ -21,7 +21,8 @@ class User extends Component {
     const color = `hsl(${hue}, ${light}%, ${sat}%)`;
 
     const {
-      openColorChoose, openChangePassword
+      openColorChoose, openChangePassword,
+      openDeleteAccount,
     } = this.props;
 
     return (
@@ -50,7 +51,8 @@ class User extends Component {
                   <button onClick={openColorChoose}>Change Color</button>
                   <button onClick={openChangePassword}>Change Password</button>
                   <button onClick={this.logoutHandler}>Log out</button>
-                  <button className={styles.delete}>Delete Account</button>
+                  <button onClick={openDeleteAccount}
+                    className={styles.delete}>Delete Account</button>
                 </div>
               </div>
             </div>
@@ -68,6 +70,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   openColorChoose: () => dispatch(openModal('COLOR_CHOOSE', 'Choose Color')),
   openChangePassword: () => dispatch(openModal('CHANGE_PASSWORD', 'Change Password')),
+  openDeleteAccount: () => dispatch(openModal('DELETE_ACCOUNT', 'Permanently delete account')),
   logout: () => dispatch(logout()),
 });
 

@@ -2,37 +2,68 @@
 
 .upper {
   background-color: $blue-color;
-}
+  min-height: 100vh;
+  
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.inner {
-  animation: fadeIn 1.5s ease-in-out;
-  font-family: $title-font;
-  text-align: center;
   font-size: 1vw;
-  margin: 0 0 2em 0;
-
-  @media (max-width: 800px){
-    font-size: 1.75vw;
-  }
-
-  h1 {
-    font-size: 8em;
-    color: $gray-color;
-    margin: 0;
-  }
-
-  p {
-    font-size: 2em;
-    color: $gray-color;
-    margin: -0.75em 0 0.75em 0;
-  }
-
-  button {
-    margin: 0.4em;
-    font-size: 1.5em;
+  @media(max-width: 800px){
+    font-size: 1.5vw;
   }
 }
 
+.title, .logoFilament, .subtitle, .buttons {
+  font-family: $title-font;
+  margin: 0 0 2em 0;
+}
+
+.titleInner, .subtitle, .buttons {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.logoFilament {
+  animation: logoFadeIn 2.5s ease-in-out;
+}
+
+.title {
+  font-size: 8em;
+  color: $gray-color;
+  position: relative;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 2em;
+  color: $gray-color;
+  margin: -0.75em 0 0.75em 0;
+}
+
+.buttons {
+  button {
+    margin: 0.2em 0.6em;
+    font-size: 1.5em;
+
+    @media (max-width: 800px){
+      font-size: 2.25em;
+    }
+  }
+}
+
+.logoFilament {
+  width: 0.5em;
+  height: 0.5em;
+  position: absolute;
+  
+  left: 3.8em;
+  top: -0.1em;
+
+  transform: rotate(5deg);
+  color: $blue-color;
+}
+  
 .bottom {
   width: 100%;
 }
@@ -46,4 +77,10 @@
   to {
     opacity: 1;
   }
+}
+
+@keyframes logoFadeIn {
+  0% { opacity: 0; }
+  75% { opacity: 0; }
+  100% { opacity: 1; }
 }
