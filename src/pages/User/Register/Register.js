@@ -26,7 +26,6 @@ const defaultState = {
 };
 
 class Register extends Component {
-  // deep copy
   state = JSON.parse(JSON.stringify(defaultState))
 
   resetState = () => {
@@ -42,14 +41,14 @@ class Register extends Component {
     if(value !== ""){
       switch(name){
         case 'username':
-          value = value.replace(/\s/g, '_').replace(/[^A-Za-z_$0-9]/g, '');
+          value = value.replace(/\s/g, '_').replace(/[^A-Za-z_$0-9]/g, '').toLowerCase();
           
           if(value.length < 4)
             error = "Username must be long at least 4 characters.";
           break;
         
         case 'email':
-          if(!value.match(/^[\w\.]+@([\w\-]+\.)+[\w\-]{2,4}$/))
+          if(!value.match(/^[\w.]+@([\w-]+\.)+[\w-]{2,4}$/))
             error = "Invalid email.";
           break;
         
@@ -206,7 +205,7 @@ class Register extends Component {
             : null}
 
             <input name="confirmPassword" type="password" placeholder="Confirm Password"
-              autocomplete="off" value={fields.confirmPassword.value}
+              autoComplete="off" value={fields.confirmPassword.value}
               onChange={this.changeHandler} />
 
             {fields.confirmPassword.error ?
@@ -242,7 +241,7 @@ const dispatchToProps = dispatch => ({
   })),
 
   openConnectionError: () => dispatch(openModal('GENERIC', 'Terrible error', {
-    msg: 'Transaction failed. Please check your internet connection and wait a few minutes.',
+    msg: 'Transaction failed. Please check your internet connection and try again in a few minutes.',
     style: 'error', right: { msg: 'Yes, Sir' }
   }))
 });

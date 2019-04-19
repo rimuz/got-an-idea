@@ -25,9 +25,14 @@ const initialState = {
 
   title: "",
   body: { text: '' },
+  inspiredBy: "",
+  editing: undefined,
 };
 
 function newPage(state = initialState, action){  
+  console.log("Dispatch!!");
+  console.log({action});
+
   switch(action.type){
     case 'NEXT':
       return {
@@ -54,20 +59,38 @@ function newPage(state = initialState, action){
     case 'SET_STAGE':
       return {
         ...state,
-        stage: action.stage,  
+        stage: action.stage,
+      };
+    
+    case 'SET_MAX_STAGE':
+      return {
+        ...state,
+        maxStage: action.maxStage,
       };
     
     case 'SET_TITLE':
       return {
         ...state,
         title: action.title,
-      }
+      };
     
     case 'SET_BODY':
       return {
         ...state,
         body: action.body,
-      }
+      };
+    
+    case 'SET_INSPIRED_BY':
+      return {
+        ...state,
+        inspiredBy: action.inspiredBy,
+      };
+    
+    case 'SET_EDITING':
+      return {
+        ...state,
+        editing: action.editing,
+      };
 
     case 'ADD_TAG':
       return {

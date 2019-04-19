@@ -8,9 +8,9 @@ const tellMore = () => {
 
       <div>
         <p>
-          "<strong>Everybody</strong> has ideas. Ideas are highly,
-          highly <strong>overvalued</strong>. Execution is all that
-          matters." - Casey Neistat.
+          As mathematician Alfred North Whitehead once said,
+          &laquo;<strong>Ideas</strong> won't keep.
+          Something <strong>must</strong> be done about them&raquo;.
         </p>
 
         <p>
@@ -29,12 +29,29 @@ const tellMore = () => {
         </p>
 
         <p>
-          Note that similar things alredy existed (e.g. subreddits such as
-          r/crazyideas, r/SomebodyMakeThis but also r/gameideas)
-          but were inadequate to host all the ideas' information
-          and their developments as well as
-          eventual <strong>feedback</strong> from users.
+          Unlike popular social media and blogs, <em>Got an idea</em> lacks
+          of all the distractions you can find on them, and it's
+          the best place to visit when you are having trouble
+          finding <strong>inspiration</strong> for your next <em>big thing</em>.
         </p>
+      </div>
+
+      <h1>The spirit of <em>Got an idea</em></h1>
+
+      <div>
+        <p>
+          When you <strong>share</strong> your intuition here, it automatically
+          becomes of <em>public domain</em>, and several users
+          can improve it and make it theirs. So, please don't publish the secret sauce
+          of <em>Big Mac</em>, but rather tell us what's that apparently useless
+          thing you'd really buy if it <strong>existed</strong>.
+        </p>
+
+        <p>
+          So, what are you doing still here? Go share your <strong>thoughts</strong> and let other
+          creative people like you <strong>judge</strong> them, or silently check out
+          the <strong>concepts</strong> behind future unicorn startups (or also <em>steal</em> them, I won't tell anyone).
+        </p>  
       </div>
     </div>
   );

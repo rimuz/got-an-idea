@@ -1,0 +1,74 @@
+@import 'src/global';
+
+.outer {
+  border-radius: 0.5em;
+
+  padding: 1em 1em 1em 1em;
+  margin-bottom: 1em;
+  // font-size: 16px;
+  font-family: $text-font;
+
+  h1 {
+    margin: 0.75em 0 0.5em 0;
+    font-size: 1.25em;
+    line-height: 1.25em;
+  }
+
+  .body {
+    padding: 1em 0;
+  }
+  
+  @media (max-width: 800px){
+    font-size: 0.75em;
+  }
+
+  :global(.ql-container){
+    font-family: $text-font;
+    font-size: 1.2em;
+
+    :global(.ql-syntax){
+      color: #111 !important;
+      background-color: #efefef !important;
+    }
+
+    :global(.ql-editor){
+      padding: 0;
+    }
+  }
+}
+
+.subContainer {
+  padding: 0.5em 0 0 5em;
+}
+
+.upper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; 
+
+  svg {
+    * {
+      fill: currentColor;
+    }
+
+    box-shadow: $profile-icon-shadow;
+    border-radius: 50%;
+
+    padding: 2px;
+    width: 2em;
+    height: 2em;
+  }
+
+  .nameDate {
+    color: $username-color;
+    align-self: top;
+    font-size: 0.8em;
+    
+    padding: 0em 1em;
+    margin: 0;
+
+    h1, p {
+      margin: 0;
+    }
+  }
+}

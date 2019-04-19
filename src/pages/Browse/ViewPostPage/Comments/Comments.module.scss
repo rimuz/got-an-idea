@@ -16,11 +16,14 @@
   }
 }
 
+.replyTo {
+  color: darkred;
+}
+
 .buttons {
   width: 100%;
   padding: 1em 0em;
-  border-bottom: solid 1px #dedede;
-
+  
   font-size: 0.9em;
   display: flex;
   justify-content: flex-end;
@@ -35,7 +38,47 @@
 }
 
 .numComments {
-  margin: 1em 0 0 1em;
+  padding: 1em 0 1.5em 1em;
   color: gray;
   font-size: 1em;
+  border-top: solid 1px #dedede;
+}
+
+
+.logInContent {
+  margin: auto;
+  display: flex;
+  width: 90%;
+
+  flex-direction: column;
+  align-items: center;
+
+  /*
+  @media (max-width: 800px){
+    align-items: flex-end;
+  }*/
+
+  .notLogged {
+    margin: 0 0 1em 0;
+    font-family: $text-font;
+    font-weight: lighter;
+    font-size: 1.25em;
+    color: #333;
+
+    @media (max-width: 800px){
+      font-size: 1.25em;
+    }
+  }
+}
+
+.logInButtons {
+  margin-bottom: 1em;
+}
+
+.login {
+  @include secondary-button;
+}
+
+.signup {
+  @include main-button;
 }

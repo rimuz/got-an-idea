@@ -29,12 +29,9 @@ class ColorChoose extends Component {
   }
 
   applyHandler = () => {
-    const { hue, light, sat } = this.state;
+    const { hue, sat, light } = this.state;
     const { openSuccess, openError, setColor } = this.props;
-    
-    const color = { hue, light, sat };
-    console.log("Request -> ");
-    console.log({color});
+    const color = { hue, sat, light };
 
     axios.post('/user/change-color', color)
     .then(response => {
@@ -50,26 +47,26 @@ class ColorChoose extends Component {
   }
 
   componentDidMount(){
-    const { hue, light, sat } = this.props.userData.color;
-    this.setState({ hue, light, sat });
+    const { hue, sat, light } = this.props.userData.color;
+    this.setState({ hue, sat, light });
   }
   
   render(){
-    const { hue, light, sat, loading } = this.state;
+    const { hue, sat, light, loading } = this.state;
 
     return (
       <div className={styles.outer}>
         <div className={styles.upper}>
-          <div className={styles.preview} style={{ color: `hsl(${hue}, ${light}%, ${sat}%)` }} />
+          <div className={styles.preview} style={{ color: `hsl(${hue}, ${sat}%, ${light}%)` }} />
           
           <h2>Hue</h2>
           <input name="hue" type="range" min="0" max="359" value={hue} onChange={this.changeHandler}/>
           
-          <h2>Light</h2>
-          <input name="light" type="range" min="20" max="80" value={light} onChange={this.changeHandler}/>
-
           <h2>Saturation</h2>
           <input name="sat" type="range" min="20" max="80" value={sat} onChange={this.changeHandler}/>
+
+          <h2>Light</h2>
+          <input name="light" type="range" min="20" max="80" value={light} onChange={this.changeHandler}/>
         </div>
       
         { loading ? <Loading /> :
@@ -90,7 +87,7 @@ const mapDispatchToProps = dispatch => ({
   })),
   
   openError: () => dispatch(openModal('GENERIC', 'Terrible error', {
-    msg: 'Operation failed. Please check your internet connection and wait a few minutes.',
+    msg: 'Operation failed. Please check your internet connection and try again in a few minutes.',
     style: 'error', right: { msg: 'Okay' }
   })),
 

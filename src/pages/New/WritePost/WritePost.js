@@ -5,19 +5,20 @@ import { connect } from 'react-redux';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
-import debounce from 'lodash/debounce';
 
 import styles from './WritePost.module.scss';
 import Boiler from '../../../components/Boiler/Boiler';
+import Loading from '../../../components/Loading/Loading';
 import { 
   newPageReset, newPageSetPostType, newPageSetPostStage,
   newPageAddTag, newPageRemoveTag, newPageSetTitle,
-  newPageSetBody,
+  newPageSetBody, newPageSetInspiredBy, openModal
 } from '../../../redux/actions';
 
 import projectStages from '../SelectStage/projectStages';
 import ideaStages from '../SelectStage/ideaStages';
 import tags from '../SelectTags/tags';
+import axios from 'axios';
 
 const modules = {
   toolbar: [
@@ -30,26 +31,97 @@ const modules = {
       'blockquote', 'code-block',
     ],
     
-    ['link', 'video']
+    ['link', /*'video'*/ ]
   ],
 };
 
 class WritePost extends Component {
+  state = {
+    loading: false,
+  };
+
   constructor(props){
     super(props);
-    this.bodyHandlerDebounced = debounce(this.bodyHandler, 3000);
+    this.ref = React.createRef();
   }
 
   previousHandler = () => {
-    const { history, stage } = this.props;
-    history.push(`/post/${stage-1}`);
+    const { reset, history, stage, editing, openDiscardMessage } = this.props;
+    
+    if(editing){ 
+      openDiscardMessage(reset);
+    } else {
+      history.push(`/post/${stage-1}`);
+    } 
   };
 
   publishHandler = () => {
-    const { reset, history } = this.props;
+    const { reset, history, postType, postStage,
+      postTags, title, inspiredBy, openSuccess,
+      openInputError, openConnectionError, editing } = this.props;
+      
+    const editor = this.ref.current.getEditor();
+    const delta = editor.getContents();
 
-    reset();
-    history.push(`/post/${0}`);
+    if(title.replace(/\s/g, '').length < 4){
+      openInputError("Title must contain at least 4 non-space characters.");
+      return;
+    }
+
+    if(editor.getLength() <= 1){
+      openInputError("Body cannot be empty.");
+      return;
+    }
+
+    const prefixRegex = /(https?:\/\/)?(www\.)?got-an-idea\.com\/browse\/post\//;
+    const uuid4Regex = /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
+    var inspiredByUuid = '';
+
+    if(inspiredBy.length !== 0){
+      const prefixMatch = inspiredBy.match(prefixRegex);
+      var uuidMatch;
+
+      if(!prefixMatch || !(uuidMatch = inspiredBy.substring(prefixMatch[0].length).match(uuid4Regex))){
+        openInputError("Invalid \"inspired by\" post URL");
+        return;
+      }
+
+      inspiredByUuid = uuidMatch[0]; 
+    }
+
+    const obj = {
+      title,
+      inspiredBy: inspiredByUuid,
+      body: {ops: delta.ops},
+      stage: postStage,
+      type: postType,
+      tags: postTags.join(" "),
+      isEdit: editing ? true : false,
+      postUuid: editing,
+    };
+
+    axios.post('/user/post', obj)
+      .then(() => {
+        reset();
+        openSuccess();
+        history.push(`/post/${0}`);
+      })
+      .catch(error => {
+        if(error.response)
+          openInputError(error.response.data.message);
+        else
+          openConnectionError();
+      
+        this.setState({
+          ...this.state,
+          loading: false,
+        })
+      });
+    
+    this.setState({
+      ...this.state,
+      loading: true,
+    })
   };
 
   postTypeHandler = event => {
@@ -72,32 +144,45 @@ class WritePost extends Component {
       removeTag(tag);
   };
 
+  inspiredByHandler = event => {
+    const { setInspiredBy } = this.props;
+    setInspiredBy(event.target.value);
+  }
+
   titleHandler = event => {
     const { setTitle } = this.props;
     setTitle(event.target.value);
   };
 
   bodyHandler = value => {
-    const { setBody } = this.props;
-    setBody({ text: value });
+    if(this.ref.current.getContents){
+      const { setBody } = this.props;
+      setBody({ text: this.ref.current.getContents() });
+    }
   };
 
   render(){
-    const { postType, postStage, postTags, title, body } = this.props;
+    const { postType, postStage, postTags, title, body, inspiredBy, editing } = this.props;
     const stages = postType === 'project' ? projectStages : ideaStages;
+    const { loading } = this.state;
 
     return (
       <Boiler>
         <div className={styles.page}>
           <div className={styles.upper}>
             <div className={styles.text}>
-              New post
+              { editing != null ? `Edit post #${editing.substring(editing.length - 6)}` : "New post" }
             </div>
 
-            <div>
-              <button onClick={this.previousHandler} className={styles.previous}>Previous</button>
-              <button onClick={this.publishHandler} className={styles.publish}>Publish</button>
-            </div>
+            { loading ? <Loading /> :
+              <div>
+                <button onClick={this.previousHandler} className={styles.previous}>
+                  { editing != null ? "Discard changes" : "Previous" }
+                </button>
+                <button onClick={this.publishHandler} className={styles.publish}>
+                  { editing != null ? "Update" : "Publish" }
+                </button>
+              </div> }
           </div>
 
           <div className={styles.outer}>
@@ -128,11 +213,8 @@ class WritePost extends Component {
                     </h2>
                   
                     <select name="stage" value={postStage} onChange={this.postStageHandler}>
-                      {
-                        stages.map(stage => (
-                          <option value={stage.shortName} key={stage.shortName}>{stage.shortName}</option>
-                          ))
-                        }
+                      { stages.map(stage => <option value={stage.shortName}
+                            key={stage.shortName}>{stage.shortName}</option> ) }
                     </select>
                   </div>
 
@@ -140,7 +222,7 @@ class WritePost extends Component {
                     <h2>
                       Select appropriate tags:
                     </h2>
-                    
+
                     <div className={styles.tags}>
                       {
                         tags.map(tag => (
@@ -153,21 +235,40 @@ class WritePost extends Component {
                       }
                     </div>
                   </div>
-                </div>
 
-                <div className={styles.areas}>
-                  <input type="text" name="title" placeholder="Enter title here"
-                      value={title} onChange={this.titleHandler} />
+                  <div className={styles.input}>
+                    <h2>
+                      Inspired by:
+                    </h2>
 
-                  <ReactQuill value={body.text} onChange={this.bodyHandlerDebounced} theme="snow"
-                      modules={modules} placeholder="Enter body here" />              
+                    <input name="inspiredBy" type="text" autoComplete="off"
+                      placeholder="Please paste post URL here (Optional)" value={inspiredBy} 
+                      onChange={this.inspiredByHandler} />
+                  </div>
+
+                  <div className={styles.input}>
+                    <h2>
+                      Content:
+                    </h2>
+                  
+                    <input type="text" name="title" placeholder="Enter title here"
+                        value={title} onChange={this.titleHandler} autoComplete="off" />
+
+                    <ReactQuill ref={this.ref} value={body.text} onChange={this.bodyHandler}
+                        theme="snow" modules={modules} placeholder="Enter body here" />              
+                  </div>
                 </div>
               </form>
 
-              <div className={styles.buttons}>
-                <button onClick={this.previousHandler} className={styles.previous}>Previous</button>
-                <button onClick={this.publishHandler} className={styles.publish}>Publish</button>
-              </div>
+              { loading ? <Loading /> :
+                <div className={styles.buttons}>
+                  <button onClick={this.previousHandler} className={styles.previous}>
+                    {editing != null ? "Discard changes" : "Previous"}
+                  </button>
+                  <button onClick={this.publishHandler} className={styles.publish}>
+                    {editing != null ? "Update" : "Publish"}
+                  </button>
+                </div> }
             </div>
           </div>
         </div>
@@ -184,9 +285,33 @@ const mapDispatchToProps = dispatch => ({
   setStage: stage => dispatch(newPageSetPostStage(stage)),
   setTitle: title => dispatch(newPageSetTitle(title)),
   setBody: body => dispatch(newPageSetBody(body)),
+  setInspiredBy: inspiredBy => dispatch(newPageSetInspiredBy(inspiredBy)),
 
   addTag: tag => dispatch(newPageAddTag(tag)),
   removeTag: tag => dispatch(newPageRemoveTag(tag)),
+
+  openInputError: msg => dispatch(openModal('GENERIC', 'Error', {
+    msg, style: 'error',
+    right: { msg: 'Got it!' }
+  })),
+
+  openSuccess: () => dispatch(openModal('GENERIC', 'Success', {
+    msg: 'Published',
+    style: 'success', right: { msg: 'Awesome!' }
+  })),
+
+  openConnectionError: () => dispatch(openModal('GENERIC', 'Terrible error', {
+    msg: 'Transaction failed. Please check your internet connection and try again in a few minutes.',
+    style: 'error', right: { msg: 'Yes, Sir' }
+  })),
+
+
+  openDiscardMessage: (action) => dispatch(openModal('GENERIC', 'Confirm operation', {
+    msg: 'Are you sure to discard the changes on the post?',
+    style: 'error',
+    left: { msg: 'Cancel' },
+    right: { msg: 'Confirm', onClick: action }
+  })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(WritePost));

@@ -22,7 +22,7 @@ class Login extends Component {
   }
   
   keyPressHandler = e => {
-    if(e.key == 'Enter'){
+    if(e.key === 'Enter'){
       this.loginHandler();
     }
   }
@@ -55,13 +55,11 @@ class Login extends Component {
     })
     .then(response => {
       const { jwt, userData } = response.data;
-      console.log({userData});
 
       login(jwt, userData);
       if(storeToken){
-        console.log("Scrivendo!!!");
         cookies.set('jwt', jwt, {
-          expires: Sugar.Date.create('in three months')
+          expires: Sugar.Date.create('in a month')
         })
       }
       
@@ -69,8 +67,6 @@ class Login extends Component {
       args.then();
     })
     .catch(error => {
-      console.log({error});
-
       const { response } = error;
       const msg = response ? ("Error: " + response.data.message) : "Connection error";
       
@@ -94,7 +90,7 @@ class Login extends Component {
     if(name === 'email'){
       var emailError = undefined;
       
-      if(value !== "" && !value.match(/^[\w\.]+@([\w\-]+\.)+[\w\-]{2,4}$/))
+      if(value !== "" && !value.match(/^[\w.]+@([\w-]+\.)+[\w-]{2,4}$/))
         emailError = "Invalid Email."
 
       this.setState({
@@ -140,7 +136,7 @@ class Login extends Component {
           </label>
         </div>
         <div className={styles.recover}>
-          <a href="#" onClick={this.forgotHandler}>Forgot password</a>
+          <a href="#top" onClick={this.forgotHandler}>Forgot password</a>
         </div>
         
         { this.state.loading ? <Loading /> :

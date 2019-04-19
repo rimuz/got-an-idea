@@ -17,21 +17,20 @@ $vote-anim-height: 0.25em;
   100% { transform: rotate(180deg); }
 }
 
-.withComment {
-  display: flex;
-  border-top: solid 1px #dedede;
-  padding: 1em 0 0 0;
 
-  justify-content: space-around;
-  flex-wrap: wrap;
+.underComment {
+  padding: 0 0 1em 0;
+  border-bottom: solid 1px #dedede;
 }
 
-.withoutComment {
-  display: flex;
-  border-top: solid 1px #dedede;
+.underPost {
   padding: 1em 0 0 0;
+  border-top: solid 1px #dedede;
+}
 
-  justify-content: space-between;
+.container {
+  display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
@@ -39,6 +38,23 @@ $vote-anim-height: 0.25em;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.replyBtn {
+  display: flex;
+  align-items: center;
+  transition: background-color 1s;
+  cursor: pointer;
+  color: #aaa;
+  font-weight: bold;
+  
+  padding: 0.25em 0.5em;
+  border-radius: 0.5em;
+  font-size: 1.1em;
+ 
+  &:hover {
+    background-color: $hover-bg;
+  }
 }
 
 .btn {

@@ -6,9 +6,9 @@ import axios from 'axios';
 import { openModal } from '../../../redux/actions';
 import Loading from '../../../components/Loading/Loading';
 import Boiler from '../../../components/Boiler/Boiler';
-import styles from './Verify.module.scss';
+import styles from './Reset.module.scss';
 
-class Verify extends Component {
+class Reset extends Component {
   state = {
     done: false,
   }
@@ -24,7 +24,7 @@ class Verify extends Component {
           <div className={styles.outer}>
             <button onClick={this.homeHandler}>Back to Home</button>
           </div>
-        : <Loading/> }
+        : <Loading /> }
       </Boiler>
     );
   }
@@ -33,7 +33,7 @@ class Verify extends Component {
     const { openSuccess, openError, openConnectionError } = this.props;
     const { token } = this.props.match.params;
     
-    axios.post('/user/verify', { token })
+    axios.post('/user/recover/execute', { token })
       .then(response => {
         openSuccess();
 
@@ -57,7 +57,7 @@ class Verify extends Component {
 
 const mapDispatchToProps = dispatch => ({
   openSuccess: () => dispatch(openModal('GENERIC', 'Success', {
-    msg: 'Email successfully verified.',
+    msg: 'Success! We sent you an email with the new password!',
     style: 'success', right: { msg: 'Awesome!' }
   })),
 
@@ -71,4 +71,4 @@ const mapDispatchToProps = dispatch => ({
   }))
 });
 
-export default connect(null, mapDispatchToProps)(withRouter(Verify));
+export default connect(null, mapDispatchToProps)(withRouter(Reset));

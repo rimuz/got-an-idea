@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withCookies } from 'react-cookie';
 import axios from 'axios';
 
 import { openModal, closeModal, logout } from '../../../redux/actions';
@@ -18,7 +19,8 @@ class DeleteAccount extends Component {
   };
 
   confirmHandler = () => {
-    const { openInputError, openSuccess, openConnectionError, userData } = this.props;
+    const { openInputError, openSuccess, openConnectionError,
+        userData, logout, cookies } = this.props;
     const { password } = this.state;
     const { email } = userData;
 
@@ -31,9 +33,9 @@ class DeleteAccount extends Component {
       email, password,
     })
       .then(response => {
-        this.resetState();
         logout();
         openSuccess();
+        cookies.remove('jwt');
       })
       .catch(error => {
         if (error.response)
@@ -56,7 +58,7 @@ class DeleteAccount extends Component {
   changeHandler = event => {
     this.setState({
       ...this.state,
-      password: event.value, 
+      password: event.target.value, 
     });
   };
 
@@ -102,8 +104,9 @@ const mapDispatchToProps = dispatch => ({
   })),
 
   openConnectionError: () => dispatch(openModal('GENERIC', 'Terrible error', {
-    msg: 'Transaction failed. Please check your internet connection and wait a few minutes.',
+    msg: 'Transaction failed. Please check your internet connection and try again in a few minutes.',
     style: 'error', right: { msg: 'Yes, Sir' }
   }))
 });
-export default connect(mapStateToProps, mapDispatchToProps)(DeleteAccount);
+
+export default connect(mapStateToProps, mapDispatchToProps)(withCookies(DeleteAccount));

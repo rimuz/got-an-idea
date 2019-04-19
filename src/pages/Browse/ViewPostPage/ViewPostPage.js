@@ -1,92 +1,204 @@
 import React, { Component } from 'react';
-import styles from './ViewPostPage.module.scss';
+import ReactQuill from 'react-quill';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Sugar from 'sugar';
+import axios from 'axios';
 
 import { ReactComponent as User } from '../assets/user.svg';
 import { ReactComponent as Building } from '../assets/building.svg';
-import { ReactComponent as BasedOn } from '../assets/based-on.svg';
 import { ReactComponent as Report } from '../assets/report.svg';
 
 import VoteShareBar from '../VoteShareBar/VoteShareBar';
 import Comments from './Comments/Comments';
-import { openModal } from '../../../redux/actions';
+import Loading from '../../../components/Loading/Loading';
+import styles from './ViewPostPage.module.scss';
+import { openModal, newPageReset, newPageSetStage,
+  newPageSetEditing, newPageSetPostType, newPageAddTag,
+  newPageSetPostStage, newPageSetInspiredBy,
+  newPageSetTitle, newPageSetBody, newPageSetMaxStage } from '../../../redux/actions';
+
+const UPVOTE = 0, DOWNVOTE = 1;
+var isMounted = false;
 
 class ViewPostPage extends Component {
-  render(){
-    const { openReport } = this.props;
+  state = {
+    post: {},
+    loading: true,
+  }
+
+  constructor(props){
+    super(props);
+    this.quillRef = React.createRef();
+  }
+
+  componentDidMount() {
+    isMounted = true;
+    this.fetchPost();
+  }
+
+  componentWillUnmount() {
+    isMounted = false;
+  }
+
+  editHandler = () => {
+    const { setData, history } = this.props;
     const { postId } = this.props.match.params;
 
+    setData(this.state.post, postId);
+    history.push('/post/3');
+  };
+
+  render(){
+    const { openReport, userData } = this.props;
+    const { postId } = this.props.match.params;
+    const { hue, light, saturation, name, title, body,
+      time, inspiredposts, vote, upvotes, downvotes,
+      inspiredby, comments, type, stage } = this.state.post;
+    
+    const color = `hsl(${hue}, ${saturation}%, ${light}%)`;
+    const date = Sugar.Date.create(time, { fromUTC: true });
+    const dateString = Sugar.Date.relative(date);
+
+    var inspiredByURL, shortInspiredBy;
+    if(inspiredby != null){
+      inspiredByURL = `https://got-an-idea.com/browse/post/${inspiredby}`;
+      shortInspiredBy = inspiredby.substring(inspiredby.length - 6);
+    }
+
     return (
+      this.state.loading ? <Loading /> :
       <div className={styles.page}>
-        <div className={styles.innerPage}>
-          <div className={styles.top}>
-            <div className={styles.userBar}>
-              <div className={styles.user}>
-                <User />
-                <div className={styles.nameKarma}>
-                  <div>Nome utente postatore</div>
-                  <div>1.3k</div>
+          <div className={styles.innerPage}>
+            <div className={styles.top}>
+              <div className={styles.userBar}>
+                <div className={styles.user}>
+                  <User style={{ color }}/>
+                  <div className={styles.nameKarma}>
+                    <div>{name}</div>
+                    <div>{type} @{stage}</div>
+                  </div>
+                </div>
+
+                <div className={styles.leftButtons}>
+                  { userData.name === name ? 
+                    <div className={styles.button} onClick={this.editHandler}>Edit</div> :
+                    <Report className={styles.button} onClick={openReport.bind(null, { target: 'p', uuid: postId })}/>
+                  }
                 </div>
               </div>
 
-              <div className={styles.leftButtons}>
-                <Report onClick={openReport.bind(null, { target: 'p', uuid: postId })}/>
+              <div className={styles.posted}>
+                Posted <strong>{dateString}</strong>
               </div>
-            </div>
 
-            <div className={styles.posted}>
-              Posted <strong>3 hours ago</strong>
-            </div>
+              <h1 className={styles.title}>
+                {title}
+              </h1>
 
-            <h1 className={styles.title}>
-              Enjoyed minutes related as at on on. Is fanny dried as often me. 
-              Goodness as reserved raptures to mistaken steepest oh screened he.
-            </h1>
+              <ReactQuill readOnly={true} value={body} theme="bubble" ref={this.quillRef} />
 
-            <div className={styles.text}>
-              Attachment apartments in delightful by motionless it no. And now she burst sir learn total. Hearing hearted shewing own ask. Solicitude uncommonly use her motionless not collecting age. The properly servants required mistaken outlived bed and. Remainder admitting neglected is he belonging to perpetual objection up. Has widen too you decay begin which asked equal any. 
-              Gave read use way make spot how nor. In daughter goodness an likewise oh consider at procured wandered. Songs words wrong by me hills heard timed. Happy eat may doors songs. Be ignorant so of suitable dissuade weddings together. Least whole timed we is. An smallness deficient discourse do newspaper be an eagerness continued. Mr my ready guest ye after short at. 
-              She who arrival end how fertile enabled. Brother she add yet see minuter natural smiling article painted. Themselves at dispatched interested insensible am be prosperous reasonably it. In either so spring wished. Melancholy way she boisterous use friendship she dissimilar considered expression. Sex quick arose mrs lived. Mr things do plenty others an vanity myself waited to. Always parish tastes at as mr father dining at. 
-              <p />
-              Am terminated it excellence invitation projection as. She graceful shy believed distance use nay. Lively is people so basket ladies window expect. Supply as so period it enough income he genius. Themselves acceptance bed sympathize get dissimilar way admiration son. Design for are edward regret met lovers. This are calm case roof and. 
-              He do subjects prepared bachelor juvenile ye oh. He feelings removing informed he as ignorant we prepared. Evening do forming observe spirits is in. Country hearted be of justice sending. On so they as with room cold ye. Be call four my went mean. Celebrated if remarkably especially an. Going eat set she books found met aware. 
-              Difficulty on insensible reasonable in. From as went he they. Preference themselves me as thoroughly partiality considered on in estimating. Middletons acceptance discovered projecting so is so or. In or attachment inquietude remarkably comparison at an. Is surrounded prosperous stimulated am me discretion expression. But truth being state can she china widow. Occasional preference fat remarkably now projecting uncommonly dissimilar. Sentiments projection particular companions interested do at my delightful. Listening newspaper in advantage frankness to concluded unwilling. 
-              Guest it he tears aware as. Make my no cold of need. He been past in by my hard. Warmly thrown oh he common future. Otherwise concealed favourite frankness on be at dashwoods defective at. Sympathize interested simplicity at do projecting increasing terminated. As edward settle limits at in. 
-              <p/>
-              Do greatest at in learning steepest. Breakfast extremity suffering one who all otherwise suspected. He at no nothing forbade up moments. Wholly uneasy at missed be of pretty whence. John way sir high than law who week. Surrounded prosperous introduced it if is up dispatched. Improved so strictly produced answered elegance is. 
-              Why end might ask civil again spoil. She dinner she our horses depend. Remember at children by reserved to vicinity. In affronting unreserved delightful simplicity ye. Law own advantage furniture continual sweetness bed agreeable perpetual. Oh song well four only head busy it. Afford son she had lively living. Tastes lovers myself too formal season our valley boy. Lived it their their walls might to by young. 
-              Surrounded affronting favourable no  mr.   Lain knew like half she yet joy. Be than dull as seen very shot. Attachment ye so am travelling estimating projecting is. Off fat address attacks his besides. Suitable settling mr attended no doubtful feelings. Any over for say bore such sold five but hung. 
-            </div>
-
-            <div className={styles.realizing}>
-              <Building />
-              <div>
-                <strong>5</strong> people are realizing <br />
+              { inspiredby == null ? null :
+              <div className={styles.realizing}>
+                <div>
+                  This post has been inspired by <a href={inspiredByURL}>{shortInspiredBy}</a>
+                  <br />
+                </div>
+              </div> }
+              
+              <div className={styles.realizing}>
+                <Building />
+                <div>
+                  <strong>{inspiredposts}</strong> 
+                    {inspiredposts === 1 ? " post has " : " posts have "}
+                    been inspired by this <br />
+                </div>
               </div>
+
+              <VoteShareBar postId={postId} vote={vote}
+                upvotes={vote === UPVOTE ? (upvotes-1) : upvotes}
+                downvotes={vote === DOWNVOTE ? (downvotes-1) : downvotes}/>
             </div>
 
-            <div className={styles.basedOn}>
-              <BasedOn />
-              <div>
-                <strong>11</strong> ideas are based on
-              </div>
+            <div className={styles.comments}>
+              <Comments postId={postId} comments={comments} />
             </div>
-
-            <VoteShareBar upvotes="156" downvotes="199" postId={postId} />
           </div>
-
-          <div className={styles.comments}>
-            <Comments />
-          </div>
-        </div>
       </div>
     );
   }
+
+  fetchPost = () => {
+    const { openConnectionErrorModal, triedLoggingIn } = this.props;
+    const { postId } = this.props.match.params;
+
+    if (!triedLoggingIn){
+      setTimeout(this.fetchPost, 50);
+      return;
+    }
+
+    this.setState({
+      ...this.state,
+      loading: true,
+      post: {},
+    });
+
+    axios.post('/browse/post/fetch', { uuid: postId })
+      .then(response => {
+        if (isMounted){
+          var post = response.data.post;
+          post.body = JSON.parse(post.body);
+
+          this.setState({
+            ...this.state,
+            loading: false, post,
+          });
+        }
+      })
+      .catch(error => {
+        console.error("Error while loading post comments!!");
+        console.error({ error });
+
+        if (isMounted) {
+          this.setState({
+            ...this.state,
+            loading: true,
+            hasReachedEnd: true,
+          })
+
+          openConnectionErrorModal();
+          setTimeout(this.fetchPost, 1000);
+        }
+      });
+  }
 }
+
+const stateToProps = state => state.auth;
 
 const dispatchToProps = dispatch => ({
   openReport: args => dispatch(openModal('REPORT', 'Report post', args)),
+
+  openConnectionErrorModal: () => dispatch(openModal('GENERIC', 'Terrible error', {
+    msg: 'Cannot connect to the server. Please check your internet connection, try again in a few minutes and then refresh the page.',
+    style: 'error', right: { msg: 'Alright!' }
+  })),
+
+  setData: (post, postId, content) => {
+    dispatch(newPageReset());
+    dispatch(newPageSetMaxStage(3));
+    dispatch(newPageSetEditing(postId));
+    
+    for(const tag of post.tags.split(" ")){
+      if(tag !== "")
+        dispatch(newPageAddTag(tag));
+    }
+    
+    dispatch(newPageSetPostType(post.type));
+    dispatch(newPageSetPostStage(post.stage));
+    dispatch(newPageSetInspiredBy(post.inspiredby || ""));
+    dispatch(newPageSetTitle(post.title));
+    dispatch(newPageSetBody({ text: post.body }));
+  }
 });
 
-export default withRouter(connect(null, dispatchToProps)(ViewPostPage));
+export default withRouter(connect(stateToProps, dispatchToProps)(ViewPostPage));

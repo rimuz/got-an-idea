@@ -1,0 +1,29 @@
+@import 'src/global';
+
+
+.outer {
+    display: flex;
+    flex-direction: column;
+    //align-items: center;
+}
+
+.invisible {
+    display: none;
+}
+
+.showMore {
+    border: none;
+    background: none;
+    font-weight: bold;
+    color: #aaa;
+    font-family: $text-font;
+    border-radius: 0.25em;
+    transition: background-color 0.75s;
+
+    cursor: pointer;
+    font-size: 1.2em;
+
+    &:hover {
+        background-color: #eee;
+    }
+}

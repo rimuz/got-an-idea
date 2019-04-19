@@ -3,12 +3,9 @@ import { withRouter } from 'react-router';
 
 import Button from '../../components/Button/Button';
 import Comp from '../../components/Comp/Comp';
-import Center from '../../components/Center/Center';
 import TellMore from './TellMore/TellMore';
 import Footer from '../../components/Boiler/Footer/Footer';
 import styles from './Start.module.scss';
-
-import { ReactComponent as JustFilament } from './assets/just-filament.svg';
 import { ReactComponent as LogoGray } from './assets/logo-gray.svg';
 
 class Start extends Component {

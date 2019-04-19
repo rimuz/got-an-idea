@@ -18,7 +18,7 @@ class User extends Component {
   render() {
     const { userData } = this.props;
     const { hue, light, sat } = userData.color;
-    const color = `hsl(${hue}, ${light}%, ${sat}%)`;
+    const color = `hsl(${hue}, ${sat}%, ${light}%)`;
 
     const {
       openColorChoose, openChangePassword,

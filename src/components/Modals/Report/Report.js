@@ -11,10 +11,6 @@ class Report extends Component {
     details: '',
   }
 
-  constructor(props){
-    super(props);
-  }
-
   submitHandler = () => {
     const { openSuccess, openConnectionError, args } = this.props;
 
@@ -26,7 +22,6 @@ class Report extends Component {
     })
       .then(openSuccess)
       .catch(error => {
-        console.log({error});
         openConnectionError();
       });
   }
@@ -61,7 +56,7 @@ class Report extends Component {
           <div>
             <label>
               <input type="radio" value="spam" onChange={this.changeHandler}
-                checked={selected == 'spam'} />
+                checked={selected === 'spam'} />
               It's spam.
             </label>
           </div>
@@ -69,7 +64,7 @@ class Report extends Component {
           <div>
             <label>
               <input type="radio" value="abuse" onChange={this.changeHandler}
-                checked={selected == 'abuse'} />
+                checked={selected === 'abuse'} />
               It's abuse or harassing.
             </label>
           </div>
@@ -77,7 +72,7 @@ class Report extends Component {
           <div>
             <label>
               <input type="radio" value="copyright" onChange={this.changeHandler}
-                checked={selected == 'copyright'} />
+                checked={selected === 'copyright'} />
               It infringes my copyright/trademark rights (Please give more information).
             </label>
           </div>
@@ -85,7 +80,7 @@ class Report extends Component {
           <div>
             <label>
               <input type="radio" value="minors" onChange={this.changeHandler}
-                checked={selected == 'minors'} />
+                checked={selected === 'minors'} />
               It's sexual or suggestive content involving minors.
             </label>
           </div>
@@ -93,7 +88,7 @@ class Report extends Component {
           <div>
             <label>
               <input type="radio" value="porn" onChange={this.changeHandler}
-                checked={selected == 'porn'} />
+                checked={selected === 'porn'} />
               It's pornography.
             </label>
           </div>
@@ -101,7 +96,7 @@ class Report extends Component {
           <div>
             <label>
               <input type="radio" value="threat" onChange={this.changeHandler}
-                checked={selected == 'threat'} />
+                checked={selected === 'threat'} />
               It's threatening self-harm or suicide.
             </label>
           </div>
@@ -109,7 +104,7 @@ class Report extends Component {
           <div>
             <label>
               <input type="radio" value="other" onChange={this.changeHandler}
-                checked={selected == 'other'} />
+                checked={selected === 'other'} />
               Other reason (Please specify)
             </label>
           </div>
@@ -138,7 +133,7 @@ const mapDispatchToProps = dispatch => ({
   })),
 
   openConnectionError: () => dispatch(openModal('GENERIC', 'Terrible error', {
-    msg: 'Operation failed. Please check your internet connection and wait a few minutes.',
+    msg: 'Operation failed. Please check your internet connection and try again in a few minutes.',
     style: 'error', right: { msg: 'Okay' }
   }))
 });

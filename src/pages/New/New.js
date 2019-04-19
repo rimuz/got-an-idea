@@ -3,10 +3,8 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
 import { newPageSetStage } from '../../redux/actions';
-import styles from './New.module.scss';
 
 import PleaseLogIn from '../../components/PleaseLogIn/PleaseLogIn';
-import Boiler from '../../components/Boiler/Boiler';
 import SelectType from './SelectType/SelectType';
 import SelectTags from './SelectTags/SelectTags';
 import SelectStage from './SelectStage/SelectStage';
@@ -22,13 +20,13 @@ class New extends Component {
   }
 
   render() {
-    const { stage, maxStage } = this.props;
+    const { stage, maxStage, editing, newPostSetStage } = this.props;
     const urlStage = parseInt(this.props.match.params.urlStage);
     
-    if(Number.isNaN(urlStage) || urlStage === undefined){
-      return <Redirect to={`/post/${stage}`} />
+    if(urlStage === undefined || Number.isNaN(urlStage)){
+      return <Redirect to={`/post/${stage}`} />;
     } else if(urlStage > maxStage){
-      return <Redirect to={`/post/${maxStage}`} />
+      return <Redirect to={`/post/${maxStage}`} />;
     }
 
     switch(urlStage){

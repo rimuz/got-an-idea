@@ -7,6 +7,7 @@ import Start from '../Start/Start';
 import Browse from '../Browse/Browse';
 import User from '../User/User';
 import Verify from '../User/Verify/Verify';
+import Reset from '../User/Reset/Reset';
 import Register from '../User/Register/Register'
 import New from '../New/New';
 import PageNotFound from '../404/PageNotFound';
@@ -42,7 +43,7 @@ class App extends Component {
       <Comp>
         <Helmet>
           <title>
-            Got an idea? - The online place for sharing my billion dollar idea.
+            Got an idea? - The online place for sharing your billion dollar idea.
           </title>
 
           <meta name="description" content={`
@@ -66,6 +67,7 @@ class App extends Component {
           {/* User */}
           <Route path='/user/sign-up(.html)?' exact component={Register} />
           <Route path='/user/verify/:token' component={Verify} />
+          <Route path='/user/reset/:token' component={Reset} />
           <Route path='/user(.html)?' component={User} />
 
           {/* Post */}

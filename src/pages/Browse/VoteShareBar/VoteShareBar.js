@@ -23,13 +23,13 @@ class VoteShareBar extends Component {
   voteHandler = isUpvote => {
     const { vote } = this.state;
     const { postId, isLoggedIn, openLogin } = this.props;
+    const type = this.props.type || 'p';
 
     if(!isLoggedIn){
       openLogin();
       return;
     }
     
-    console.log("uuid: '" + postId + "'");
     var newVote = !isUpvote | 0; // bool -> int
     var queryVote = newVote === 0 ? '+1' : '-1';
     
@@ -43,16 +43,11 @@ class VoteShareBar extends Component {
     });
     
     axios.post('/user/vote', {
-      target: 'p',
+      target: type,
       uuid: postId,
       value: queryVote,
     })
-      .then(response => {
-        console.log("Success!!");
-        console.log({response});
-      })
       .catch(error => {
-        console.log({error});
         this.setState({
           vote: undefined
         });
@@ -70,7 +65,10 @@ class VoteShareBar extends Component {
   };
 
   render(){
-    var { comments, upvotes, downvotes } = this.props;
+    var { comments, upvotes, downvotes, type, noShare, replyHandler } = this.props;
+    const underPost = type == null || type === 'p';
+    const commentHandler = this.props.commentHandler || this.commentHandler;
+
     const upvoted = this.state.vote === UPVOTE,
           downvoted = this.state.vote === DOWNVOTE;
     
@@ -80,7 +78,8 @@ class VoteShareBar extends Component {
       downvotes += 1;
     
     return (
-      <div className={comments ? styles.withComment : styles.withoutComment}>
+      <div className={styles.container + " " +
+        (underPost ? styles.underPost : styles.underComment)}>
 
         <div className={styles.btnContainer}>
           <div className={styles.btn} onClick={this.voteHandler.bind(null, true)}>
@@ -94,21 +93,27 @@ class VoteShareBar extends Component {
           </div>
         </div>
 
-        { comments ?
+        { comments !== undefined ?
           <div className={styles.btnContainer}>
-            <div className={styles.btn} onClick={this.commentHandler}>
+            <div className={styles.btn} onClick={commentHandler}>
               <Comment />
               <span>{comments}</span>
             </div>
           </div>
         : null }
 
-        <div className={styles.btnContainer}>
+        {noShare ? null : <div className={styles.btnContainer}>
           <div className={styles.btn} onClick={this.shareHandler}>
             <Share className={styles.share} />
             <span className={styles.optional}>Share</span>
           </div>
-        </div>
+        </div>}
+
+        {underPost ? null : <div className={styles.btnContainer}>
+          <div className={styles.replyBtn} onClick={replyHandler}>
+            <span className={styles.reply}>Reply</span>
+          </div>
+        </div>}
       </div>
     );
   }

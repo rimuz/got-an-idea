@@ -18,6 +18,11 @@ export const newPageSetBody = body => ({
   body,
 });
 
+export const newPageSetInspiredBy = inspiredBy => ({
+  type: 'SET_INSPIRED_BY',
+  inspiredBy,
+});
+
 export const newPageNext = () => ({
   type: 'NEXT',
 });
@@ -29,6 +34,16 @@ export const newPageReset = () => ({
 export const newPageSetStage = stage => ({
   type: 'SET_STAGE',
   stage
+});
+
+export const newPageSetMaxStage = maxStage => ({
+  type: 'SET_MAX_STAGE',
+  maxStage
+});
+
+export const newPageSetEditing = editing => ({
+  type: 'SET_EDITING',
+  editing
 });
 
 export const newPageAddTag = tag => ({

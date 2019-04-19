@@ -22,6 +22,7 @@ const defaultState = {
 };
 
 class ChangePassword extends Component {
+  // deep copy
   state = JSON.parse(JSON.stringify(defaultState));
 
   cancelHandler = () => {
@@ -52,7 +53,6 @@ class ChangePassword extends Component {
       newPassword: fields.newPassword.value,
     })
       .then(response => {
-        this.resetState();
         openSuccess();
       })
       .catch(error => {
@@ -156,7 +156,7 @@ class ChangePassword extends Component {
           : null}
 
         <div className={styles.recover}>
-          <a href="#" onClick={this.forgotHandler}>Forgot password</a>
+          <a href="#top" onClick={this.forgotHandler}>Forgot password</a>
         </div>
 
         { loading ? <Loading /> :
@@ -184,7 +184,7 @@ const mapDispatchToProps = dispatch => ({
   })),
 
   openConnectionError: () => dispatch(openModal('GENERIC', 'Terrible error', {
-    msg: 'Transaction failed. Please check your internet connection and wait a few minutes.',
+    msg: 'Transaction failed. Please check your internet connection and try again in a few minutes.',
     style: 'error', right: { msg: 'Yes, Sir' }
   }))
 });

@@ -37,7 +37,7 @@ class BrowsePage extends Component {
             this.state.posts.map(post => {
               return (
                 <Post
-                  color={`hsl(${post.hue}, ${post.light}%, ${post.saturation}%)`}
+                  color={`hsl(${post.hue}, ${post.saturation}%, ${post.light}%)`}
                   key={post.postid} name={post.name} time={post.time}
                   id={post.postid} title={post.title} strippedBody={post.strippedbody}
                   comments={post.comments} vote={post.vote} tags={post.tags}
@@ -73,9 +73,6 @@ class BrowsePage extends Component {
       if (!arr.find(p => p.postid === post.postid)){
         arr.push(post); 
       }
-
-      console.log("Received post:");
-      console.log({post});
     }
     
     const justLoaded = this.state.justLoaded + arr.length - oldLength;
@@ -97,11 +94,12 @@ class BrowsePage extends Component {
     const { openConnectionErrorModal, triedLoggingIn } = this.props;
 
     this.setState({
+      ...this.state,
       stillLoading: true,
     })
 
     if(!triedLoggingIn){
-      setTimeout(this.fetchPosts, 100);
+      setTimeout(this.fetchPosts, 50);
       return;
     }
 
@@ -114,16 +112,18 @@ class BrowsePage extends Component {
           this.updateState(response.data);
       })
       .catch(error => {
-        console.error(error);
+        console.error("Error while loading browse page!!");
+        console.error({error});
         
-        if(isMounted)
+        if(isMounted){
           this.setState({
             ...this.state,
             stillLoading: false,
             hasReachedEnd: true,
           })
-
-        openConnectionErrorModal();
+          
+          openConnectionErrorModal();
+        }
       });
   }
 }
@@ -132,7 +132,7 @@ const mapStateToProps = state => state.auth;
 
 const mapDispatchToProps = dispatch => ({
   openConnectionErrorModal: () => dispatch(openModal('GENERIC', 'Terrible error', {
-    msg: 'Cannot connect to the server. Please check your internet connection, wait a few minutes and then refresh the page.',
+    msg: 'Cannot connect to the server. Please check your internet connection, try again in a few minutes and then refresh the page.',
     style: 'error', right: { msg: 'Alright!' }
   }))
 });

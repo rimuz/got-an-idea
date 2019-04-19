@@ -24,8 +24,21 @@ $hover-bg: #efefef;
   margin: 2em 0;
   padding: 2em 2.5em 1em 2.5em;
   border-radius: 0.5em;
-  
   box-shadow: $card-shadow;
+  
+  :global(.ql-container){
+    font-family: $text-font;
+    font-size: 1.2em;
+
+    :global(.ql-syntax){
+      color: #111 !important;
+      background-color: #efefef !important;
+    }
+
+    :global(.ql-editor){
+      padding: 0;
+    }
+  }
 }
 
 .userBar {
@@ -34,23 +47,28 @@ $hover-bg: #efefef;
 }
 
 .leftButtons {
-  svg {
+  .button {
     transition: background-color 1s;
-    width: 1.3em;
-    height: 1.3em;
     padding: 0.5em;
     border-radius: 0.75em;
-
     cursor: pointer;
-
+    color: #aaa;
+    font-weight: bold;
+    
+    &:hover {
+      background-color: $hover-bg;
+    }
+  }
+  
+  svg {
+    width: 1.3em;
+    height: 1.3em;
+    
     * {
       fill: $icons-color;
       stroke: $icons-color;
     }
 
-    &:hover {
-      background-color: $hover-bg;
-    }
   }
 }
 
@@ -69,10 +87,10 @@ $hover-bg: #efefef;
         color: $username-color; 
       }
 
-      // karma
+      // user's grade
       &:last-of-type {
         width: fit-content;
-        font-size: 0.85em;
+        font-size: 1em;
 
         background: silver;
         color: white;
@@ -91,21 +109,26 @@ $hover-bg: #efefef;
   
     width: 3em;
     height: 3em;
+
+    * {
+      fill: currentColor;
+    }
   }
 }
 
-.posted, .realizing, .basedOn {
+.posted, .realizing {
   color: gray;
   font-size: 1em;
 }
 
-.posted, .realizing {
+.posted {
   margin-top: 2em;
 }
 
-.realizing, .basedOn {
+.realizing {
   display: flex;
   align-items: center;
+  margin: 1em 0;
 
   svg {
     width: 1.25em;
@@ -128,8 +151,8 @@ $hover-bg: #efefef;
 }
 
 .title {
-  margin: 0;
-  font-size: 1.3em;
+  margin: 0 0 0.5em 0;
+  font-size: 1.8em;
   line-height: 125%;
   word-wrap: break-word;
 }
@@ -151,7 +174,7 @@ $hover-bg: #efefef;
 }
 
 .comments {
-  padding: 2em;
+  padding: 2em 2em 0 2em;
   margin-bottom: 3em;
   border-radius: 0.5em;
   box-shadow: $card-shadow;

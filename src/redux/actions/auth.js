@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { openModal } from './modals.js';
 
 export const triedLoggingIn = () => ({
   type: 'TRIED_LOGGING_IN',
@@ -7,7 +6,6 @@ export const triedLoggingIn = () => ({
 
 export const login = (jwt, userData) => dispatch => {
   axios.defaults.data = { jwt };
-  console.log({jwt});
 
   dispatch({
     type: 'LOG_IN',
@@ -28,6 +26,8 @@ export const checkAndFetch = (jwt, success, failed) => dispatch => {
     })
     .catch(error => {
       console.error('Found invalid JSON Web Token in cookies.');
+      console.error("Here's the error: ");
+      console.error({error});
       failed(error);
     });
 };
