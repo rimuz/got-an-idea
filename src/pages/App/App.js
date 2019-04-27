@@ -43,7 +43,7 @@ class App extends Component {
       <Comp>
         <Helmet>
           <title>
-            Got an idea? - The online place for sharing your billion dollar idea.
+            Got an idea? - The platform for sharing your billion dollar idea.
           </title>
 
           <meta name="description" content={`

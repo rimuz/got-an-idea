@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Sugar from 'sugar';
 import axios from 'axios';
 
+import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { ReactComponent as User } from '../assets/user.svg';
 import { ReactComponent as Building } from '../assets/building.svg';
 import { ReactComponent as Report } from '../assets/report.svg';
@@ -197,7 +198,10 @@ const dispatchToProps = dispatch => ({
     dispatch(newPageSetPostStage(post.stage));
     dispatch(newPageSetInspiredBy(post.inspiredby || ""));
     dispatch(newPageSetTitle(post.title));
-    dispatch(newPageSetBody({ text: post.body }));
+
+    const converter = new QuillDeltaToHtmlConverter(post.body.ops, {});
+    const html = converter.convert(); 
+    dispatch(newPageSetBody({ text: html }));
   }
 });
 

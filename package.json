@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "node-sass": "^4.9.4",
+    "quill-delta-to-html": "^0.10.7",
     "quill-image-drop-module": "^1.0.3",
     "react": "^16.4.2",
     "react-cookie": "^3.0.8",

@@ -155,10 +155,11 @@ class WritePost extends Component {
   };
 
   bodyHandler = value => {
-    if(this.ref.current.getContents){
-      const { setBody } = this.props;
-      setBody({ text: this.ref.current.getContents() });
-    }
+    const { setBody } = this.props;
+    console.log("HANDLER!!");
+    console.log({value});
+    
+    setBody({ text: value});
   };
 
   render(){
