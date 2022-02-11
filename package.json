@@ -5,7 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
-    "node-sass": "^4.9.4",
+    "node-sass": "^7.0.0",
     "quill-delta-to-html": "^0.10.7",
     "quill-image-drop-module": "^1.0.3",
     "react": "^16.4.2",
